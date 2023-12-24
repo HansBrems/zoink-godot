@@ -1,6 +1,6 @@
 using Godot;
 using System;
-[Tool]
+
 public partial class Candle : Node2D
 {
 	private PointLight2D _light;
