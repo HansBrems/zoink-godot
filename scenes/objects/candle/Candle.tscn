@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckvculsbye1tk"]
+
+[ext_resource type="Script" path="res://scenes/objects/candle/Candle.cs" id="1_ykqdq"]
+[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_tpgxg"]
+
+[node name="Candle" type="Node2D"]
+script = ExtResource("1_ykqdq")
+
+[node name="Light" type="PointLight2D" parent="."]
+color = Color(0.819608, 0.631373, 0.458824, 1)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("2_tpgxg")
+texture_scale = 0.3

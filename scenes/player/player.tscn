@@ -1,11 +1,78 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxm0j161834m3"]
+[gd_scene load_steps=9 format=3 uid="uid://dxm0j161834m3"]
 
-[ext_resource type="Script" path="res://scenes/player/player.cs" id="1_1qkp2"]
+[ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_1qkp2"]
+[ext_resource type="Texture2D" uid="uid://dnp0l3804ggar" path="res://resources/images/chick.png" id="2_io24x"]
+[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="3_vgrb3"]
+[ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="4_7hwtw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
+size = Vector2(10, 15)
+
+[sub_resource type="Animation" id="Animation_mga73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ig6jw"]
+resource_name = "Walking"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sufwe"]
+_data = {
+"RESET": SubResource("Animation_mga73"),
+"Walking": SubResource("Animation_ig6jw")
+}
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 31
 script = ExtResource("1_1qkp2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_to76k")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+color = Color(0.819608, 0.631373, 0.458824, 1)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("3_vgrb3")
+texture_scale = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_io24x")
+hframes = 4
+frame = 1
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sufwe")
+}
+autoplay = "Walking"
+
+[node name="Candle" parent="." instance=ExtResource("4_7hwtw")]
