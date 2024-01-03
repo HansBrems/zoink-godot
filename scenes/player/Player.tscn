@@ -1,31 +1,43 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxm0j161834m3"]
+[gd_scene load_steps=10 format=3 uid="uid://dxm0j161834m3"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_1qkp2"]
-[ext_resource type="Texture2D" uid="uid://dnp0l3804ggar" path="res://resources/images/chick.png" id="2_io24x"]
-[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="3_vgrb3"]
+[ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/character.png" id="3_yq0mq"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="4_7hwtw"]
+[ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_so6wk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
-size = Vector2(10, 15)
+size = Vector2(12, 9)
 
-[sub_resource type="Animation" id="Animation_mga73"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_nx18h"]
+resource_name = "Idle"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_ig6jw"]
-resource_name = "Walking"
-length = 0.2
+[sub_resource type="Animation" id="Animation_mga73"]
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -34,7 +46,36 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_ig6jw"]
+resource_name = "Walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 2]
@@ -42,48 +83,51 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sufwe"]
 _data = {
+"Idle": SubResource("Animation_nx18h"),
 "RESET": SubResource("Animation_mga73"),
 "Walking": SubResource("Animation_ig6jw")
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 31
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_1qkp2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_to76k")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-color = Color(0.819608, 0.631373, 0.458824, 1)
-energy = 2.0
-shadow_enabled = true
-texture = ExtResource("3_vgrb3")
-texture_scale = 0.3
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_io24x")
-hframes = 4
-frame = 1
-region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_sufwe")
-}
-autoplay = "Walking"
-
-[node name="Candle" parent="." instance=ExtResource("4_7hwtw")]
-
 [node name="DashCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
-[connection signal="timeout" from="DashCooldownTimer" to="." method="EnableDashing"]
-[connection signal="timeout" from="DashTimer" to="." method="StopDashing"]
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_so6wk")
+volume_db = -19.023
+pitch_scale = 3.85
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Candle" parent="." instance=ExtResource("4_7hwtw")]
+visible = false
+LightColor = Color(0.964706, 0.678431, 0.423529, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sufwe")
+}
+autoplay = "RESET"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+texture = ExtResource("3_yq0mq")
+hframes = 3
+frame = 1
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
