@@ -16,7 +16,9 @@ public partial class Dungeon01 : Node2D
 		_bulletScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/Bullet.tscn");
 		_beetleScene = ResourceLoader.Load<PackedScene>("res://scenes/enemies/Beetle.tscn");
 		_player = GetNode<Player>("Player");
-		_spawnLocations = GetNode<Node2D>("SpawnLocations").GetChildren().Cast<Marker2D>().ToArray();
+		_spawnLocations = GetNode<Node2D>("World/SpawnLocations").GetChildren().Cast<Marker2D>().ToArray();
+
+		GetNode<Timer>("SpawnEnemyTimer").Timeout += SpawnEnemy;
 	}
 
 	private void SpawnEnemy()
