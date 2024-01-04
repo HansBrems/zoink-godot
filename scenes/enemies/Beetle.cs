@@ -4,41 +4,41 @@ using Godot;
 public partial class Beetle : CharacterBody2D
 {
 	private const int Speed = 1000;
-	private NavigationAgent2D _navigationAgent;
-	private AnimationPlayer _animationPlayer;
-	private AudioStreamPlayer2D _audioStreamPlayer;
-	private readonly Random _random = new Random();
+
+	private Vector2 _direction = Vector2.Zero;
 	private int _health = 100;
 
+	private AnimationPlayer _animationPlayer;
+	private AudioStreamPlayer2D _audioStreamPlayer;
+	private Follower _follower;
 	private TextureProgressBar _healthBar;
-
-	[Export]
-	public Player Player { get; set; }
+	private readonly Random _random = new Random();
 
 	public override void _Ready()
 	{
-		_healthBar = GetNode<TextureProgressBar>("HealthBar");
 		_audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-	}
+		_follower = GetNode<Follower>("Follower");
+		_healthBar = GetNode<TextureProgressBar>("HealthBar");
 
-	public override void _Process(double delta)
-	{
 		_healthBar.Value = 100;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_navigationAgent.DistanceToTarget() < 1000f)
-		{
-			Move(delta);
-			// LookAt(Player.GlobalPosition);
-		}
-		else
+		if (_direction == Vector2.Zero)
 		{
 			Idle();
 		}
+		else
+		{
+			Move(delta);
+		}
+	}
+
+	public void Target(Node2D node)
+	{
+		_follower.Target = node;
 	}
 
 	private void Idle()
@@ -48,10 +48,14 @@ public partial class Beetle : CharacterBody2D
 
 	private void Move(double delta)
 	{
-		var direction = ToLocal(_navigationAgent.GetNextPathPosition()).Normalized();
 		_animationPlayer.Play("Walking");
-		Velocity = direction * (float)(Speed * delta);
+		Velocity = _direction * (float)(Speed * delta);
 		MoveAndSlide();
+	}
+
+	private void OnDirectionChanged(Vector2 direction)
+	{
+		_direction = direction;
 	}
 
 	private void PlayFootstepAudio()
@@ -59,10 +63,5 @@ public partial class Beetle : CharacterBody2D
 		var pitch = _random.NextSingle() * 0.8 + 1.2;
 		_audioStreamPlayer.PitchScale = (float)pitch;
 		_audioStreamPlayer.Play();
-	}
-
-	private void ReconsiderAction()
-	{
-		_navigationAgent.TargetPosition = Player.GlobalPosition;
 	}
 }
