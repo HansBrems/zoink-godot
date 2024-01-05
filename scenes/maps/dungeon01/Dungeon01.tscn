@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://dmwe56cl1h7h2"]
+[gd_scene load_steps=33 format=3 uid="uid://dmwe56cl1h7h2"]
 
 [ext_resource type="Script" path="res://scenes/maps/dungeon01/Dungeon01.cs" id="1_7oyc1"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/player/Player.tscn" id="1_k54c4"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="2_o7amd"]
 [ext_resource type="Texture2D" uid="uid://cborlij1lqi2r" path="res://resources/images/tiles.png" id="3_6xgj7"]
+[ext_resource type="PackedScene" uid="uid://h3pd3ytyyvxa" path="res://scenes/objects/bitcoin/Bitcoin.tscn" id="5_y8fxn"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cye38"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -203,6 +204,12 @@ color_ramp = SubResource("GradientTexture1D_n0x31")
 anim_speed_max = 0.64
 turbulence_enabled = true
 
+[sub_resource type="LabelSettings" id="LabelSettings_4v8l7"]
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+
 [node name="Dungeon01" type="Node2D"]
 script = ExtResource("1_7oyc1")
 
@@ -245,8 +252,16 @@ position = Vector2(100, 251)
 [node name="Spawn2" type="Marker2D" parent="World/SpawnLocations"]
 position = Vector2(440, 266)
 
+[node name="Bitcoin1" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_y8fxn")]
+position = Vector2(511, 465)
+Player = NodePath("../Player")
+
+[node name="Bitcoin2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_y8fxn")]
+position = Vector2(622, 465)
+Player = NodePath("../Player")
+
 [node name="Player" parent="." instance=ExtResource("1_k54c4")]
-position = Vector2(227, 247)
+position = Vector2(456, 465)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -258,8 +273,15 @@ process_material = SubResource("ParticleProcessMaterial_bx2m3")
 lifetime = 19.34
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0 bitcoins"
+label_settings = SubResource("LabelSettings_4v8l7")
 
 [connection signal="OnShoot" from="Player" to="." method="OnPlayerShoot"]

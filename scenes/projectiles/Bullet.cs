@@ -15,6 +15,8 @@ public partial class Bullet : Area2D
 		_splash = GetNode<GpuParticles2D>("Splash");
 		_light = GetNode<PointLight2D>("Light");
 		_sprite = GetNode<Sprite2D>("Sprite");
+		
+		BodyEntered += Splash;
 	}
 
 	public override void _Process(double delta)

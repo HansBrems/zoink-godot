@@ -2,6 +2,7 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
+	private int _bitcoins = 0;
 	private Vector2 _direction = new (0, 0);
 
 	private bool _canShoot = true;
@@ -17,6 +18,9 @@ public partial class Player : CharacterBody2D
 
 	[Signal]
 	public delegate void OnShootEventHandler(Vector2 direction);
+
+	[Signal]
+	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
 
 	[Export]
 	public int Speed { get; set; } = 50;
@@ -43,6 +47,12 @@ public partial class Player : CharacterBody2D
 		Move();
 		if (_canShoot && Input.IsActionPressed("shoot")) Shoot();
 		if (_canDash && Input.IsActionPressed("dash")) Dash();
+	}
+
+	public void ReceiveBitcoin()
+	{
+		_bitcoins += 1;
+		EmitSignal("OnBitcoinsReceived", _bitcoins);
 	}
 
 	private void Dash()

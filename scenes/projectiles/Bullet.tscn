@@ -55,5 +55,4 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
 
-[connection signal="body_entered" from="." to="." method="Splash"]
 [connection signal="finished" from="Splash" to="." method="SelfDestruct"]
