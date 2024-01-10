@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dxm0j161834m3"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_1qkp2"]
+[ext_resource type="AudioStream" uid="uid://bk8l47xcjqyx5" path="res://resources/sounds/laser.wav" id="2_hndvq"]
 [ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/character.png" id="3_yq0mq"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="4_7hwtw"]
-[ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_so6wk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
 size = Vector2(12, 9)
@@ -106,9 +106,8 @@ wait_time = 0.2
 one_shot = true
 
 [node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_so6wk")
-volume_db = -19.023
-pitch_scale = 3.85
+stream = ExtResource("2_hndvq")
+max_polyphony = 8
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.25
