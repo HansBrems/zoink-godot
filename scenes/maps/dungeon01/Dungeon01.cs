@@ -43,7 +43,7 @@ public partial class Dungeon01 : Node2D
 		var spawnLocation = _spawnLocations[spawnIndex];
 		beetle.Position = spawnLocation.Position;
 		AddChild(beetle);
-		beetle.Target(_player);
+		beetle.Target = _player;
 	}
 
 	private void OnPlayerShoot(Vector2 direction)

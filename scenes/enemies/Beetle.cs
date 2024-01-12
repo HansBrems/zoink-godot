@@ -3,42 +3,49 @@ using Godot;
 
 public partial class Beetle : CharacterBody2D
 {
-	private const int Speed = 1000;
-
 	private Vector2 _direction = Vector2.Zero;
 	private int _health = 100;
+	private readonly Random _random = new();
 
 	private AnimationPlayer _animationPlayer;
 	private AudioStreamPlayer2D _audioStreamPlayer;
-	private Follower _follower;
 	private TextureProgressBar _healthBar;
-	private readonly Random _random = new Random();
+	private NavigationAgent2D _navigationAgent;
+	private Timer _navigationTimer;
+	private Sprite2D _sprite;
+
+	[Export]
+	public int Speed = 1000;
+
+	[Export]
+	public Node2D Target;
 
 	public override void _Ready()
 	{
 		_audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_follower = GetNode<Follower>("Follower");
+		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent");
+		_navigationTimer = GetNode<Timer>("NavigationTimer");
 		_healthBar = GetNode<TextureProgressBar>("HealthBar");
+		_sprite = GetNode<Sprite2D>("Sprite2D");
 
 		_healthBar.Value = 100;
+		_navigationTimer.Timeout += UpdateNavigationTargetPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_direction == Vector2.Zero)
-		{
-			Idle();
-		}
-		else
-		{
-			Move(delta);
-		}
-	}
+		var nextPathPosition = ToLocal(_navigationAgent.GetNextPathPosition());
+		_direction = nextPathPosition.Normalized();
 
-	public void Target(Node2D node)
-	{
-		_follower.Target = node;
+		var rotation = (float)(_direction.Angle() * 180 / Math.PI) + 90;
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(_sprite, "rotation_degrees", rotation, 0.2f);
+
+		if (_direction == Vector2.Zero)
+			Idle();
+		else
+			Move(delta);
 	}
 
 	private void Idle()
@@ -53,15 +60,13 @@ public partial class Beetle : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	private void OnDirectionChanged(Vector2 direction)
-	{
-		_direction = direction;
-	}
-
 	private void PlayFootstepAudio()
 	{
 		var pitch = _random.NextSingle() * 0.8 + 1.2;
 		_audioStreamPlayer.PitchScale = (float)pitch;
 		_audioStreamPlayer.Play();
 	}
+
+	private void UpdateNavigationTargetPosition()
+		=> _navigationAgent.TargetPosition = Target.GlobalPosition;
 }

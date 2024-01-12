@@ -227,7 +227,7 @@ layer_0/tile_data = PackedInt32Array(1245204, 65538, 0, 1310740, 327682, 0, 1310
 [node name="Lighting" type="Node2D" parent="World"]
 
 [node name="Candle1" parent="World/Lighting" instance=ExtResource("2_o7amd")]
-position = Vector2(409, 358)
+position = Vector2(321, 188)
 LightColor = Color(0.545098, 0.176471, 0, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="World/Lighting"]
@@ -238,13 +238,13 @@ blend_mode = 1
 [node name="SpawnLocations" type="Node2D" parent="World"]
 
 [node name="Spawn1" type="Marker2D" parent="World/SpawnLocations"]
-position = Vector2(99, 247)
+position = Vector2(234, 249)
 
 [node name="Spawn2" type="Marker2D" parent="World/SpawnLocations"]
-position = Vector2(625, 349)
+position = Vector2(452, 252)
 
 [node name="Player" parent="." instance=ExtResource("1_k54c4")]
-position = Vector2(373, 465)
+position = Vector2(338, 279)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
