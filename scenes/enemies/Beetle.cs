@@ -8,6 +8,7 @@ public partial class Beetle : CharacterBody2D
 	private readonly Random _random = new();
 
 	private AnimationPlayer _animationPlayer;
+	private Area2D _area2D;
 	private AudioStreamPlayer2D _audioStreamPlayer;
 	private TextureProgressBar _healthBar;
 	private NavigationAgent2D _navigationAgent;
@@ -24,13 +25,21 @@ public partial class Beetle : CharacterBody2D
 	{
 		_audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_area2D = GetNode<Area2D>("Area2D");
 		_navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent");
 		_navigationTimer = GetNode<Timer>("NavigationTimer");
 		_healthBar = GetNode<TextureProgressBar>("HealthBar");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
 
-		_healthBar.Value = 100;
+		_area2D.AreaEntered += OnAreaEntered;
 		_navigationTimer.Timeout += UpdateNavigationTargetPosition;
+	}
+
+	private void OnAreaEntered(Area2D area)
+	{
+		_health -= 30;
+
+		if (_health <= 0) QueueFree();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -46,6 +55,8 @@ public partial class Beetle : CharacterBody2D
 			Idle();
 		else
 			Move(delta);
+
+		_healthBar.Value = _health;
 	}
 
 	private void Idle()

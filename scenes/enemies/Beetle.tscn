@@ -4,9 +4,6 @@
 [ext_resource type="Script" path="res://scenes/enemies/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3savt"]
-size = Vector2(6, 7)
-
 [sub_resource type="Animation" id="Animation_si1uk"]
 resource_name = "Idle"
 tracks/0/type = "value"
@@ -87,6 +84,9 @@ colors = PackedColorArray(0.517647, 0, 0, 1, 1, 0, 0.183333, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_to43h"]
 gradient = SubResource("Gradient_hj5cl")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg3rv"]
+size = Vector2(4, 8)
+
 [node name="Beetle" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 15
@@ -101,10 +101,6 @@ radius = 51.67
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_3savt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2b5hm")
@@ -140,5 +136,12 @@ stretch_margin_top = 2
 stretch_margin_right = 2
 stretch_margin_bottom = 2
 texture_progress = SubResource("GradientTexture2D_to43h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kg3rv")
 
 [connection signal="timeout" from="Timer" to="." method="ReconsiderAction"]

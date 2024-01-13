@@ -19,7 +19,13 @@ public partial class Bullet : Area2D
 		_sprite = GetNode<Sprite2D>("Sprite");
 
 		BodyEntered += InitializeSelfDestruct;
+		AreaEntered += InitializeSelfDestruct;
 		_selfDestructTimer.Timeout += SelfDestruct;
+	}
+
+	private void OnAreaEntered(Area2D area)
+	{
+		InitializeSelfDestruct(area);
 	}
 
 	public override void _Process(double delta)
