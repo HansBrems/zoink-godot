@@ -1,34 +1,43 @@
+using System;
+using System.Linq;
 using Godot;
+using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
+	private PackedScene _bulletScene;
+
 	private int _bitcoins = 0;
 	private Vector2 _direction = new (0, 0);
 
 	private bool _canShoot = true;
 	private Timer _shootCooldownTimer;
-	private AudioStreamPlayer2D _shootAudio;
 
 	private bool _canDash = true;
 	private bool _isDashing = false;
 	private Timer _dashCooldownTimer;
 	private Timer _dashTimer;
 
+	private Array<Marker2D> _spawnLocations;
 	private AnimationPlayer _animationPlayer;
 
 	[Signal]
-	public delegate void OnShootEventHandler(Vector2 direction);
+	public delegate void OnShootEventHandler(Vector2 position, Vector2 direction);
 
 	[Signal]
 	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
+
+	[Export]
+	public double AttackSpeed = 0.15;
 
 	[Export]
 	public int Speed { get; set; } = 50;
 
 	public override void _Ready()
 	{
+		_bulletScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/Bullet.tscn");
+
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_shootAudio = GetNode<AudioStreamPlayer2D>("ShootAudio");
 
 		_dashCooldownTimer = GetNode<Timer>("DashCooldownTimer");
 		_dashCooldownTimer.Timeout += EnableDashing;
@@ -37,7 +46,11 @@ public partial class Player : CharacterBody2D
 		_dashTimer.Timeout += StopDashing;
 
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
+		_shootCooldownTimer.WaitTime = AttackSpeed;
 		_shootCooldownTimer.Timeout += EnableShooting;
+
+		_spawnLocations = new Array<Marker2D>(
+			GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
 	}
 
 	public override void _Process(double delta)
@@ -53,6 +66,13 @@ public partial class Player : CharacterBody2D
 	{
 		_bitcoins += 1;
 		EmitSignal("OnBitcoinsReceived", _bitcoins);
+	}
+
+	public void IncreaseAttackSpeed()
+	{
+		var attackSpeed = Math.Clamp(_shootCooldownTimer.WaitTime - 0.01, 0.05, 5);
+		_shootCooldownTimer.WaitTime = attackSpeed;
+		GD.Print("Increasing attack speed: " + attackSpeed);
 	}
 
 	private void Dash()
@@ -75,11 +95,25 @@ public partial class Player : CharacterBody2D
 		_animationPlayer.Play(animation);
 	}
 
+
+	private void OnPlayerShoot(Vector2 position, Vector2 direction)
+	{
+		var bullet = _bulletScene.Instantiate<Bullet>();
+		bullet.Position = position;
+		bullet.Direction = direction;
+		bullet.RotationDegrees = (float)(direction.Angle() * 180 / Math.PI);
+
+		GetTree().CurrentScene.AddChild(bullet);
+	}
+
 	private void Shoot()
 	{
+		//var spawnIndex = _random.Next(0, _spawnLocations.Length);
+		var spawnLocation = _spawnLocations.PickRandom();//   _spawnLocations[spawnIndex];
+
 		var direction = GetGlobalMousePosition() - Position;
-		EmitSignal("OnShoot", direction.Normalized());
-		_shootAudio.Play();
+		// EmitSignal("OnShoot", spawnLocation.GlobalPosition, direction.Normalized());
+		OnPlayerShoot(spawnLocation.GlobalPosition, direction.Normalized());
 		_canShoot= false;
 		_shootCooldownTimer.Start();
 	}

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs30bakpqplxt"]
+
+[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/maps/Map01.tscn" id="1_5i3vo"]
+[ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/player/Player.tscn" id="1_fma10"]
+[ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/enemies/Beetle.tscn" id="3_ke1qg"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Map01" parent="." instance=ExtResource("1_5i3vo")]
+
+[node name="Player" parent="." instance=ExtResource("1_fma10")]
+position = Vector2(103, 107)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
+[node name="Beetle" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("3_ke1qg")]
+position = Vector2(149, 71)
+Target = NodePath("../Player")

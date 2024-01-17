@@ -42,18 +42,22 @@ public partial class Dungeon01 : Node2D
 		var spawnIndex = _random.Next(0, _spawnLocations.Length);
 		var spawnLocation = _spawnLocations[spawnIndex];
 		beetle.Position = spawnLocation.Position;
+		beetle.OnShoot += OnBeetleShoot;
+		beetle.OnKilled += () => _player.IncreaseAttackSpeed();
 		AddChild(beetle);
 		beetle.Target = _player;
 	}
 
-	private void OnPlayerShoot(Vector2 direction)
+	private void OnBeetleShoot(Vector2 position, Vector2 direction)
 	{
 		var bullet = _bulletScene.Instantiate<Bullet>();
-		bullet.Position = _player.Position;
+		bullet.Position = position;
 		bullet.Direction = direction;
 		bullet.RotationDegrees = (float)(direction.Angle() * 180 / Math.PI);
 		AddChild(bullet);
 	}
+
+
 
 	private void UpdateBitcoinLabel(int bitcoins)
 	{

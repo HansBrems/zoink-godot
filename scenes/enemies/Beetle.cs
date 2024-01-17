@@ -3,8 +3,14 @@ using Godot;
 
 public partial class Beetle : CharacterBody2D
 {
+	[Signal]
+	public delegate void OnShootEventHandler(Vector2 position, Vector2 direction);
+
+	[Signal]
+	public delegate void OnKilledEventHandler();
+
 	private Vector2 _direction = Vector2.Zero;
-	private int _health = 100;
+	private int _health = 50;
 	private readonly Random _random = new();
 
 	private AnimationPlayer _animationPlayer;
@@ -15,8 +21,13 @@ public partial class Beetle : CharacterBody2D
 	private Timer _navigationTimer;
 	private Sprite2D _sprite;
 
+	private Timer _shootCooldownTimer;
+	private AudioStreamPlayer2D _shootSoundPlayer;
+
+	private Marker2D _bulletStartingPosition;
+
 	[Export]
-	public int Speed = 1000;
+	public int Speed = 2000;
 
 	[Export]
 	public Node2D Target;
@@ -33,13 +44,35 @@ public partial class Beetle : CharacterBody2D
 
 		_area2D.AreaEntered += OnAreaEntered;
 		_navigationTimer.Timeout += UpdateNavigationTargetPosition;
+
+		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
+		_shootCooldownTimer.Timeout += Shoot;
+		_shootSoundPlayer = GetNode<AudioStreamPlayer2D>("ShootSoundPlayer");
+		_bulletStartingPosition = GetNode<Marker2D>("Sprite2D/BulletStartingPosition");
+
+		_health = GetNode<Global>("/root/Global").MaxHealth;
+		_healthBar.MaxValue = _health;
+		GD.Print(_health);
+	}
+
+	private void Shoot()
+	{
+		var direction = Target.GlobalPosition - Position;
+		EmitSignal("OnShoot", _bulletStartingPosition.GlobalPosition, direction.Normalized());
+
+		SetRandomPitch(_shootSoundPlayer);
+		_shootSoundPlayer.Play();
 	}
 
 	private void OnAreaEntered(Area2D area)
 	{
 		_health -= 30;
 
-		if (_health <= 0) QueueFree();
+		if (_health <= 0)
+		{
+			EmitSignal("OnKilled");
+			QueueFree();
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -73,9 +106,14 @@ public partial class Beetle : CharacterBody2D
 
 	private void PlayFootstepAudio()
 	{
-		var pitch = _random.NextSingle() * 0.8 + 1.2;
-		_audioStreamPlayer.PitchScale = (float)pitch;
+		SetRandomPitch(_audioStreamPlayer);
 		_audioStreamPlayer.Play();
+	}
+
+	private void SetRandomPitch(AudioStreamPlayer2D streamPlayer)
+	{
+		var pitch = _random.NextSingle() * 0.8 + 1.2;
+		streamPlayer.PitchScale = (float)pitch;
 	}
 
 	private void UpdateNavigationTargetPosition()

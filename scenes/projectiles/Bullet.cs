@@ -4,7 +4,7 @@ using Vector2 = Godot.Vector2;
 
 public partial class Bullet : Area2D
 {
-	private int _speed = 250;
+	private int _speed = 200;
 
 	private PointLight2D _light;
 	private Timer _selfDestructTimer;
@@ -35,9 +35,10 @@ public partial class Bullet : Area2D
 
 	private void InitializeSelfDestruct(Node2D node)
 	{
-		Direction = Vector2.Zero;
-		_sprite.Visible = false;
-		_selfDestructTimer.Start();
+		QueueFree();
+		//Direction = Vector2.Zero;
+		//_sprite.Visible = false;
+		//_selfDestructTimer.Start();
 	}
 
 	private void SelfDestruct()

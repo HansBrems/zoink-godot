@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv1tbt8rf32mp"]
+[gd_scene load_steps=12 format=3 uid="uid://bv1tbt8rf32mp"]
 
 [ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://resources/images/void.png" id="1_2b5hm"]
 [ext_resource type="Script" path="res://scenes/enemies/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
+[ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_m2o12"]
 
 [sub_resource type="Animation" id="Animation_si1uk"]
 resource_name = "Idle"
@@ -106,15 +107,14 @@ autostart = true
 texture = ExtResource("1_2b5hm")
 hframes = 4
 
+[node name="BulletStartingPosition" type="Marker2D" parent="Sprite2D"]
+position = Vector2(0, -11)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_co6dd")
 }
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_xvf53")
@@ -144,4 +144,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_kg3rv")
 
-[connection signal="timeout" from="Timer" to="." method="ReconsiderAction"]
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 2.332
+autostart = true
+
+[node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_m2o12")
+pitch_scale = 1.37
+max_distance = 250.0
