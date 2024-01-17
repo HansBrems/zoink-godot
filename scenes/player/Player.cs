@@ -5,24 +5,22 @@ using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
-	private PackedScene _bulletScene;
+	private AnimationPlayer _animationPlayer;
 
 	private int _bitcoins = 0;
 	private Vector2 _direction = new (0, 0);
-
-	private bool _canShoot = true;
-	private Timer _shootCooldownTimer;
 
 	private bool _canDash = true;
 	private bool _isDashing = false;
 	private Timer _dashCooldownTimer;
 	private Timer _dashTimer;
 
-	private Array<Marker2D> _spawnLocations;
-	private AnimationPlayer _animationPlayer;
+	private bool _canShoot = true;
+	private Timer _shootCooldownTimer;
+	private Array<Marker2D> _bulletSpawnLocations;
 
 	[Signal]
-	public delegate void OnShootEventHandler(Vector2 position, Vector2 direction);
+	public delegate void OnShootEventHandler(OnShootEventArgs args);
 
 	[Signal]
 	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
@@ -35,13 +33,10 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		_bulletScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/Bullet.tscn");
-
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
 		_dashCooldownTimer = GetNode<Timer>("DashCooldownTimer");
 		_dashCooldownTimer.Timeout += EnableDashing;
-
 		_dashTimer = GetNode<Timer>("DashTimer");
 		_dashTimer.Timeout += StopDashing;
 
@@ -49,7 +44,7 @@ public partial class Player : CharacterBody2D
 		_shootCooldownTimer.WaitTime = AttackSpeed;
 		_shootCooldownTimer.Timeout += EnableShooting;
 
-		_spawnLocations = new Array<Marker2D>(
+		_bulletSpawnLocations = new Array<Marker2D>(
 			GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
 	}
 
@@ -62,19 +57,6 @@ public partial class Player : CharacterBody2D
 		if (_canDash && Input.IsActionPressed("dash")) Dash();
 	}
 
-	public void ReceiveBitcoin()
-	{
-		_bitcoins += 1;
-		EmitSignal("OnBitcoinsReceived", _bitcoins);
-	}
-
-	public void IncreaseAttackSpeed()
-	{
-		var attackSpeed = Math.Clamp(_shootCooldownTimer.WaitTime - 0.01, 0.05, 5);
-		_shootCooldownTimer.WaitTime = attackSpeed;
-		GD.Print("Increasing attack speed: " + attackSpeed);
-	}
-
 	private void Dash()
 	{
 		_canDash = false;
@@ -82,6 +64,10 @@ public partial class Player : CharacterBody2D
 		Speed = 200;
 		_dashTimer.Start();
 	}
+
+	private void EnableDashing() => _canDash = true;
+
+	private void EnableShooting() => _canShoot = true;
 
 	private void Move()
 	{
@@ -95,31 +81,27 @@ public partial class Player : CharacterBody2D
 		_animationPlayer.Play(animation);
 	}
 
-
-	private void OnPlayerShoot(Vector2 position, Vector2 direction)
+	public void ReceiveBitcoin()
 	{
-		var bullet = _bulletScene.Instantiate<Bullet>();
-		bullet.Position = position;
-		bullet.Direction = direction;
-		bullet.RotationDegrees = (float)(direction.Angle() * 180 / Math.PI);
-
-		GetTree().CurrentScene.AddChild(bullet);
+		_bitcoins += 1;
+		EmitSignal("OnBitcoinsReceived", _bitcoins);
 	}
 
 	private void Shoot()
 	{
-		//var spawnIndex = _random.Next(0, _spawnLocations.Length);
-		var spawnLocation = _spawnLocations.PickRandom();//   _spawnLocations[spawnIndex];
-
 		var direction = GetGlobalMousePosition() - Position;
-		// EmitSignal("OnShoot", spawnLocation.GlobalPosition, direction.Normalized());
-		OnPlayerShoot(spawnLocation.GlobalPosition, direction.Normalized());
+		var spawnLocation = _bulletSpawnLocations.PickRandom();
+
+		EmitSignal("OnShoot", new OnShootEventArgs
+		{
+			Direction = direction.Normalized(),
+			Position = spawnLocation.GlobalPosition,
+			ProjectileType = ProjectileType.Bullet,
+		});
+
 		_canShoot= false;
 		_shootCooldownTimer.Start();
 	}
-
-	private void EnableDashing() => _canDash = true;
-	private void EnableShooting() => _canShoot = true;
 
 	private void StopDashing()
 	{

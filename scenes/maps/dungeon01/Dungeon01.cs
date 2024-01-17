@@ -42,8 +42,6 @@ public partial class Dungeon01 : Node2D
 		var spawnIndex = _random.Next(0, _spawnLocations.Length);
 		var spawnLocation = _spawnLocations[spawnIndex];
 		beetle.Position = spawnLocation.Position;
-		beetle.OnShoot += OnBeetleShoot;
-		beetle.OnKilled += () => _player.IncreaseAttackSpeed();
 		AddChild(beetle);
 		beetle.Target = _player;
 	}

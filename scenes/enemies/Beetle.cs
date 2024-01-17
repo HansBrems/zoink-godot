@@ -3,12 +3,6 @@ using Godot;
 
 public partial class Beetle : CharacterBody2D
 {
-	[Signal]
-	public delegate void OnShootEventHandler(Vector2 position, Vector2 direction);
-
-	[Signal]
-	public delegate void OnKilledEventHandler();
-
 	private Vector2 _direction = Vector2.Zero;
 	private int _health = 50;
 	private readonly Random _random = new();
@@ -22,9 +16,14 @@ public partial class Beetle : CharacterBody2D
 	private Sprite2D _sprite;
 
 	private Timer _shootCooldownTimer;
-	private AudioStreamPlayer2D _shootSoundPlayer;
 
 	private Marker2D _bulletStartingPosition;
+
+	[Signal]
+	public delegate void OnShootEventHandler(OnShootEventArgs args);
+
+	[Signal]
+	public delegate void OnKilledEventHandler();
 
 	[Export]
 	public int Speed = 2000;
@@ -47,7 +46,6 @@ public partial class Beetle : CharacterBody2D
 
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
 		_shootCooldownTimer.Timeout += Shoot;
-		_shootSoundPlayer = GetNode<AudioStreamPlayer2D>("ShootSoundPlayer");
 		_bulletStartingPosition = GetNode<Marker2D>("Sprite2D/BulletStartingPosition");
 
 		_health = GetNode<Global>("/root/Global").MaxHealth;
@@ -58,10 +56,12 @@ public partial class Beetle : CharacterBody2D
 	private void Shoot()
 	{
 		var direction = Target.GlobalPosition - Position;
-		EmitSignal("OnShoot", _bulletStartingPosition.GlobalPosition, direction.Normalized());
-
-		SetRandomPitch(_shootSoundPlayer);
-		_shootSoundPlayer.Play();
+		EmitSignal("OnShoot", new OnShootEventArgs
+		{
+			Direction = direction.Normalized(),
+			Position = _bulletStartingPosition.GlobalPosition,
+			ProjectileType = ProjectileType.Bullet
+		});
 	}
 
 	private void OnAreaEntered(Area2D area)
