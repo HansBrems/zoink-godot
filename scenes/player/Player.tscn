@@ -1,11 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxm0j161834m3"]
+[gd_scene load_steps=8 format=3 uid="uid://dxm0j161834m3"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_1qkp2"]
 [ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/character.png" id="3_yq0mq"]
-[ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="4_7hwtw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
-size = Vector2(9, 9)
 
 [sub_resource type="Animation" id="Animation_nx18h"]
 resource_name = "Idle"
@@ -87,36 +83,23 @@ _data = {
 "Walking": SubResource("Animation_ig6jw")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
+size = Vector2(9, 9)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_1qkp2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_to76k")
-
-[node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
-[node name="Candle" parent="." instance=ExtResource("4_7hwtw")]
-visible = false
-LightColor = Color(0.964706, 0.678431, 0.423529, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_sufwe")
 }
 autoplay = "RESET"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_to76k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -136,3 +119,15 @@ position = Vector2(7, 0)
 
 [node name="Spawn3" type="Marker2D" parent="BulletSpawnLocations"]
 position = Vector2(6, 2)
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true

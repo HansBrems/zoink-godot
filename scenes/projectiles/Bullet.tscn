@@ -1,71 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://blpigh71lroqw"]
+[gd_scene load_steps=5 format=3 uid="uid://blpigh71lroqw"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/Bullet.cs" id="1_0nif7"]
-[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_8d5o3"]
 [ext_resource type="Texture2D" uid="uid://ima8mtvtvm8u" path="res://resources/images/bullet.png" id="3_5crnl"]
 [ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_gagfg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7vr6"]
-radius = 1.0
-
-[sub_resource type="Gradient" id="Gradient_o2uew"]
-offsets = PackedFloat32Array(0, 0.989796)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gueig"]
-gradient = SubResource("Gradient_o2uew")
-
-[sub_resource type="Curve" id="Curve_u58xj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.351111, 0.351712), 2.08165e-12, 2.08165e-12, 0, 0, Vector2(1, 0.00922096), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_rygaw"]
-curve = SubResource("Curve_u58xj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxvmg"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 2.0
-spread = 169.286
-initial_velocity_min = 1.0
-initial_velocity_max = 20.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-damping_max = 5.0
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_rygaw")
-color_ramp = SubResource("GradientTexture1D_gueig")
+radius = 2.0
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 8
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("1_0nif7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e7vr6")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-4, 0)
-amount = 32
-process_material = SubResource("ParticleProcessMaterial_fxvmg")
-lifetime = 0.5
-
-[node name="Light" type="PointLight2D" parent="."]
-position = Vector2(-3, 0)
-color = Color(0.882353, 0.360784, 0, 1)
-energy = 0.1
-shadow_enabled = true
-texture = ExtResource("2_8d5o3")
-texture_scale = 0.5
-
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_5crnl")
 
-[node name="SelfDestructTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="ShootAudioPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_gagfg")
 volume_db = -17.327
 pitch_scale = 1.98

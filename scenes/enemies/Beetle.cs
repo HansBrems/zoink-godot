@@ -23,6 +23,9 @@ public partial class Beetle : CharacterBody2D
 	public delegate void OnShootEventHandler(OnShootEventArgs args);
 
 	[Signal]
+	public delegate void OnCreatedEventHandler();
+
+	[Signal]
 	public delegate void OnKilledEventHandler();
 
 	[Export]
@@ -50,7 +53,8 @@ public partial class Beetle : CharacterBody2D
 
 		_health = GetNode<Global>("/root/Global").MaxHealth;
 		_healthBar.MaxValue = _health;
-		GD.Print(_health);
+
+		EmitSignal("OnCreated");
 	}
 
 	private void Shoot()

@@ -99,7 +99,7 @@ public partial class Player : CharacterBody2D
 			ProjectileType = ProjectileType.Bullet,
 		});
 
-		_canShoot= false;
+		_canShoot = false;
 		_shootCooldownTimer.Start();
 	}
 

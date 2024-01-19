@@ -16,9 +16,8 @@ public partial class ShootController : Node2D
 
 		var bullet = _bulletScene.Instantiate<Bullet>();
 		bullet.Direction = args.Direction;
-        bullet.Position = args.Position;
+		bullet.Position = args.Position;
 		bullet.RotationDegrees = (float)(args.Direction.Angle() * 180 / Math.PI);
-		GetTree().CurrentScene.AddChild(bullet);
-
+		AddChild(bullet);
 	}
 }
