@@ -1,12 +1,15 @@
 using Godot;
+using System;
 
-public partial class Tower : Node2D
+public partial class Tower : StaticBody2D
 {
-	private Node2D _enemy;
-
+	private Beetle _enemy;
 	private Line2D _laser;
+	private Marker2D _laserOrigin;
+	private Random _random = new();
 	private RayCast2D _rayCast;
 	private Timer _shootTimer;
+	private Sprite2D _turret;
 
 	[Export]
 	public double AttackSpeed { get; set; } = 0.5;
@@ -20,10 +23,13 @@ public partial class Tower : Node2D
 	public override void _Ready()
 	{
 		_laser = GetNode<Line2D>("Laser");
+		_laserOrigin = GetNode<Marker2D>("Turret/LaserOrigin");
 		_rayCast = GetNode<RayCast2D>("RayCast2D");
 		_shootTimer = GetNode<Timer>("ShootTimer");
-		_shootTimer.WaitTime = AttackSpeed;
+		var variance = _random.NextDouble() * 0.4 - 0.2;
+		_shootTimer.WaitTime = AttackSpeed + variance;
 		_shootTimer.Timeout += Shoot;
+		_turret = GetNode<Sprite2D>("Turret");
 	}
 
 	public override void _Process(double delta)
@@ -34,9 +40,17 @@ public partial class Tower : Node2D
 		}
 		else
 		{
+			var direction = _enemy.Position - Position;
+			_turret.RotationDegrees = (float)(direction.Angle() * 180 / Math.PI) + 90;
 			_laser.Visible = true;
-			_laser.Points = new[] { ToLocal(Position), ToLocal(_enemy.Position) };
+			_laser.Points = new[] { ToLocal(_laserOrigin.GlobalPosition), ToLocal(_enemy.Position) };
 		}
+	}
+
+	public void SetAttackSpeed(double attackSpeed)
+	{
+		AttackSpeed = attackSpeed;
+		_shootTimer.WaitTime = AttackSpeed;
 	}
 
 	private Node2D FindClosestEnemy()
@@ -59,8 +73,9 @@ public partial class Tower : Node2D
 
 	private void Shoot()
 	{
-		_enemy = FindClosestEnemy();
+		_enemy = FindClosestEnemy() as Beetle;
 		if (_enemy == null) return;
+		_enemy.OnKilled += () => _enemy = null;
 
 		_rayCast.TargetPosition = _enemy.GlobalPosition - GlobalPosition;
 		if (_rayCast.IsColliding()) return;

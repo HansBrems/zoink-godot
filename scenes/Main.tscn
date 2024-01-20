@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=6 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/maps/Map01.tscn" id="1_5i3vo"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/player/Player.tscn" id="1_fma10"]
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/components/ShootController.tscn" id="3_385lq"]
-[ext_resource type="PackedScene" uid="uid://c5l10jf380t3u" path="res://scenes/objects/tower/Tower.tscn" id="6_b85qr"]
 [ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/components/EnemySpawner.tscn" id="6_y406e"]
 
 [node name="Main" type="Node2D"]
@@ -12,65 +11,29 @@ script = ExtResource("1_3ik1s")
 
 [node name="Map01" parent="." instance=ExtResource("1_5i3vo")]
 
+[node name="Square" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
+
 [node name="ShootController" parent="." instance=ExtResource("3_385lq")]
-
-[node name="Player" parent="." instance=ExtResource("1_fma10")]
-position = Vector2(50, 90)
-AttackSpeed = 0.01
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="EnemySpawners" type="Node2D" parent="."]
 
 [node name="EnemySpawner1" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(375, 87)
+position = Vector2(235, 88)
 ChaseTarget = NodePath("../../Player")
-SpawnRate = 1.3
-
-[node name="EnemySpawner2" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(296, -23)
-ChaseTarget = NodePath("../../Player")
-SpawnRate = 2.5
-
-[node name="EnemySpawner3" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(296, 199)
-ChaseTarget = NodePath("../../Player")
-SpawnRate = 4.0
-
-[node name="EnemySpawner4" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(-124, 118)
-ChaseTarget = NodePath("../../Player")
-SpawnRate = 1.0
-
-[node name="EnemySpawner5" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(-185, -112)
-ChaseTarget = NodePath("../../Player")
-SpawnRate = 1.0
+SpawnRate = 5.0
 
 [node name="Towers" type="Node2D" parent="."]
 
-[node name="Tower1" parent="Towers" node_paths=PackedStringArray("EnemiesNode") instance=ExtResource("6_b85qr")]
-position = Vector2(25, 41)
-AttackSpeed = 0.1
-EnemiesNode = NodePath("../../Enemies")
+[node name="Player" parent="." instance=ExtResource("1_fma10")]
+position = Vector2(50, 90)
+AttackSpeed = 0.2
 
-[node name="Tower2" parent="Towers" node_paths=PackedStringArray("EnemiesNode") instance=ExtResource("6_b85qr")]
-position = Vector2(25, 135)
-AttackSpeed = 0.1
-EnemiesNode = NodePath("../../Enemies")
-
-[node name="Tower3" parent="Towers" node_paths=PackedStringArray("EnemiesNode") instance=ExtResource("6_b85qr")]
-position = Vector2(134, 42)
-AttackSpeed = 0.1
-EnemiesNode = NodePath("../../Enemies")
-
-[node name="Tower4" parent="Towers" node_paths=PackedStringArray("EnemiesNode") instance=ExtResource("6_b85qr")]
-position = Vector2(135, 135)
-AttackSpeed = 0.1
-EnemiesNode = NodePath("../../Enemies")
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.75

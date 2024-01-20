@@ -29,7 +29,7 @@ public partial class Beetle : CharacterBody2D
 	public delegate void OnKilledEventHandler();
 
 	[Export]
-	public int Speed = 2000;
+	public int Speed = 1500;
 
 	[Export]
 	public Node2D Target;
@@ -52,6 +52,11 @@ public partial class Beetle : CharacterBody2D
 		_bulletStartingPosition = GetNode<Marker2D>("Sprite2D/BulletStartingPosition");
 
 		_health = GetNode<Global>("/root/Global").MaxHealth;
+		var r = new Random();
+		_health = r.Next(50, 1000);
+		var scaleValue = 1 + (float)((_health - 50) * (2f - 1) / (1000 - 50));
+		Speed = 4000 + ((_health - 50) * (500 - 4000) / (1000 - 50));
+		_sprite.Scale = new Vector2(scaleValue, scaleValue);
 		_healthBar.MaxValue = _health;
 
 		EmitSignal("OnCreated");
@@ -85,8 +90,8 @@ public partial class Beetle : CharacterBody2D
 		_direction = nextPathPosition.Normalized();
 
 		var rotation = (float)(_direction.Angle() * 180 / Math.PI) + 90;
-		var tween = GetTree().CreateTween();
-		tween.TweenProperty(_sprite, "rotation_degrees", rotation, 0.2f);
+		//var tween = GetTree().CreateTween();
+		//tween.TweenProperty(_sprite, "rotation_degrees", rotation, 0.2f);
 
 		if (_direction == Vector2.Zero)
 			Idle();

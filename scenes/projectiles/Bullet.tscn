@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_gagfg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7vr6"]
-radius = 2.0
+radius = 1.0
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 8
@@ -23,4 +23,3 @@ texture = ExtResource("3_5crnl")
 stream = ExtResource("4_gagfg")
 volume_db = -17.327
 pitch_scale = 1.98
-autoplay = true
