@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -19,8 +18,20 @@ public partial class Player : CharacterBody2D
 	private Timer _shootCooldownTimer;
 	private Array<Marker2D> _bulletSpawnLocations;
 
+	private int _turretCount = 2;
+	private bool _isSelectingTurretLocation;
+	private bool _isPlacingTurret;
+
+	private ProgressBar _buildingProgressBar;
+
 	[Signal]
 	public delegate void OnShootEventHandler(OnShootEventArgs args);
+
+	[Signal]
+	public delegate void OnPlacingTurretEventHandler();
+
+	[Signal]
+	public delegate void OnTurretPlacedEventHandler();
 
 	[Signal]
 	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
@@ -44,13 +55,53 @@ public partial class Player : CharacterBody2D
 		_shootCooldownTimer.WaitTime = AttackSpeed;
 		_shootCooldownTimer.Timeout += EnableShooting;
 
+		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
+
 		_bulletSpawnLocations = new Array<Marker2D>(
 			GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
+	}
+
+	private bool CanPlaceTurret()
+	{
+		return _turretCount > 0 && !_isSelectingTurretLocation && !_isPlacingTurret;
+	}
+
+	private void SelectTurretLocation()
+	{
+		_isSelectingTurretLocation = true;
+		EmitSignal("OnPlacingTurret");
+	}
+
+	private void StartPlacingTurret()
+	{
+		_isSelectingTurretLocation = false;
+		_isPlacingTurret = true;
+		_buildingProgressBar.Value = 0;
+		_buildingProgressBar.Visible = true;
+	}
+
+	private void UpdateProgressBar()
+	{
+		_buildingProgressBar.Value += 1;
+	}
+
+	private void FinishTurretPlacement()
+	{
+		EmitSignal("OnTurretPlaced");
+		_isPlacingTurret = false;
+		_turretCount -= 1;
+		_buildingProgressBar.Visible = false;
 	}
 
 	public override void _Process(double delta)
 	{
 		LookAt(GetGlobalMousePosition());
+
+		if (CanPlaceTurret() && Input.IsActionJustPressed("placeTurret")) SelectTurretLocation();
+		if (_isSelectingTurretLocation && Input.IsMouseButtonPressed(MouseButton.Left)) StartPlacingTurret();
+		if (_isPlacingTurret) UpdateProgressBar();
+		if (_isPlacingTurret && _buildingProgressBar.Value >= 100) FinishTurretPlacement();
+		if (_isSelectingTurretLocation || _isPlacingTurret) return;
 
 		Move();
 		if (_canShoot && Input.IsActionPressed("shoot")) Shoot();

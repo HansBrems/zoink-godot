@@ -132,3 +132,13 @@ one_shot = true
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="InteractionProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -12.0
+offset_right = 10.0
+offset_bottom = -8.0
+value = 50.0
+rounded = true
+show_percentage = false

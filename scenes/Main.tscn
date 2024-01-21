@@ -31,7 +31,7 @@ SpawnRate = 5.0
 [node name="Player" parent="." instance=ExtResource("1_fma10")]
 position = Vector2(41, 504)
 rotation = -3.14159
-AttackSpeed = 0.2
+AttackSpeed = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
