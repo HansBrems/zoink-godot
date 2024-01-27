@@ -11,7 +11,7 @@ public partial class FightingState : State
 
 	public override void Update(double delta)
 	{
-		if (Input.IsActionJustPressed("shoot"))
+		if (Player.CanShoot && Input.IsActionPressed("shoot"))
 			Player.Shoot();
 
 		if (Player.CanDash && Input.IsActionJustPressed("dash"))

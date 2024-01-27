@@ -20,7 +20,6 @@ public partial class Bitcoin : Area2D
 	{
 		if (_isPlayerNear && Input.IsActionJustPressed("interact"))
 		{
-			Player?.ReceiveBitcoin();
 			QueueFree();
 		}
 	}

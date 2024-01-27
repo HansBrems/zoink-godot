@@ -4,20 +4,6 @@ using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
-	private AnimationPlayer _animationPlayer;
-	private ProgressBar _buildingProgressBar;
-
-	private Vector2 _buildingPosition;
-
-	private int _bitcoins;
-	private bool _canShoot = true;
-	private Timer _shootCooldownTimer;
-	private Array<Marker2D> _bulletSpawnLocations;
-
-	private int _turretCount = 2;
-	private bool _isSelectingTurretLocation;
-	private bool _isPlacingTurret;
-
 	[Signal]
 	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
 
@@ -42,16 +28,26 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int Speed { get; set; } = 50;
 
+	private AnimationPlayer _animationPlayer;
+	private Array<Marker2D> _bulletSpawnLocations;
+	private ProgressBar _buildingProgressBar;
+	private Timer _shootCooldownTimer;
+
+	private Vector2 _buildingPosition;
+	private int _turretCount = 2;
+
 	public bool CanBuild => _turretCount > 0;
-	public bool CanDash = true;
+	public bool CanDash { get; set; } = true;
+	public bool CanShoot { get; private set; } = true;
 
 	public override void _Ready()
 	{
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
+		_bulletSpawnLocations = new Array<Marker2D>(GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
 		_shootCooldownTimer.WaitTime = AttackSpeed;
-		_bulletSpawnLocations = new Array<Marker2D>(
-			GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
+		_shootCooldownTimer.Timeout += () => CanShoot = true;
 	}
 
 	public Vector2 GetInputVector()
@@ -122,7 +118,6 @@ public partial class Player : CharacterBody2D
 		_animationPlayer?.Play(name);
 	}
 
-
 	public void Shoot()
 	{
 		var direction = GetGlobalMousePosition() - Position;
@@ -135,15 +130,7 @@ public partial class Player : CharacterBody2D
 			ProjectileType = ProjectileType.Bullet,
 		});
 
-		_canShoot = false;
+		CanShoot = false;
 		_shootCooldownTimer.Start();
 	}
-
-	public void ReceiveBitcoin()
-	{
-		_bitcoins += 1;
-		EmitSignal("OnBitcoinsReceived", _bitcoins);
-	}
-
-
 }

@@ -11,7 +11,7 @@ public partial class IdleState : State
 
 	public override void Update(double delta)
 	{
-		if (Input.IsActionJustPressed("shoot"))
+		if (Player.CanShoot && Input.IsActionPressed("shoot"))
 			Player.Shoot();
 
 		if (Player.CanBuild && Input.IsActionJustPressed("build"))
