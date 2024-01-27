@@ -2,6 +2,8 @@ using Godot;
 
 public partial class BuildingTurretState : State
 {
+	[Export] public Player Player;
+
 	private Timer _buildTimer;
 
 	public override void _Ready()
@@ -12,7 +14,6 @@ public partial class BuildingTurretState : State
 
 	public override void Enter()
 	{
-		GD.Print("Entering building turret state");
 		Player.CaptureMousePosition();
 		Player.ConfirmBuilding();
 		Player.ShowBuildingProgress(true);
@@ -35,7 +36,6 @@ public partial class BuildingTurretState : State
 	private void BuildTurret()
 	{
 		Player.FinishBuilding();
-		GD.Print("Turret Placed");
 		TransitionToState("IdleState");
 	}
 }

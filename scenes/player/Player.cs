@@ -123,15 +123,6 @@ public partial class Player : CharacterBody2D
 	}
 
 
-
-
-
-	public void ReceiveBitcoin()
-	{
-		_bitcoins += 1;
-		EmitSignal("OnBitcoinsReceived", _bitcoins);
-	}
-
 	public void Shoot()
 	{
 		var direction = GetGlobalMousePosition() - Position;
@@ -147,4 +138,12 @@ public partial class Player : CharacterBody2D
 		_canShoot = false;
 		_shootCooldownTimer.Start();
 	}
+
+	public void ReceiveBitcoin()
+	{
+		_bitcoins += 1;
+		EmitSignal("OnBitcoinsReceived", _bitcoins);
+	}
+
+
 }

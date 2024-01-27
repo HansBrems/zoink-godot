@@ -140,22 +140,24 @@ offset_bottom = -8.0
 rounded = true
 show_percentage = false
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState", "Player") instance=ExtResource("3_hswj8")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("3_hswj8")]
 InitialState = NodePath("IdleState")
-Player = NodePath("..")
 
-[node name="BuildingState" type="Node" parent="StateMachine"]
+[node name="BuildingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("4_mii4y")
+Player = NodePath("../..")
 
-[node name="BuildingTurretState" type="Node" parent="StateMachine"]
+[node name="BuildingTurretState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_d3gic")
+Player = NodePath("../..")
 
 [node name="BuildTimer" type="Timer" parent="StateMachine/BuildingTurretState"]
 wait_time = 2.0
 one_shot = true
 
-[node name="DashingState" type="Node" parent="StateMachine"]
+[node name="DashingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("5_0rran")
+Player = NodePath("../..")
 
 [node name="CooldownTimer" type="Timer" parent="StateMachine/DashingState"]
 wait_time = 2.0
@@ -165,8 +167,10 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_c8fjm")
+Player = NodePath("../..")
 
-[node name="FightingState" type="Node" parent="StateMachine"]
+[node name="FightingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("4_pwo8c")
+Player = NodePath("../..")

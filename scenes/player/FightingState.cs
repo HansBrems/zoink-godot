@@ -2,9 +2,10 @@ using Godot;
 
 public partial class FightingState : State
 {
+	[Export] public Player Player;
+
 	public override void Enter()
 	{
-		GD.Print("Entering Fighting state");
 		Player.PlayAnimation("Walking");
 	}
 

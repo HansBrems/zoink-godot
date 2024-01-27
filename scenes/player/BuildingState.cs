@@ -2,9 +2,10 @@ using Godot;
 
 public partial class BuildingState : State
 {
+	[Export] public Player Player;
+
 	public override void Enter()
 	{
-		GD.Print("Entering building state");
 		Player.StartBuilding();
 	}
 

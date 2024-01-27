@@ -2,11 +2,11 @@ using Godot;
 
 public partial class IdleState : State
 {
+	[Export] public Player Player;
+
 	public override void Enter()
 	{
-		GD.Print("Entering Idle state");
-		if (Player != null)
-			Player.PlayAnimation("Idle");
+		Player.PlayAnimation("Idle");
 	}
 
 	public override void Update(double delta)

@@ -2,6 +2,8 @@ using Godot;
 
 public partial class DashingState : State
 {
+	[Export] public Player Player;
+
 	private Vector2 _inputVector;
 	private Timer _cooldownTimer;
 	private Timer _dashTimer;
@@ -16,7 +18,6 @@ public partial class DashingState : State
 
 	public override void Enter()
 	{
-		GD.Print("Entering dashing state");
 		_inputVector = Player.GetInputVector();
 		Player.Dash();
 		_dashTimer.Start();
@@ -24,7 +25,6 @@ public partial class DashingState : State
 
 	public override void Exit()
 	{
-		GD.Print("Leaving dashing state");
 		Player.EndDash();
 		_cooldownTimer.Start();
 	}
