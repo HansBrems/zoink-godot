@@ -23,12 +23,10 @@ public partial class Main : Node2D
 		_towerScene = ResourceLoader.Load<PackedScene>("res://scenes/objects/tower/Tower.tscn");
 		_towers = GetNode<Node2D>("Towers");
 
-		_player.OnPlacingTurret += () => _showSelector = true;
-		_player.OnTurretPlaced += () =>
-		{
-			PlaceTurret();
-			_showSelector = false;
-		};
+		_player.OnBuildingStarted += () => _showSelector = true;
+		_player.OnBuildingCancelled += () => _showSelector = false;
+		_player.OnBuildingConfirmed += () =>_showSelector = false;
+		_player.OnBuildingFinished += PlaceTurret;;
 		_player.OnShoot += _shootController.OnShoot;
 	}
 
@@ -65,9 +63,9 @@ public partial class Main : Node2D
 		_selector.Visible = false;
 	}
 
-	private void PlaceTurret()
+	private void PlaceTurret(Vector2 buildingPosition)
 	{
-		var mouseMapPosition = _tileMap.LocalToMap(GetGlobalMousePosition());
+		var mouseMapPosition = _tileMap.LocalToMap(buildingPosition);
 		var tower = _towerScene.Instantiate<Tower>();
 		tower.Position = new Vector2(mouseMapPosition.X * TileWidth + TileWidth / 2, mouseMapPosition.Y * TileWidth + TileWidth / 2);
 		_towers.AddChild(tower);
