@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckvculsbye1tk"]
 
-[ext_resource type="Script" path="res://scenes/ObjectsOld/candle/Candle.cs" id="1_ykqdq"]
+[ext_resource type="Script" path="res://scenes/Objects/Candle/Candle.cs" id="1_ykqdq"]
 [ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_tpgxg"]
 
 [node name="Candle" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dl3mtk1tgtlh8"]
 
-[ext_resource type="Script" path="res://scenes/Console/Console.cs" id="1_j7kdh"]
+[ext_resource type="Script" path="res://scenes/Objects/Console/Console.cs" id="1_j7kdh"]
 [ext_resource type="PackedScene" uid="uid://cl1cf4l23ugcx" path="res://scenes/Interaction/InteractionArea/InteractionArea.tscn" id="1_jvfyq"]
 [ext_resource type="Texture2D" uid="uid://bb6vojxsfp4ga" path="res://resources/images/console.png" id="1_ps1ud"]
 [ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_7cwr5"]

@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://dxm0j161834m3"]
 
-[ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_1qkp2"]
-[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/components/StateMachine.tscn" id="3_hswj8"]
+[ext_resource type="Script" path="res://scenes/playerOld/Player.cs" id="1_1qkp2"]
+[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/componentsold/StateMachine.tscn" id="3_hswj8"]
 [ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/character.png" id="3_yq0mq"]
-[ext_resource type="Script" path="res://scenes/player/BuildingState.cs" id="4_mii4y"]
-[ext_resource type="Script" path="res://scenes/player/FightingState.cs" id="4_pwo8c"]
-[ext_resource type="Script" path="res://scenes/player/DashingState.cs" id="5_0rran"]
-[ext_resource type="Script" path="res://scenes/player/IdleState.cs" id="6_c8fjm"]
-[ext_resource type="Script" path="res://scenes/player/BuildingTurretState.cs" id="6_d3gic"]
+[ext_resource type="Script" path="res://scenes/playerOld/BuildingState.cs" id="4_mii4y"]
+[ext_resource type="Script" path="res://scenes/playerOld/FightingState.cs" id="4_pwo8c"]
+[ext_resource type="Script" path="res://scenes/playerOld/DashingState.cs" id="5_0rran"]
+[ext_resource type="Script" path="res://scenes/playerOld/IdleState.cs" id="6_c8fjm"]
+[ext_resource type="Script" path="res://scenes/playerOld/BuildingTurretState.cs" id="6_d3gic"]
 
 [sub_resource type="Animation" id="Animation_nx18h"]
 resource_name = "Idle"

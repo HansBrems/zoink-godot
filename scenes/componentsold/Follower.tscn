@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vk63oalng0xa"]
 
-[ext_resource type="Script" path="res://scenes/components/Follower.cs" id="1_qhxgf"]
+[ext_resource type="Script" path="res://scenes/componentsold/Follower.cs" id="1_qhxgf"]
 
 [node name="Follower" type="Node2D"]
 script = ExtResource("1_qhxgf")

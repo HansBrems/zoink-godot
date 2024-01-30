@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Tower : StaticBody2D
+public partial class Turret : StaticBody2D
 {
 	private Beetle _enemy;
 	private Line2D _laser;
