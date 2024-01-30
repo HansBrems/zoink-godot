@@ -3,6 +3,8 @@ using Godot;
 
 public partial class Beetle : CharacterBody2D
 {
+	private PackedScene _bloodSplatterScene;
+
 	private Vector2 _direction = Vector2.Zero;
 	private int _health = 50;
 	private readonly Random _random = new();
@@ -59,6 +61,8 @@ public partial class Beetle : CharacterBody2D
 		_sprite.Scale = new Vector2(scaleValue, scaleValue);
 		_healthBar.MaxValue = _health;
 
+		_bloodSplatterScene = ResourceLoader.Load<PackedScene>("res://scenes/effects/BloodSplatter.tscn");
+
 		EmitSignal("OnCreated");
 	}
 
@@ -80,6 +84,10 @@ public partial class Beetle : CharacterBody2D
 		if (_health <= 0)
 		{
 			EmitSignal("OnKilled");
+
+			var splatter = _bloodSplatterScene.Instantiate<Node2D>();
+			GetTree().CurrentScene.AddChild(splatter);
+			splatter.GlobalPosition = GlobalPosition;
 			QueueFree();
 		}
 	}

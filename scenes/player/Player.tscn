@@ -127,6 +127,10 @@ position = Vector2(7, 0)
 [node name="Spawn3" type="Marker2D" parent="BulletSpawnLocations"]
 position = Vector2(6, 2)
 
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [node name="InteractionProgress" type="ProgressBar" parent="."]
 visible = false
 offset_left = -10.0
@@ -135,10 +139,6 @@ offset_right = 10.0
 offset_bottom = -8.0
 rounded = true
 show_percentage = false
-
-[node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("3_hswj8")]
 InitialState = NodePath("IdleState")

@@ -78,13 +78,3 @@ RotationSpeed = 150.0
 position = Vector2(440, 663)
 LightColor = Color(0, 0, 1, 1)
 RotationSpeed = 175.0
-
-[node name="RotatingLight3" parent="Lights" instance=ExtResource("5_oy6yx")]
-position = Vector2(233, 569)
-LightColor = Color(0, 0.623529, 0, 1)
-RotationSpeed = 10.0
-
-[node name="RotatingLight4" parent="Lights" instance=ExtResource("5_oy6yx")]
-position = Vector2(232, 424)
-LightColor = Color(0, 0.623529, 0, 1)
-RotationSpeed = 10.0
