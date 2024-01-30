@@ -13,7 +13,7 @@ public partial class EnemySpawner : Node2D
 
 	public override void _Ready()
 	{
-		_beetleScene = ResourceLoader.Load<PackedScene>("res://scenes/enemies/Beetle.tscn");
+		_beetleScene = ResourceLoader.Load<PackedScene>(SceneUris.Get("Enemies", "Beetle"));
 		_spawnTimer = GetNode<Timer>("SpawnTimer");
 		_spawnTimer.WaitTime = SpawnRate;
 		_spawnTimer.Timeout += SpawnEnemy;

@@ -7,7 +7,7 @@ public partial class ShootController : Node2D
 
 	public override void _Ready()
 	{
-		_bulletScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/Bullet.tscn");
+		_bulletScene = ResourceLoader.Load<PackedScene>(SceneUris.Get("Projectiles", "Bullet"));
 	}
 
 	public void OnShoot(OnShootEventArgs args)

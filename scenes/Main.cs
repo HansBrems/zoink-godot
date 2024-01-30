@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 
 public partial class Main : Node2D
@@ -20,7 +19,7 @@ public partial class Main : Node2D
 		_shootController = GetNode<ShootController>("ShootController");
 		_selector = GetNode<Line2D>("Square");
 		_tileMap = GetNode<TileMap>("Map01/TileMap");
-		_turretScene = ResourceLoader.Load<PackedScene>("res://scenes/Objects/Turret/Turret.tscn");
+		_turretScene = ResourceLoader.Load<PackedScene>(SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");
 
 		_player.OnBuildingStarted += () => _showSelector = true;

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://blpigh71lroqw"]
 
-[ext_resource type="Script" path="res://scenes/Projectilesssssss/Bullet/Bullet.cs" id="1_0nif7"]
+[ext_resource type="Script" path="res://scenes/Projectiles/Bullet/Bullet.cs" id="1_0nif7"]
 [ext_resource type="Texture2D" uid="uid://ima8mtvtvm8u" path="res://resources/images/bullet.png" id="3_5crnl"]
 [ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_gagfg"]
 

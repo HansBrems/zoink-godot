@@ -61,7 +61,7 @@ public partial class Beetle : CharacterBody2D
 		_sprite.Scale = new Vector2(scaleValue, scaleValue);
 		_healthBar.MaxValue = _health;
 
-		_bloodSplatterScene = ResourceLoader.Load<PackedScene>("res://scenes/effects/BloodSplatter/BloodSplatter.tscn");
+		_bloodSplatterScene = ResourceLoader.Load<PackedScene>( SceneUris.Get("Effects", "BloodSplatter"));
 
 		EmitSignal("OnCreated");
 	}
