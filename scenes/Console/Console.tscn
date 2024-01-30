@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl3mtk1tgtlh8"]
+
+[ext_resource type="Script" path="res://scenes/Console/Console.cs" id="1_j7kdh"]
+[ext_resource type="PackedScene" uid="uid://cl1cf4l23ugcx" path="res://scenes/Interaction/InteractionArea/InteractionArea.tscn" id="1_jvfyq"]
+[ext_resource type="Texture2D" uid="uid://bb6vojxsfp4ga" path="res://resources/images/console.png" id="1_ps1ud"]
+[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_7cwr5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlmag"]
+size = Vector2(46, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4cuv"]
+size = Vector2(48, 16)
+
+[node name="Console" type="StaticBody2D"]
+script = ExtResource("1_j7kdh")
+
+[node name="InteractionArea" parent="." instance=ExtResource("1_jvfyq")]
+ActionName = "enable"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_rlmag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v4cuv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ps1ud")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -1)
+color = Color(0, 0.364706, 1, 1)
+texture = ExtResource("2_7cwr5")
+texture_scale = 0.2
