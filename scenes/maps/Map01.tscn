@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmirmbjj8qvwt"]
 
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/maps/TileSet.tres" id="1_senoy"]
-[ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/objects/candle/Candle.tscn" id="2_cee8s"]
+[ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/Objects/candle/Candle.tscn" id="2_cee8s"]
 [ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Console/Console.tscn" id="2_hv5sl"]
-[ext_resource type="PackedScene" uid="uid://k4da6li0kgtm" path="res://scenes/objects/Chair.tscn" id="2_ksumh"]
-[ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/objects/RotatingLight.tscn" id="5_oy6yx"]
+[ext_resource type="PackedScene" uid="uid://k4da6li0kgtm" path="res://scenes/Objects/Chair.tscn" id="2_ksumh"]
+[ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/Objects/RotatingLight.tscn" id="5_oy6yx"]
 
 [node name="Map01" type="Node2D"]
 
