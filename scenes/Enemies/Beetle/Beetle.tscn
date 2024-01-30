@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bv1tbt8rf32mp"]
 
 [ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://resources/images/void.png" id="1_2b5hm"]
-[ext_resource type="Script" path="res://scenes/enemiesold/Beetle.cs" id="1_o0868"]
+[ext_resource type="Script" path="res://scenes/Enemies/Beetle/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
 [ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_m2o12"]
 

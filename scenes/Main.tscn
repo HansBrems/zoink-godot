@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
-[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/mapsold/Map01.tscn" id="1_5i3vo"]
-[ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/playerOld/Player.tscn" id="1_fma10"]
-[ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/componentsold/ShootController.tscn" id="3_385lq"]
-[ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/componentsold/EnemySpawner.tscn" id="6_y406e"]
+[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Map01.tscn" id="1_5i3vo"]
+[ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="1_fma10"]
+[ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Components/ShootController/ShootController.tscn" id="3_385lq"]
+[ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Components/EnemySpawner/EnemySpawner.tscn" id="6_y406e"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3ik1s")
