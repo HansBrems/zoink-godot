@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl3mtk1tgtlh8"]
+[gd_scene load_steps=11 format=3 uid="uid://dl3mtk1tgtlh8"]
 
 [ext_resource type="Script" path="res://scenes/Objects/Console/Console.cs" id="1_j7kdh"]
 [ext_resource type="PackedScene" uid="uid://cl1cf4l23ugcx" path="res://scenes/Components/Interaction/InteractionArea/InteractionArea.tscn" id="1_jvfyq"]
@@ -10,6 +10,60 @@ size = Vector2(46, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4cuv"]
 size = Vector2(48, 16)
+
+[sub_resource type="Animation" id="Animation_24yrl"]
+resource_name = "Off"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_02dup"]
+resource_name = "On"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_mdvm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qonaq"]
+_data = {
+"Off": SubResource("Animation_24yrl"),
+"On": SubResource("Animation_02dup"),
+"RESET": SubResource("Animation_mdvm6")
+}
 
 [node name="Console" type="StaticBody2D"]
 script = ExtResource("1_j7kdh")
@@ -26,9 +80,17 @@ shape = SubResource("RectangleShape2D_v4cuv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ps1ud")
+hframes = 4
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -1)
+enabled = false
 color = Color(0, 0.364706, 1, 1)
 texture = ExtResource("2_7cwr5")
 texture_scale = 0.2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qonaq")
+}
+autoplay = "Off"

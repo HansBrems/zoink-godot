@@ -37,5 +37,5 @@ AttackSpeed = 0.25
 position_smoothing_enabled = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.75
+energy = 0.9
 blend_mode = 1

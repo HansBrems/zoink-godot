@@ -44,37 +44,41 @@ rotation = -1.5708
 [node name="Lights" type="Node" parent="."]
 
 [node name="Candle1" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(87, 503)
-rotation = 0.523598
+position = Vector2(85, 421)
+rotation = -0.6353
 LightColor = Color(0, 0.94902, 0.411765, 1)
 
 [node name="Candle2" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(304, 576)
+position = Vector2(90, 582)
+rotation = -2.31605
 LightColor = Color(1, 0.447059, 0.239216, 1)
 
 [node name="Candle3" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(304, 432)
+position = Vector2(332, 506)
+rotation = 1.50971
 LightColor = Color(0.239216, 0.784314, 1, 1)
 
 [node name="Candle4" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(560, 336)
+position = Vector2(587, 293)
+rotation = 0.420624
 LightColor = Color(0.847059, 0.239216, 1, 1)
 
 [node name="Candle5" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(560, 672)
+position = Vector2(587, 715)
+rotation = 2.38761
 LightColor = Color(1, 0.239216, 0.25098, 1)
 
 [node name="Candle6" parent="Lights" instance=ExtResource("2_cee8s")]
-position = Vector2(472, 505)
-rotation = 0.523598
+position = Vector2(491, 484)
+rotation = 0.593412
 LightColor = Color(0, 0.94902, 0.411765, 1)
 
 [node name="RotatingLight1" parent="Lights" instance=ExtResource("5_oy6yx")]
-position = Vector2(440, 344)
+position = Vector2(336, 302)
 LightColor = Color(0.811765, 0, 0, 1)
 RotationSpeed = 150.0
 
 [node name="RotatingLight2" parent="Lights" instance=ExtResource("5_oy6yx")]
-position = Vector2(440, 663)
+position = Vector2(336, 704)
 LightColor = Color(0, 0, 1, 1)
 RotationSpeed = 175.0

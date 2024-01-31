@@ -3,6 +3,7 @@ using System;
 
 public partial class Candle : Node2D
 {
+	private InteractionArea _interactionArea;
 	private PointLight2D _light;
 	private bool _lightAnimating;
 	private readonly Random _random = new Random();
@@ -12,6 +13,8 @@ public partial class Candle : Node2D
 
 	public override void _Ready()
 	{
+		_interactionArea = GetNode<InteractionArea>("InteractionArea");
+		_interactionArea.Interact = Callable.From(ToggleEnabled);
 		_light = GetNode<PointLight2D>("Light");
 		_light.Color = LightColor;
 	}
@@ -39,5 +42,10 @@ public partial class Candle : Node2D
 			// Make it so the tween sets _lightAnimating to false when it's done animating.
 			tween.TweenCallback(Callable.From(() => _lightAnimating = false));
 		}
+	}
+
+	private void ToggleEnabled()
+	{
+		_light.Enabled = !_light.Enabled;
 	}
 }

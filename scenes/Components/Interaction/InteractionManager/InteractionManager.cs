@@ -29,9 +29,9 @@ public partial class InteractionManager : Node2D
 
 			var labelPosX = _activeArea.GlobalPosition.X - _label.Size.X / 2;
 			var labelPosY = _activeArea.GlobalPosition.Y - 36;
-			_label.GlobalPosition = new Vector2(labelPosX, labelPosY);
-			_label.Text = $"{Text} {_activeArea.ActionName}";
-			_label.Show();
+			//_label.GlobalPosition = new Vector2(labelPosX, labelPosY);
+			//_label.Text = $"{Text} {_activeArea.ActionName}";
+			//_label.Show();
 		}
 		else
 		{
@@ -54,6 +54,7 @@ public partial class InteractionManager : Node2D
 
 	public void UnregisterArea(InteractionArea area)
 	{
+		if (_activeArea == area) _activeArea = null;
 		_activeAreas.Remove(area);
 	}
 }
