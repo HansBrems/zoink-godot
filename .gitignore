@@ -1,2 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Rider
+.idea/
+
+# Mac stuff
+**/.DS_Store
