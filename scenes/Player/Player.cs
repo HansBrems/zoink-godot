@@ -30,6 +30,7 @@ public partial class Player : CharacterBody2D
 
 	private AnimationPlayer _animationPlayer;
 	private Array<Marker2D> _bulletSpawnLocations;
+	private InteractionManager _interactionManager;
 	private ProgressBar _buildingProgressBar;
 	private Timer _shootCooldownTimer;
 
@@ -45,6 +46,8 @@ public partial class Player : CharacterBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
 		_bulletSpawnLocations = new Array<Marker2D>(GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
+		_interactionManager = GetNode<InteractionManager>("/root/InteractionManager");
+		_interactionManager.RegisterPlayer(this);
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
 		_shootCooldownTimer.WaitTime = AttackSpeed;
 		_shootCooldownTimer.Timeout += () => CanShoot = true;

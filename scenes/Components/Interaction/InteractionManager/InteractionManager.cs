@@ -16,12 +16,11 @@ public partial class InteractionManager : Node2D
 	public override void _Ready()
 	{
 		_label = GetNode<Label>("Label");
-		_player = GetTree().GetFirstNodeInGroup("Player") as Player;
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_activeAreas.Count > 0 && _canInteract)
+		if (_player != null && _activeAreas.Count > 0 && _canInteract)
 		{
 			_activeArea = _activeAreas
 				.OrderBy(area => area.GlobalPosition.DistanceTo(_player.GlobalPosition))
@@ -45,6 +44,11 @@ public partial class InteractionManager : Node2D
 		_canInteract = false;
 		_activeArea.Interact.Call();
 		_canInteract = true;
+	}
+
+	public void RegisterPlayer(Player player)
+	{
+		_player = player;
 	}
 
 	public void RegisterArea(InteractionArea area)
