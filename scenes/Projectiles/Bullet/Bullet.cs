@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Bullet : Area2D
 {
-	private AudioStreamPlayer2D _shootSound;
+	private AudioStreamPlayer _shootSound;
 	private Random _random = new();
 
 	public Vector2 Direction { get; set; } = Vector2.Right;
@@ -13,7 +13,7 @@ public partial class Bullet : Area2D
 
 	public override void _Ready()
 	{
-		_shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
+		_shootSound = GetNode<AudioStreamPlayer>("ShootSound");
 		PlayShootSound();
 
 		BodyEntered += SelfDestruct;
@@ -36,9 +36,9 @@ public partial class Bullet : Area2D
 		_shootSound.Play();
 	}
 
-	private void SetRandomPitch(AudioStreamPlayer2D streamPlayer)
+	private void SetRandomPitch(AudioStreamPlayer streamPlayer)
 	{
-		var pitch = _random.NextSingle() * 0.8 + 1.2;
+		var pitch = _random.NextSingle() * 0.99 + 1;
 		streamPlayer.PitchScale = (float)pitch;
 	}
 }

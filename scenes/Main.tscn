@@ -24,7 +24,7 @@ default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
 [node name="EnemySpawner1" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
 position = Vector2(590, 509)
 ChaseTarget = NodePath("../../Player")
-SpawnRate = 5.0
+SpawnRate = 60.0
 
 [node name="Turrets" type="Node2D" parent="."]
 

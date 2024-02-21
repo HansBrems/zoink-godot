@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/Projectiles/Bullet/Bullet.cs" id="1_0nif7"]
 [ext_resource type="Texture2D" uid="uid://ima8mtvtvm8u" path="res://resources/images/bullet.png" id="3_5crnl"]
-[ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_gagfg"]
+[ext_resource type="AudioStream" uid="uid://ddigqp2erw1p5" path="res://resources/sounds/bullet.wav" id="3_gel7e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7vr6"]
 radius = 1.0
@@ -19,8 +19,7 @@ shape = SubResource("CircleShape2D_e7vr6")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_5crnl")
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_gagfg")
-volume_db = -17.327
-pitch_scale = 1.98
-max_distance = 500.0
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gel7e")
+volume_db = -5.253
+max_polyphony = 24
