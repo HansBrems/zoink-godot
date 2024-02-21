@@ -34,7 +34,5 @@ size_flags_vertical = 8
 theme_override_fonts/normal_font = ExtResource("2_fbw3k")
 theme_override_font_sizes/normal_font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxLine_0awyo")
-text = "A few days ago I crashed on this remote planet... I thought I was a goner but luckily I survived.
-
-I made myself at home in what's left of the ship. It's in bad condition but it still has a bit of power left. I'll see if I can boot some of the systems and perhaps it will enable me to contact the captain."
+text = "A few days ago I crashed on this remote planet... I thought I was a goner but luckily I survived. I made myself at home in what's left of the ship. It's in bad shape but it still has a bit of power left. I'll see if I can boot some of the systems and perhaps it will enable me to contact the captain."
 autowrap_mode = 2

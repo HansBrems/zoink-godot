@@ -14,20 +14,29 @@ public partial class Intro : Node2D
 		_timer.Timeout += UpdateText;
 	}
 
-	public void UpdateText()
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressed("Cancel")) TransitionToNextScene();
+	}
+
+	private void UpdateText()
 	{
 		_label.VisibleCharacters += 1;
 
 		if (_label.VisibleCharacters == _label.GetParsedText().Length)
 		{
-			_timer.Stop();
-
-			var startColor = _label.Modulate;
-			var endColor = new Color(startColor.R, startColor.G, startColor.B, 0);
-
-			var tween = GetTree().CreateTween();
-			tween.TweenProperty(_label, "modulate", endColor, 5);
-			tween.Finished += () => GetTree().ChangeSceneToFile(SceneUris.Get("Main"));
+			TransitionToNextScene();
 		}
+	}
+
+	private void TransitionToNextScene()
+	{
+		_timer.Stop();
+
+		var startColor = _label.Modulate;
+		var endColor = new Color(startColor.R, startColor.G, startColor.B, 0);
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(_label, "modulate", endColor, 1);
+		tween.Finished += () => GetTree().ChangeSceneToFile(SceneUris.Get("Main"));
 	}
 }
