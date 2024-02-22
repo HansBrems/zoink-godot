@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://blpigh71lroqw"]
+[gd_scene load_steps=6 format=3 uid="uid://blpigh71lroqw"]
 
 [ext_resource type="Script" path="res://scenes/Projectiles/Bullet/Bullet.cs" id="1_0nif7"]
 [ext_resource type="Texture2D" uid="uid://ima8mtvtvm8u" path="res://resources/images/bullet.png" id="3_5crnl"]
+[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="3_cxlk2"]
 [ext_resource type="AudioStream" uid="uid://ddigqp2erw1p5" path="res://resources/sounds/bullet.wav" id="3_gel7e"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e7vr6"]
-radius = 1.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohs66"]
+size = Vector2(4, 2)
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 8
@@ -13,13 +14,19 @@ collision_mask = 5
 script = ExtResource("1_0nif7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_e7vr6")
+shape = SubResource("RectangleShape2D_ohs66")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+modulate = Color(0.870588, 0.458824, 0.466667, 1)
 texture = ExtResource("3_5crnl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.682353, 0.517647, 1)
+energy = 0.1
+texture = ExtResource("3_cxlk2")
+texture_scale = 0.25
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gel7e")
-volume_db = -5.253
+volume_db = -6.0
 max_polyphony = 24

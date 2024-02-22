@@ -119,13 +119,13 @@ region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
 [node name="BulletSpawnLocations" type="Node2D" parent="."]
 
 [node name="Spawn1" type="Marker2D" parent="BulletSpawnLocations"]
-position = Vector2(6, -2)
+position = Vector2(6, -1)
 
 [node name="Spawn2" type="Marker2D" parent="BulletSpawnLocations"]
 position = Vector2(7, 0)
 
 [node name="Spawn3" type="Marker2D" parent="BulletSpawnLocations"]
-position = Vector2(6, 2)
+position = Vector2(6, 1)
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.25
