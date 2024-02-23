@@ -15,7 +15,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/path = NodePath("PlayerSprite:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +27,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("PlayerSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -43,7 +43,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -55,7 +55,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("PlayerSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -72,7 +72,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,10 +105,9 @@ libraries = {
 autoplay = "RESET"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_to76k")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
 texture = ExtResource("3_yq0mq")
@@ -116,29 +115,21 @@ hframes = 3
 frame = 1
 region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
 
-[node name="BulletSpawnLocations" type="Node2D" parent="."]
+[node name="BulletSpawnLocations" type="Node2D" parent="PlayerSprite"]
+rotation = -1.5708
 
-[node name="Spawn1" type="Marker2D" parent="BulletSpawnLocations"]
+[node name="Spawn1" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
 position = Vector2(6, -1)
 
-[node name="Spawn2" type="Marker2D" parent="BulletSpawnLocations"]
+[node name="Spawn2" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
 position = Vector2(7, 0)
 
-[node name="Spawn3" type="Marker2D" parent="BulletSpawnLocations"]
+[node name="Spawn3" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
 position = Vector2(6, 1)
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
-
-[node name="InteractionProgress" type="ProgressBar" parent="."]
-visible = false
-offset_left = -10.0
-offset_top = -12.0
-offset_right = 10.0
-offset_bottom = -8.0
-rounded = true
-show_percentage = false
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("3_hswj8")]
 InitialState = NodePath("IdleState")
@@ -174,3 +165,12 @@ Player = NodePath("../..")
 [node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_c8fjm")
 Player = NodePath("../..")
+
+[node name="InteractionProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -13.0
+offset_right = 10.0
+offset_bottom = -9.0
+rounded = true
+show_percentage = false

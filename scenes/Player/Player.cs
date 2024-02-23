@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -32,8 +33,9 @@ public partial class Player : CharacterBody2D
 	private Array<Marker2D> _bulletSpawnLocations;
 	private InteractionManager _interactionManager;
 	private ProgressBar _buildingProgressBar;
+	private Sprite2D _playerSprite;
 	private Timer _shootCooldownTimer;
-
+	
 	private Vector2 _buildingPosition;
 	private int _turretCount = 2;
 
@@ -45,9 +47,10 @@ public partial class Player : CharacterBody2D
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
-		_bulletSpawnLocations = new Array<Marker2D>(GetNode("BulletSpawnLocations").GetChildren().Cast<Marker2D>());
+		_bulletSpawnLocations = new Array<Marker2D>(GetNode("PlayerSprite/BulletSpawnLocations").GetChildren().Cast<Marker2D>());
 		_interactionManager = GetNode<InteractionManager>("/root/InteractionManager");
 		_interactionManager.RegisterPlayer(this);
+		_playerSprite = GetNode<Sprite2D>("PlayerSprite");
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
 		_shootCooldownTimer.WaitTime = AttackSpeed;
 		_shootCooldownTimer.Timeout += () => CanShoot = true;
@@ -60,7 +63,8 @@ public partial class Player : CharacterBody2D
 
 	public void LookAtMousePosition()
 	{
-		LookAt(GetGlobalMousePosition());
+		//_playerSprite.LookAt(GetGlobalMousePosition());
+		//_playerSprite.Rotation += Mathf.DegToRad(90);
 	}
 
 	public void Move(Vector2 direction)
