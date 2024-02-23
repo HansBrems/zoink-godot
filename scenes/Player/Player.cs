@@ -35,7 +35,7 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _buildingProgressBar;
 	private Sprite2D _playerSprite;
 	private Timer _shootCooldownTimer;
-	
+
 	private Vector2 _buildingPosition;
 	private int _turretCount = 2;
 
@@ -63,8 +63,8 @@ public partial class Player : CharacterBody2D
 
 	public void LookAtMousePosition()
 	{
-		//_playerSprite.LookAt(GetGlobalMousePosition());
-		//_playerSprite.Rotation += Mathf.DegToRad(90);
+		_playerSprite.LookAt(GetGlobalMousePosition());
+		_playerSprite.Rotation += Mathf.DegToRad(90);
 	}
 
 	public void Move(Vector2 direction)
