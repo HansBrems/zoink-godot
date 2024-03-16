@@ -29,11 +29,11 @@ SpawnRate = 60.0
 [node name="Turrets" type="Node2D" parent="."]
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_fma10")]
-position = Vector2(41, 504)
+position = Vector2(86, 503)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.9
+energy = 0.7
 blend_mode = 1
