@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bv1tbt8rf32mp"]
+[gd_scene load_steps=15 format=3 uid="uid://bv1tbt8rf32mp"]
 
 [ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://resources/images/void.png" id="1_2b5hm"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
-[ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_m2o12"]
 [ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Components/StateMachine/StateMachine.tscn" id="5_a3qas"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/ChaseState.cs" id="6_vi7js"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/IdleState.cs" id="7_ge2ar"]
@@ -108,9 +107,6 @@ shape = SubResource("RectangleShape2D_o4frt")
 texture = ExtResource("1_2b5hm")
 hframes = 4
 
-[node name="BulletStartingPosition" type="Marker2D" parent="Sprite2D"]
-position = Vector2(0, -11)
-
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 radius = 51.67
@@ -148,15 +144,6 @@ collision_mask = 8
 visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_kg3rv")
-
-[node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 2.332
-autostart = true
-
-[node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_m2o12")
-pitch_scale = 1.37
-max_distance = 250.0
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("5_a3qas")]
 InitialState = NodePath("IdleState")
