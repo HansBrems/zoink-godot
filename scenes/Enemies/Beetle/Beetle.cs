@@ -45,9 +45,9 @@ public partial class Beetle : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        // var rotation = (float)(_direction.Angle() * 180 / Math.PI) + 90;
-        // var tween = GetTree().CreateTween();
-        // tween.TweenProperty(_sprite, "rotation_degrees", rotation, 0.2f);
+        var rotation = (float)(_direction.Angle() * 180 / Math.PI) + 90;
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(_sprite, "rotation_degrees", rotation, 0.2f);
 
         _healthBar.Value = _health;
     }
