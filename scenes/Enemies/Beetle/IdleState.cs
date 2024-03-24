@@ -2,9 +2,9 @@ using Godot;
 
 namespace Zoink.scenes.Enemies.Beetle;
 
-public partial class IdleState : State
+public partial class IdleState : Components.StateMachine.State
 {
-	[Export] public global::Beetle Beetle;
+	[Export] public global::Zoink.scenes.Enemies.Beetle.Beetle Beetle;
 
 	public override void Enter()
 	{
