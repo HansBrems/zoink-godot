@@ -1,12 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv1tbt8rf32mp"]
+[gd_scene load_steps=16 format=3 uid="uid://bv1tbt8rf32mp"]
 
 [ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://resources/images/void.png" id="1_2b5hm"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
 [ext_resource type="AudioStream" uid="uid://b0igcpcaxyu2w" path="res://resources/sounds/Retro Weapon Gun LoFi 03.wav" id="4_m2o12"]
+[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Components/StateMachine/StateMachine.tscn" id="5_a3qas"]
+[ext_resource type="Script" path="res://scenes/Enemies/Beetle/ChaseState.cs" id="6_vi7js"]
+[ext_resource type="Script" path="res://scenes/Enemies/Beetle/IdleState.cs" id="7_ge2ar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4frt"]
 size = Vector2(4, 8)
+
+[sub_resource type="Gradient" id="Gradient_hj5cl"]
+colors = PackedColorArray(0.517647, 0, 0, 1, 1, 0, 0.183333, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_to43h"]
+gradient = SubResource("Gradient_hj5cl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg3rv"]
+size = Vector2(8, 11)
 
 [sub_resource type="Animation" id="Animation_si1uk"]
 resource_name = "Idle"
@@ -82,15 +94,6 @@ _data = {
 "Walking": SubResource("Animation_28ysg")
 }
 
-[sub_resource type="Gradient" id="Gradient_hj5cl"]
-colors = PackedColorArray(0.517647, 0, 0, 1, 1, 0, 0.183333, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_to43h"]
-gradient = SubResource("Gradient_hj5cl")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg3rv"]
-size = Vector2(8, 11)
-
 [node name="Beetle" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 11
@@ -107,12 +110,6 @@ hframes = 4
 
 [node name="BulletStartingPosition" type="Marker2D" parent="Sprite2D"]
 position = Vector2(0, -11)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_co6dd")
-}
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
@@ -160,3 +157,20 @@ autostart = true
 stream = ExtResource("4_m2o12")
 pitch_scale = 1.37
 max_distance = 250.0
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("5_a3qas")]
+InitialState = NodePath("IdleState")
+
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+script = ExtResource("6_vi7js")
+Beetle = NodePath("../..")
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+script = ExtResource("7_ge2ar")
+Beetle = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_co6dd")
+}
