@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=7 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Map01.tscn" id="1_5i3vo"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="1_fma10"]
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Components/ShootController/ShootController.tscn" id="3_385lq"]
-[ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Components/EnemySpawner/EnemySpawner.tscn" id="6_y406e"]
+[ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="5_jbklf"]
+[ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Components/Node2dSpawner/Node2dSpawner.tscn" id="6_y406e"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3ik1s")
@@ -21,10 +22,10 @@ default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
 
 [node name="EnemySpawners" type="Node2D" parent="."]
 
-[node name="EnemySpawner1" parent="EnemySpawners" node_paths=PackedStringArray("ChaseTarget") instance=ExtResource("6_y406e")]
-position = Vector2(162, 438)
-ChaseTarget = NodePath("../../Player")
-SpawnRate = 60.0
+[node name="Node2dSpawner" parent="EnemySpawners" instance=ExtResource("6_y406e")]
+position = Vector2(138, 474)
+EnemyScene = ExtResource("5_jbklf")
+SpawnRate = 10.0
 
 [node name="Turrets" type="Node2D" parent="."]
 
