@@ -28,7 +28,7 @@ public partial class Node2dSpawner : Node2D
 		enemy.Position = Position;
 
 		GetTree().CurrentScene
-            .GetNode<Node2D>("Enemies")
-            .AddChild(enemy);
+			.GetNode<Node2D>("Enemies")
+			.AddChild(enemy);
 	}
 }
