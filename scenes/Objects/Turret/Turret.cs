@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using Zoink.scenes.Components.ShootController;
+using Zoink.scenes.Core.Projectiles;
 
 namespace Zoink.scenes.Objects.Turret;
 
@@ -21,7 +21,7 @@ public partial class Turret : StaticBody2D
 	public Node2D EnemiesNode { get; set; }
 
 	[Signal]
-	public delegate void OnShootEventHandler(Components.ShootController.OnShootEventArgs args);
+	public delegate void OnShootEventHandler(OnShootEventArgs args);
 
 	public override void _Ready()
 	{
@@ -84,7 +84,7 @@ public partial class Turret : StaticBody2D
 		if (_rayCast.IsColliding()) return;
 
 		var direction = _enemy.Position - Position;
-		EmitSignal("OnShoot", new Components.ShootController.OnShootEventArgs
+		EmitSignal("OnShoot", new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
 			Position = Position,

@@ -1,17 +1,18 @@
 using Godot;
+using Zoink.scenes.Core.Interactions;
 
 namespace Zoink.scenes.Objects.Console;
 
 public partial class Console : StaticBody2D
 {
 	private AnimationPlayer _animationPlayer;
-	private Components.Interaction.InteractionArea.InteractionArea _interactionArea;
+	private InteractionArea _interactionArea;
 	private PointLight2D _light;
 
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		_interactionArea = GetNode<Components.Interaction.InteractionArea.InteractionArea>("InteractionArea");
+		_interactionArea = GetNode<InteractionArea>("InteractionArea");
 		_interactionArea.Interact = Callable.From(ToggleEnabled);
 		_light = GetNode<PointLight2D>("PointLight2D");
 	}

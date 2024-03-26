@@ -1,8 +1,9 @@
 using Godot;
+using Zoink.scenes.Core.States;
 
 namespace Zoink.scenes.Player;
 
-public partial class DashingState : Components.StateMachine.State
+public partial class DashingState : State
 {
 	[Export] public Player Player;
 

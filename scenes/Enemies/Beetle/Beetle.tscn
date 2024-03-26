@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://resources/images/void.png" id="1_2b5hm"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/Beetle.cs" id="1_o0868"]
 [ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_xvf53"]
-[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Components/StateMachine/StateMachine.tscn" id="5_a3qas"]
+[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Core/States/StateMachine.tscn" id="5_a3qas"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/ChaseState.cs" id="6_vi7js"]
 [ext_resource type="Script" path="res://scenes/Enemies/Beetle/IdleState.cs" id="7_ge2ar"]
 

@@ -1,9 +1,9 @@
 using System;
 using Godot;
 
-namespace Zoink.scenes.Components.ShootController;
+namespace Zoink.scenes.Core.Projectiles;
 
-public partial class ShootController : Node2D
+public partial class ProjectileManager : Node2D
 {
 	private PackedScene _bulletScene;
 
@@ -16,7 +16,7 @@ public partial class ShootController : Node2D
 	{
 		if (args.ProjectileType != ProjectileType.Bullet) return;
 
-		var bullet = _bulletScene.Instantiate<Projectiles.Bullet.Bullet>();
+		var bullet = _bulletScene.Instantiate<scenes.Projectiles.Bullet.Bullet>();
 		bullet.Direction = args.Direction;
 		bullet.Position = args.Position;
 		bullet.RotationDegrees = (float)(args.Direction.Angle() * 180 / Math.PI);

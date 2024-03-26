@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace Zoink.scenes.Components.StateMachine;
+namespace Zoink.scenes.Core.States;
 
 public partial class StateMachine : Node
 {

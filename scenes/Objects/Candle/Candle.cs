@@ -1,11 +1,12 @@
 using System;
 using Godot;
+using Zoink.scenes.Core.Interactions;
 
 namespace Zoink.scenes.Objects.Candle;
 
 public partial class Candle : Node2D
 {
-	private Components.Interaction.InteractionArea.InteractionArea _interactionArea;
+	private InteractionArea _interactionArea;
 	private PointLight2D _light;
 	private bool _lightAnimating;
 	private readonly Random _random = new Random();
@@ -15,7 +16,7 @@ public partial class Candle : Node2D
 
 	public override void _Ready()
 	{
-		_interactionArea = GetNode<Components.Interaction.InteractionArea.InteractionArea>("InteractionArea");
+		_interactionArea = GetNode<InteractionArea>("InteractionArea");
 		_interactionArea.Interact = Callable.From(ToggleEnabled);
 		_light = GetNode<PointLight2D>("Light");
 		_light.Color = LightColor;

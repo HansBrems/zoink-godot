@@ -1,8 +1,9 @@
 using Godot;
+using Zoink.scenes.Core.States;
 
 namespace Zoink.scenes.Player;
 
-public partial class FightingState : Components.StateMachine.State
+public partial class FightingState : State
 {
 	[Export] public Player Player;
 

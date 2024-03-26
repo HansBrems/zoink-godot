@@ -1,9 +1,9 @@
 using System;
 using Godot;
 
-namespace Zoink.scenes.Components.EnemySpawner;
+namespace Zoink.scenes.Core.Spawners;
 
-public partial class Node2dSpawner : Node2D
+public partial class EnemySpawner : Node2D
 {
 	private Timer _spawnTimer;
 

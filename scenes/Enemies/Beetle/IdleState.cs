@@ -1,8 +1,9 @@
 using Godot;
+using Zoink.scenes.Core.States;
 
 namespace Zoink.scenes.Enemies.Beetle;
 
-public partial class IdleState : Components.StateMachine.State
+public partial class IdleState : State
 {
 	[Export] public global::Zoink.scenes.Enemies.Beetle.Beetle Beetle;
 

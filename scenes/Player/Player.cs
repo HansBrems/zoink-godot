@@ -1,7 +1,8 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Zoink.scenes.Components.ShootController;
+using Zoink.scenes.Core.Interactions;
+using Zoink.scenes.Core.Projectiles;
 
 namespace Zoink.scenes.Player;
 
@@ -11,7 +12,7 @@ public partial class Player : CharacterBody2D
 	public delegate void OnBitcoinsReceivedEventHandler(int bitcoins);
 
 	[Signal]
-	public delegate void OnShootEventHandler(Components.ShootController.OnShootEventArgs args);
+	public delegate void OnShootEventHandler(OnShootEventArgs args);
 
 	[Signal]
 	public delegate void OnBuildingStartedEventHandler();
@@ -33,7 +34,7 @@ public partial class Player : CharacterBody2D
 
 	private AnimationPlayer _animationPlayer;
 	private Array<Marker2D> _bulletSpawnLocations;
-	private Components.Interaction.InteractionManager.InteractionManager _interactionManager;
+	private InteractionManager _interactionManager;
 	private ProgressBar _buildingProgressBar;
 	private Sprite2D _playerSprite;
 	private Timer _shootCooldownTimer;
@@ -50,7 +51,7 @@ public partial class Player : CharacterBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
 		_bulletSpawnLocations = new Array<Marker2D>(GetNode("PlayerSprite/BulletSpawnLocations").GetChildren().Cast<Marker2D>());
-		_interactionManager = GetNode<Components.Interaction.InteractionManager.InteractionManager>("/root/InteractionManager");
+		_interactionManager = GetNode<InteractionManager>("/root/InteractionManager");
 		_interactionManager.RegisterPlayer(this);
 		_playerSprite = GetNode<Sprite2D>("PlayerSprite");
 		_shootCooldownTimer = GetNode<Timer>("ShootCooldownTimer");
@@ -132,7 +133,7 @@ public partial class Player : CharacterBody2D
 		var direction = GetGlobalMousePosition() - Position;
 		var spawnLocation = _bulletSpawnLocations.PickRandom();
 
-		EmitSignal("OnShoot", new Components.ShootController.OnShootEventArgs
+		EmitSignal("OnShoot", new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
 			Position = spawnLocation.GlobalPosition,

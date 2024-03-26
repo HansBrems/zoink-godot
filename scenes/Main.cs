@@ -1,4 +1,5 @@
 using Godot;
+using Zoink.scenes.Core.Projectiles;
 
 namespace Zoink.scenes;
 
@@ -7,7 +8,7 @@ public partial class Main : Node2D
 	private const int TileWidth = 16;
 
 	private Player.Player _player;
-	private Components.ShootController.ShootController _shootController;
+	private ProjectileManager _shootController;
 	private Line2D _selector;
 	private TileMap _tileMap;
 	private PackedScene _turretScene;
@@ -18,7 +19,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 		_player = GetNode<Player.Player>("Player");
-		_shootController = GetNode<Components.ShootController.ShootController>("ShootController");
+		_shootController = GetNode<ProjectileManager>("ProjectileManager");
 		_selector = GetNode<Line2D>("Square");
 		_tileMap = GetNode<TileMap>("Map01/TileMap");
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
