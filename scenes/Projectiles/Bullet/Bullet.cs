@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Zoink.scripts;
 
 namespace Zoink.scenes.Projectiles.Bullet;
 
@@ -7,6 +8,7 @@ public partial class Bullet : Area2D
 {
 	private PackedScene _bulletImpactScene;
 	private AudioStreamPlayer _shootSound;
+	private Sprite2D _sprite;
 
 	private readonly Random _random = new();
 	public Vector2 Direction { get; set; } = Vector2.Right;
@@ -16,8 +18,9 @@ public partial class Bullet : Area2D
 
 	public override void _Ready()
 	{
-		_bulletImpactScene = scripts.PackedSceneLoader.Load("Effects", "BulletImpact");
+		_bulletImpactScene = PackedSceneLoader.Load("Effects", "BulletImpact");
 		_shootSound = GetNode<AudioStreamPlayer>("ShootSound");
+		_sprite = GetNode<Sprite2D>("Sprite");
 		PlayShootSound();
 
 		BodyEntered += SelfDestruct;
@@ -32,7 +35,16 @@ public partial class Bullet : Area2D
 	{
 		if (body is TileMap tileMap) SpawnImpact(tileMap);
 
-		QueueFree();
+		if (!_shootSound.Playing)
+		{
+			QueueFree();
+		}
+		else
+		{
+			_sprite.Visible = false;
+			Speed = 0;
+			_shootSound.Finished += QueueFree;
+		}
 	}
 
 	private void SpawnImpact(TileMap tileMap)

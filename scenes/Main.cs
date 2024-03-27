@@ -20,7 +20,7 @@ public partial class Main : Node2D
 	{
 		_player = GetNode<Player.Player>("Player");
 		_shootController = GetNode<ProjectileManager>("ProjectileManager");
-		_selector = GetNode<Line2D>("Square");
+		_selector = GetNode<Line2D>("Selector");
 		_tileMap = GetNode<TileMap>("Map01/TileMap");
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");

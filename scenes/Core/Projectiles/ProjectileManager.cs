@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Zoink.scripts;
 
 namespace Zoink.scenes.Core.Projectiles;
 
@@ -9,7 +10,7 @@ public partial class ProjectileManager : Node2D
 
 	public override void _Ready()
 	{
-		_bulletScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Projectiles", "Bullet"));
+		_bulletScene = PackedSceneLoader.Load("Projectiles", "Bullet");
 	}
 
 	public void OnShoot(OnShootEventArgs args)

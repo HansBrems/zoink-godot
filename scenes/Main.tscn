@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=10 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Map01.tscn" id="1_5i3vo"]
@@ -6,13 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="3_385lq"]
 [ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="5_jbklf"]
 [ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Core/Spawners/EnemySpawner.tscn" id="6_y406e"]
+[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="7_7by16"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0gq54"]
+font = ExtResource("7_7by16")
+font_size = 4
+font_color = Color(0, 0.980392, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_stno0"]
+font = ExtResource("7_7by16")
+font_size = 4
+font_color = Color(0, 0.980392, 0, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3ik1s")
 
 [node name="Map01" parent="." instance=ExtResource("1_5i3vo")]
 
-[node name="Square" type="Line2D" parent="."]
+[node name="Selector" type="Line2D" parent="."]
 width = 1.0
 default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
 
@@ -38,3 +49,27 @@ position_smoothing_enabled = true
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.7
 blend_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.13
+anchor_bottom = 0.077
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 13.4
+offset_bottom = 7.14
+size_flags_horizontal = 0
+columns = 2
+
+[node name="OxygenLabel" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+text = "Oxygen:"
+label_settings = SubResource("LabelSettings_0gq54")
+uppercase = true
+
+[node name="OxygenValue" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+text = "100%"
+label_settings = SubResource("LabelSettings_stno0")
