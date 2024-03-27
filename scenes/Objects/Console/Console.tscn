@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/light.png" id="2_7cwr5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlmag"]
-size = Vector2(46, 11)
+size = Vector2(46, 10.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4cuv"]
 size = Vector2(48, 16)
@@ -72,7 +72,7 @@ script = ExtResource("1_j7kdh")
 ActionName = "enable"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 13)
+position = Vector2(0, 13.25)
 shape = SubResource("RectangleShape2D_rlmag")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

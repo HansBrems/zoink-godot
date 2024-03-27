@@ -1,5 +1,7 @@
 using Godot;
 using Zoink.scenes.Core.Projectiles;
+using Zoink.scenes.Objects.Console;
+using Zoink.scenes.Systems;
 
 namespace Zoink.scenes;
 
@@ -13,6 +15,10 @@ public partial class Main : Node2D
 	private TileMap _tileMap;
 	private PackedScene _turretScene;
 	private Node2D _turrets;
+	private EnvironmentManager _environmentManager;
+
+	private Console _oxygenConsole;
+	private Label _oxygenValue;
 
 	private bool _showSelector;
 
@@ -24,7 +30,11 @@ public partial class Main : Node2D
 		_tileMap = GetNode<TileMap>("Map01/TileMap");
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");
-
+		_oxygenValue = GetNode<Label>("CanvasLayer/GridContainer/OxygenValue");
+		_environmentManager = GetNode<EnvironmentManager>("Systems/EnvironmentManager");
+		_environmentManager.OnOxygenChanged += (oxygen) => _oxygenValue.Text = $"{oxygen}%";
+		_oxygenConsole = GetNode<Console>("Systems/OxygenConsole");
+		_oxygenConsole.OnStateChanged += (enabled) => _environmentManager.IsOxygenOn = enabled;
 		_player.OnBuildingStarted += () => _showSelector = true;
 		_player.OnBuildingCancelled += () => _showSelector = false;
 		_player.OnBuildingConfirmed += () =>_showSelector = false;

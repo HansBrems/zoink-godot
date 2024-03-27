@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=12 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Map01.tscn" id="1_5i3vo"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="1_fma10"]
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="3_385lq"]
+[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="3_etaof"]
+[ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="4_o5fs7"]
 [ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="5_jbklf"]
 [ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Core/Spawners/EnemySpawner.tscn" id="6_y406e"]
 [ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="7_7by16"]
@@ -22,6 +24,14 @@ font_color = Color(0, 0.980392, 0, 1)
 script = ExtResource("1_3ik1s")
 
 [node name="Map01" parent="." instance=ExtResource("1_5i3vo")]
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="OxygenConsole" parent="Systems" instance=ExtResource("3_etaof")]
+position = Vector2(24, 504)
+rotation = -1.5708
+
+[node name="EnvironmentManager" parent="Systems" instance=ExtResource("4_o5fs7")]
 
 [node name="Selector" type="Line2D" parent="."]
 width = 1.0
@@ -71,5 +81,4 @@ uppercase = true
 
 [node name="OxygenValue" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
-text = "100%"
 label_settings = SubResource("LabelSettings_stno0")

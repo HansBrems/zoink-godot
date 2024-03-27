@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmirmbjj8qvwt"]
+[gd_scene load_steps=6 format=3 uid="uid://dmirmbjj8qvwt"]
 
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/Objects/Candle/Candle.tscn" id="2_cee8s"]
-[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="2_hv5sl"]
 [ext_resource type="PackedScene" uid="uid://k4da6li0kgtm" path="res://scenes/Objects/Chair/Chair.tscn" id="2_ksumh"]
 [ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/Objects/RotatingLight/RotatingLight.tscn" id="5_oy6yx"]
 [ext_resource type="AudioStream" uid="uid://cq8jormcn1xy6" path="res://resources/sounds/ship-drone.wav" id="6_psafd"]
@@ -26,21 +25,6 @@ rotation = -1.71217
 [node name="Chair2" parent="Objects" instance=ExtResource("2_ksumh")]
 position = Vector2(424, 504)
 rotation = -1.19206
-
-[node name="Console1" parent="Objects" instance=ExtResource("2_hv5sl")]
-position = Vector2(152, 376)
-
-[node name="Console2" parent="Objects" instance=ExtResource("2_hv5sl")]
-position = Vector2(24, 504)
-rotation = -1.5708
-
-[node name="Console3" parent="Objects" instance=ExtResource("2_hv5sl")]
-position = Vector2(152, 633)
-rotation = -3.14159
-
-[node name="Console4" parent="Objects" instance=ExtResource("2_hv5sl")]
-position = Vector2(392, 504)
-rotation = -1.5708
 
 [node name="Lights" type="Node" parent="."]
 

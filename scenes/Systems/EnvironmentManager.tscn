@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxahuhljrtkyg"]
+
+[ext_resource type="Script" path="res://scenes/Systems/EnvironmentManager.cs" id="1_1l2b6"]
+
+[node name="EnvironmentManager" type="Node"]
+script = ExtResource("1_1l2b6")
+
+[node name="OxygenTicker" type="Timer" parent="."]
+autostart = true
