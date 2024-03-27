@@ -33,8 +33,8 @@ public partial class Main : Node2D
 		_tileMap = GetNode<TileMap>("Map01/TileMap");
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");
-		_oxygenValue = GetNode<Label>("CanvasLayer/GridContainer/OxygenValue");
-		_powerValue = GetNode<Label>("CanvasLayer/GridContainer/PowerValue");
+		_oxygenValue = GetNode<Label>("HUD/GridContainer/OxygenValue");
+		_powerValue = GetNode<Label>("HUD/GridContainer/PowerValue");
 		_environmentManager = GetNode<EnvironmentManager>("Systems/EnvironmentManager");
 		_environmentManager.OnOxygenChanged += (oxygen) => _oxygenValue.Text = $"{oxygen}%";
 		_environmentManager.OnPowerChanged += (power) => _powerValue.Text = $"{power} %";

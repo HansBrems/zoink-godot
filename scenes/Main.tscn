@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
-[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Map01.tscn" id="1_5i3vo"]
+[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Ship.tscn" id="1_5i3vo"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="1_fma10"]
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="3_385lq"]
 [ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="3_etaof"]
@@ -63,9 +63,9 @@ position_smoothing_enabled = true
 energy = 0.7
 blend_mode = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="GridContainer" type="GridContainer" parent="HUD"]
 anchors_preset = -1
 anchor_right = 0.13
 anchor_bottom = 0.077
@@ -76,22 +76,22 @@ offset_bottom = 7.14
 size_flags_horizontal = 0
 columns = 2
 
-[node name="OxygenLabel" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="OxygenLabel" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 text = "Oxygen:"
 label_settings = SubResource("LabelSettings_0gq54")
 uppercase = true
 
-[node name="OxygenValue" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="OxygenValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_stno0")
 
-[node name="PowerLabel" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="PowerLabel" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 text = "Power:"
 label_settings = SubResource("LabelSettings_0gq54")
 uppercase = true
 
-[node name="PowerValue" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="PowerValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_stno0")
