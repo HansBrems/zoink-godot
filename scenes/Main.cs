@@ -20,6 +20,9 @@ public partial class Main : Node2D
 	private Console _oxygenConsole;
 	private Label _oxygenValue;
 
+	private Console _powerConsole;
+	private Label _powerValue;
+
 	private bool _showSelector;
 
 	public override void _Ready()
@@ -31,10 +34,17 @@ public partial class Main : Node2D
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");
 		_oxygenValue = GetNode<Label>("CanvasLayer/GridContainer/OxygenValue");
+		_powerValue = GetNode<Label>("CanvasLayer/GridContainer/PowerValue");
 		_environmentManager = GetNode<EnvironmentManager>("Systems/EnvironmentManager");
 		_environmentManager.OnOxygenChanged += (oxygen) => _oxygenValue.Text = $"{oxygen}%";
+		_environmentManager.OnPowerChanged += (power) => _powerValue.Text = $"{power} %";
+
 		_oxygenConsole = GetNode<Console>("Systems/OxygenConsole");
 		_oxygenConsole.OnStateChanged += (enabled) => _environmentManager.IsOxygenOn = enabled;
+
+		_powerConsole = GetNode<Console>("Systems/PowerConsole");
+		_powerConsole.OnStateChanged += (enabled) => _environmentManager.IsPowerOn = enabled;
+
 		_player.OnBuildingStarted += () => _showSelector = true;
 		_player.OnBuildingCancelled += () => _showSelector = false;
 		_player.OnBuildingConfirmed += () =>_showSelector = false;
