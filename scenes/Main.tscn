@@ -36,10 +36,6 @@ rotation = -1.5708
 [node name="PowerConsole" parent="Systems" instance=ExtResource("3_etaof")]
 position = Vector2(152, 376)
 
-[node name="Selector" type="Line2D" parent="."]
-width = 1.0
-default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
-
 [node name="ProjectileManager" parent="." instance=ExtResource("3_385lq")]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -59,9 +55,9 @@ position = Vector2(86, 503)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.7
-blend_mode = 1
+[node name="Selector" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

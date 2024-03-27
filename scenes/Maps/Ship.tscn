@@ -71,3 +71,7 @@ RotationSpeed = 175.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_psafd")
 autoplay = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.95
+blend_mode = 1
