@@ -26,12 +26,11 @@ public partial class EnvironmentManager : Node
 	}
 
 	private void UpdateOxygen()
-    {
-        var changeValue = 0;
-        if (!IsOxygenOn) changeValue -= 1;
-        if (IsOxygenOn) changeValue += 1;
+	{
+		var changeValue = 0;
+		changeValue = IsOxygenOn ? 1 : -1;
 
-        _oxygen = Math.Clamp(_oxygen + changeValue, 0, 100);
+		_oxygen = Math.Clamp(_oxygen + changeValue, 0, 100);
 		EmitSignal("OnOxygenChanged", _oxygen);
 	}
 

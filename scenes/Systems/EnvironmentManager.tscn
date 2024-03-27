@@ -6,8 +6,9 @@
 script = ExtResource("1_1l2b6")
 
 [node name="OxygenTicker" type="Timer" parent="."]
+wait_time = 5.273
 autostart = true
 
 [node name="PowerTicker" type="Timer" parent="."]
-wait_time = 1.483
+wait_time = 2.199
 autostart = true
