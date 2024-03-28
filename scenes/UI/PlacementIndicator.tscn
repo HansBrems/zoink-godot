@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhdthxhs15ldr"]
+
+[sub_resource type="Gradient" id="Gradient_uaj35"]
+colors = PackedColorArray(1, 0.185094, 0.589396, 1, 0.300598, 0.487072, 0.944917, 1)
+
+[node name="PlacementIndicator" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-1, 1)
+points = PackedVector2Array(2, 0, 16, 0, 16, 14, 2, 14)
+closed = true
+width = 1.0
+default_color = Color(1, 0.121569, 1, 1)
+gradient = SubResource("Gradient_uaj35")

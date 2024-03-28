@@ -9,6 +9,7 @@ public partial class Main : Node2D
 {
 	private const int TileWidth = 16;
 
+	private Camera2D _camera;
 	private Player.Player _player;
 	private ProjectileManager _shootController;
 	private Line2D _selector;
@@ -17,20 +18,21 @@ public partial class Main : Node2D
 	private Node2D _turrets;
 	private EnvironmentManager _environmentManager;
 
+	private Node2D _placementIndicator;
+	private bool _showPlacementIndicator;
+
 	private Console _oxygenConsole;
 	private Label _oxygenValue;
 
 	private Console _powerConsole;
 	private Label _powerValue;
 
-	private bool _showSelector;
-
 	public override void _Ready()
 	{
+		_camera = GetNode<Camera2D>("Player/Camera2D");
 		_player = GetNode<Player.Player>("Player");
 		_shootController = GetNode<ProjectileManager>("ProjectileManager");
-		_selector = GetNode<Line2D>("Selector");
-		_tileMap = GetNode<TileMap>("Map01/TileMap");
+		_tileMap = GetNode<TileMap>("Ship/TileMap");
 		_turretScene = ResourceLoader.Load<PackedScene>(scripts.SceneUris.Get("Objects", "Turret"));
 		_turrets = GetNode<Node2D>("Turrets");
 		_oxygenValue = GetNode<Label>("HUD/GridContainer/OxygenValue");
@@ -39,50 +41,43 @@ public partial class Main : Node2D
 		_environmentManager.OnOxygenChanged += (oxygen) => _oxygenValue.Text = $"{oxygen}%";
 		_environmentManager.OnPowerChanged += (power) => _powerValue.Text = $"{power} %";
 
+		_placementIndicator = GetNode<Node2D>("HUD/PlacementIndicator");
+
 		_oxygenConsole = GetNode<Console>("Systems/OxygenConsole");
 		_oxygenConsole.OnStateChanged += (enabled) => _environmentManager.IsOxygenOn = enabled;
 
 		_powerConsole = GetNode<Console>("Systems/PowerConsole");
 		_powerConsole.OnStateChanged += (enabled) => _environmentManager.IsPowerOn = enabled;
 
-		_player.OnBuildingStarted += () => _showSelector = true;
-		_player.OnBuildingCancelled += () => _showSelector = false;
-		_player.OnBuildingConfirmed += () =>_showSelector = false;
+		_player.OnBuildingStarted += () => _showPlacementIndicator = true;
+		_player.OnBuildingCancelled += () => _showPlacementIndicator = false;
+		_player.OnBuildingConfirmed += () =>_showPlacementIndicator = false;
 		_player.OnBuildingFinished += PlaceTurret;;
 		_player.OnShoot += _shootController.OnShoot;
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_showSelector)
-		{
-			DrawSelector();
-		}
-		else
-		{
-			HideSelector();
-		}
+		if (_showPlacementIndicator) DrawSelector();
+		else HideSelector();
 	}
 
 	private void DrawSelector()
 	{
+		// This assumes the viewport size is 320x180.
+		// Todo (Hans): Make this dynamic.
+		var cameraOriginX = _camera.GlobalPosition.X - 160F;
+		var cameraOriginY = _camera.GlobalPosition.Y - 90F;
 		var mouseMapPosition = _tileMap.LocalToMap(GetGlobalMousePosition());
-
-		_selector.Points = new []
-		{
-			new Vector2(mouseMapPosition.X * TileWidth, mouseMapPosition.Y * TileWidth),
-			new Vector2(mouseMapPosition.X * TileWidth + TileWidth, mouseMapPosition.Y * TileWidth),
-			new Vector2(mouseMapPosition.X * TileWidth + TileWidth, mouseMapPosition.Y * TileWidth + TileWidth),
-			new Vector2(mouseMapPosition.X * TileWidth, mouseMapPosition.Y * TileWidth + TileWidth),
-			new Vector2(mouseMapPosition.X * TileWidth, mouseMapPosition.Y * TileWidth),
-		};
-
-		_selector.Visible = true;
+		var x = (mouseMapPosition.X * 16) - (cameraOriginX);
+		var y = (mouseMapPosition.Y * 16) - (cameraOriginY);
+		_placementIndicator.GlobalPosition = new Vector2(x, y);
+		_placementIndicator.Visible = true;
 	}
 
 	private void HideSelector()
 	{
-		_selector.Visible = false;
+		_placementIndicator.Visible = false;
 	}
 
 	private void PlaceTurret(Vector2 buildingPosition)

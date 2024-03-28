@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=11 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Ship.tscn" id="1_5i3vo"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="3_385lq"]
 [ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="3_etaof"]
 [ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="4_o5fs7"]
-[ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="5_jbklf"]
-[ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Core/Spawners/EnemySpawner.tscn" id="6_y406e"]
 [ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="7_7by16"]
+[ext_resource type="PackedScene" uid="uid://dhdthxhs15ldr" path="res://scenes/UI/PlacementIndicator.tscn" id="9_s05gq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0gq54"]
 font = ExtResource("7_7by16")
@@ -38,11 +37,6 @@ position = Vector2(152, 376)
 
 [node name="EnemySpawners" type="Node2D" parent="."]
 
-[node name="BeetleSpawner" parent="EnemySpawners" instance=ExtResource("6_y406e")]
-position = Vector2(138, 474)
-EnemyScene = ExtResource("5_jbklf")
-SpawnRate = 10.0
-
 [node name="ProjectileManager" parent="." instance=ExtResource("3_385lq")]
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_fma10")]
@@ -55,11 +49,9 @@ position_smoothing_enabled = true
 
 [node name="Turrets" type="Node2D" parent="."]
 
-[node name="Selector" type="Line2D" parent="."]
-width = 1.0
-default_color = Color(0.105882, 0.247059, 0.156863, 0.541176)
-
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlacementIndicator" parent="HUD" instance=ExtResource("9_s05gq")]
 
 [node name="GridContainer" type="GridContainer" parent="HUD"]
 anchors_preset = -1
