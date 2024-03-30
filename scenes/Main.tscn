@@ -1,81 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs30bakpqplxt"]
+[gd_scene load_steps=3 format=3 uid="uid://cs30bakpqplxt"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_3ik1s"]
 [ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Ship.tscn" id="1_5i3vo"]
-[ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="1_fma10"]
-[ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="3_385lq"]
-[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="3_etaof"]
-[ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="4_o5fs7"]
-[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="7_7by16"]
-[ext_resource type="PackedScene" uid="uid://dhdthxhs15ldr" path="res://scenes/UI/PlacementIndicator.tscn" id="9_s05gq"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0gq54"]
-font = ExtResource("7_7by16")
-font_size = 4
-font_color = Color(0, 0.980392, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_stno0"]
-font = ExtResource("7_7by16")
-font_size = 4
-font_color = Color(0, 0.980392, 0, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3ik1s")
 
 [node name="Ship" parent="." instance=ExtResource("1_5i3vo")]
-
-[node name="Systems" type="Node" parent="."]
-
-[node name="EnvironmentManager" parent="Systems" instance=ExtResource("4_o5fs7")]
-
-[node name="OxygenConsole" parent="Systems" instance=ExtResource("3_etaof")]
-position = Vector2(24, 504)
-rotation = -1.5708
-
-[node name="PowerConsole" parent="Systems" instance=ExtResource("3_etaof")]
-position = Vector2(152, 376)
-
-[node name="ProjectileManager" parent="." instance=ExtResource("3_385lq")]
-
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_fma10")]
-position = Vector2(86, 503)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
-
-[node name="Turrets" type="Node2D" parent="."]
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="PlacementIndicator" parent="HUD" instance=ExtResource("9_s05gq")]
-
-[node name="GridContainer" type="GridContainer" parent="HUD"]
-anchors_preset = -1
-anchor_right = 0.13
-anchor_bottom = 0.077
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 13.4
-offset_bottom = 7.14
-size_flags_horizontal = 0
-columns = 2
-
-[node name="OxygenLabel" type="Label" parent="HUD/GridContainer"]
-layout_mode = 2
-text = "Oxygen:"
-label_settings = SubResource("LabelSettings_0gq54")
-uppercase = true
-
-[node name="OxygenValue" type="Label" parent="HUD/GridContainer"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_stno0")
-
-[node name="PowerLabel" type="Label" parent="HUD/GridContainer"]
-layout_mode = 2
-text = "Power:"
-label_settings = SubResource("LabelSettings_0gq54")
-uppercase = true
-
-[node name="PowerValue" type="Label" parent="HUD/GridContainer"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_stno0")

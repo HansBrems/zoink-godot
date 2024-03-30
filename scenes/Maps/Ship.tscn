@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmirmbjj8qvwt"]
+[gd_scene load_steps=17 format=3 uid="uid://dmirmbjj8qvwt"]
 
+[ext_resource type="Script" path="res://scenes/Maps/Ship.cs" id="1_klscs"]
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
 [ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Core/Spawners/EnemySpawner.tscn" id="2_365x3"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/Objects/Candle/Candle.tscn" id="2_cee8s"]
@@ -7,8 +8,25 @@
 [ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="3_ydtv6"]
 [ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/Objects/RotatingLight/RotatingLight.tscn" id="5_oy6yx"]
 [ext_resource type="AudioStream" uid="uid://cq8jormcn1xy6" path="res://resources/sounds/ship-drone.wav" id="6_psafd"]
+[ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="8_h7nsa"]
+[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="9_6ikew"]
+[ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="10_glw5j"]
+[ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="10_jjy70"]
+[ext_resource type="PackedScene" uid="uid://dhdthxhs15ldr" path="res://scenes/UI/PlacementIndicator.tscn" id="11_fde4i"]
+[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="12_v4ffi"]
 
-[node name="Map01" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_2qc3k"]
+font = ExtResource("12_v4ffi")
+font_size = 4
+font_color = Color(0, 0.980392, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_na1a8"]
+font = ExtResource("12_v4ffi")
+font_size = 4
+font_color = Color(0, 0.980392, 0, 1)
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_klscs")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_senoy")
@@ -18,23 +36,15 @@ layer_0/tile_data = PackedInt32Array(1703973, 131072, 1, 1638437, 131072, 1, 150
 layer_1/name = "Objects"
 layer_1/tile_data = PackedInt32Array(2162691, 262144, 0, 2162690, 327680, 4, 2162692, 262144, 0, 2162693, 327680, 0, 2228229, 327680, 1, 2293765, 327680, 1, 2359301, 327680, 4, 2359302, 262144, 0, 2359303, 262144, 0, 2359304, 327680, 0, 2424840, 327680, 1, 2490376, 327680, 1, 2097154, 327680, 0)
 
+[node name="Enemies" type="Node" parent="."]
+
 [node name="EnemySpawners" type="Node" parent="."]
 
 [node name="EnemySpawner" parent="EnemySpawners" node_paths=PackedStringArray("Container") instance=ExtResource("2_365x3")]
 position = Vector2(593, 508)
-Container = NodePath("..")
+Container = NodePath("../../Enemies")
 EnemyScene = ExtResource("3_ydtv6")
 SpawnRate = 60.0
-
-[node name="Objects" type="Node" parent="."]
-
-[node name="Chair1" parent="Objects" instance=ExtResource("2_ksumh")]
-position = Vector2(56, 504)
-rotation = -1.71217
-
-[node name="Chair2" parent="Objects" instance=ExtResource("2_ksumh")]
-position = Vector2(424, 504)
-rotation = -1.19206
 
 [node name="Lights" type="Node" parent="."]
 
@@ -78,6 +88,37 @@ position = Vector2(336, 704)
 LightColor = Color(0, 0, 1, 1)
 RotationSpeed = 175.0
 
+[node name="Objects" type="Node" parent="."]
+
+[node name="Chair1" parent="Objects" instance=ExtResource("2_ksumh")]
+position = Vector2(56, 504)
+rotation = -1.71217
+
+[node name="Chair2" parent="Objects" instance=ExtResource("2_ksumh")]
+position = Vector2(424, 504)
+rotation = -1.19206
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="EnvironmentManager" parent="Systems" instance=ExtResource("8_h7nsa")]
+
+[node name="OxygenConsole" parent="Systems" instance=ExtResource("9_6ikew")]
+position = Vector2(24, 504)
+rotation = -1.5708
+
+[node name="PowerConsole" parent="Systems" instance=ExtResource("9_6ikew")]
+position = Vector2(152, 376)
+
+[node name="Turrets" type="Node" parent="."]
+
+[node name="ProjectileManager" parent="." instance=ExtResource("10_jjy70")]
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("10_glw5j")]
+position = Vector2(86, 503)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_psafd")
 autoplay = true
@@ -85,3 +126,38 @@ autoplay = true
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.9
 blend_mode = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlacementIndicator" parent="HUD" instance=ExtResource("11_fde4i")]
+
+[node name="GridContainer" type="GridContainer" parent="HUD"]
+anchors_preset = -1
+anchor_right = 0.13
+anchor_bottom = 0.077
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 13.4
+offset_bottom = 7.14
+size_flags_horizontal = 0
+columns = 2
+
+[node name="OxygenTitle" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+text = "Oxygen:"
+label_settings = SubResource("LabelSettings_2qc3k")
+uppercase = true
+
+[node name="OxygenValue" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_na1a8")
+
+[node name="PowerTitle" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+text = "Power:"
+label_settings = SubResource("LabelSettings_2qc3k")
+uppercase = true
+
+[node name="PowerValue" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_na1a8")

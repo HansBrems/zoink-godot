@@ -18,7 +18,7 @@ public partial class Turret : StaticBody2D
 	public double AttackSpeed { get; set; } = 0.5;
 
 	[Export]
-	public Node2D EnemiesNode { get; set; }
+	public Node EnemiesNode { get; set; }
 
 	[Signal]
 	public delegate void OnShootEventHandler(OnShootEventArgs args);
