@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmirmbjj8qvwt"]
+[gd_scene load_steps=18 format=3 uid="uid://dmirmbjj8qvwt"]
 
 [ext_resource type="Script" path="res://scenes/Maps/Ship.cs" id="1_klscs"]
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
@@ -24,6 +24,9 @@ font_color = Color(0, 0.980392, 0, 1)
 font = ExtResource("12_v4ffi")
 font_size = 4
 font_color = Color(0, 0.980392, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cov8l"]
+size = Vector2(41, 78)
 
 [node name="Ship" type="Node2D"]
 script = ExtResource("1_klscs")
@@ -161,3 +164,11 @@ uppercase = true
 [node name="PowerValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_na1a8")
+
+[node name="DoorToOutside" type="Area2D" parent="."]
+position = Vector2(167, 504)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToOutside"]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_cov8l")

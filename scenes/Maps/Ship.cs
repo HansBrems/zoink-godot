@@ -13,6 +13,7 @@ public partial class Ship : Node2D
 	private Label _oxygenLabel;
 	private Label _powerLabel;
 	private Console _powerConsole;
+	private Area2D _doorToOutside;
 	private Player _player;
 	private Camera2D _camera;
 	private TileMap _tileMap;
@@ -30,6 +31,7 @@ public partial class Ship : Node2D
 		_environmentManager = GetNode<EnvironmentManager>("Systems/EnvironmentManager");
 		_oxygenConsole = GetNode<Console>("Systems/OxygenConsole");
 		_powerConsole = GetNode<Console>("Systems/PowerConsole");
+		_doorToOutside = GetNode<Area2D>("DoorToOutside");
 		_player = GetNode<Player>("Player");
 		_camera = GetNode<Camera2D>("Player/Camera2D");
 		_tileMap = GetNode<TileMap>("TileMap");
@@ -43,6 +45,7 @@ public partial class Ship : Node2D
 		_placementIndicator = GetNode<Node2D>("HUD/PlacementIndicator");
 
 		// Events
+		_doorToOutside.BodyEntered += GoOutside;
 		_player.OnBuildingStarted += () => _showPlacementIndicator = true;
 		_player.OnBuildingCancelled += () => _showPlacementIndicator = false;
 		_player.OnBuildingConfirmed += () =>_showPlacementIndicator = false;
@@ -62,6 +65,14 @@ public partial class Ship : Node2D
 	{
 		if (_showPlacementIndicator) ShowPlacementIndicator();
 		else HidePlacementIndicator();
+	}
+
+	private void GoOutside(Node2D node)
+	{
+		if (node is Player)
+		{
+			GetTree().ChangeSceneToFile("res://scenes/Maps/Outside.tscn");
+		}
 	}
 
 	private void ShowPlacementIndicator()
