@@ -7,6 +7,7 @@ public partial class EnemySpawner : Node2D
 {
 	private Timer _spawnTimer;
 
+	[Export] public Node Container { get; set; }
 	[Export] public PackedScene EnemyScene { get; set; }
 	[Export] public double SpawnRate { get; set; } = 2;
 
@@ -19,6 +20,9 @@ public partial class EnemySpawner : Node2D
 
 	private void SpawnEnemy()
 	{
+		if (Container == null)
+			throw new ArgumentException("Missing container for enemy spawner");
+
 		if (EnemyScene == null)
 			throw new ArgumentException("Missing enemy scene");
 
@@ -27,8 +31,6 @@ public partial class EnemySpawner : Node2D
 
 		enemy.Position = Position;
 
-		GetTree().CurrentScene
-			.GetNode<Node2D>("Enemies")
-			.AddChild(enemy);
+		Container.AddChild(enemy);
 	}
 }

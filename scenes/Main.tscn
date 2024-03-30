@@ -35,8 +35,6 @@ rotation = -1.5708
 [node name="PowerConsole" parent="Systems" instance=ExtResource("3_etaof")]
 position = Vector2(152, 376)
 
-[node name="EnemySpawners" type="Node2D" parent="."]
-
 [node name="ProjectileManager" parent="." instance=ExtResource("3_385lq")]
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_fma10")]
@@ -44,8 +42,6 @@ position = Vector2(86, 503)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
-
-[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Turrets" type="Node2D" parent="."]
 
