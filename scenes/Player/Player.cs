@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using Zoink.scenes.Core;
 using Zoink.scenes.Core.Interactions;
 using Zoink.scenes.Core.Projectiles;
 
@@ -34,6 +35,7 @@ public partial class Player : CharacterBody2D
 
 	private AnimationPlayer _animationPlayer;
 	private Array<Marker2D> _bulletSpawnLocations;
+	private Hurtbox _hurtbox;
 	private InteractionManager _interactionManager;
 	private ProgressBar _buildingProgressBar;
 	private Sprite2D _playerSprite;
@@ -41,6 +43,8 @@ public partial class Player : CharacterBody2D
 
 	private Vector2 _buildingPosition;
 	private int _turretCount = 2;
+
+	private Health _health;
 
 	public bool CanBuild => _turretCount > 0;
 	public bool CanDash { get; set; } = true;
@@ -51,6 +55,10 @@ public partial class Player : CharacterBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
 		_bulletSpawnLocations = new Array<Marker2D>(GetNode("PlayerSprite/BulletSpawnLocations").GetChildren().Cast<Marker2D>());
+		_health = GetNode<Health>("Health");
+		_health.OnNoHealth += () => GD.Print("Dead");
+		_hurtbox = GetNode<Hurtbox>("Hurtbox");
+		_hurtbox.OnHurt += (damage) => _health.CurrentHealth -= damage;
 		_interactionManager = GetNode<InteractionManager>("/root/InteractionManager");
 		_interactionManager.RegisterPlayer(this);
 		_playerSprite = GetNode<Sprite2D>("PlayerSprite");

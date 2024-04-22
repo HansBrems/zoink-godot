@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxm0j161834m3"]
+[gd_scene load_steps=17 format=3 uid="uid://dxm0j161834m3"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_1qkp2"]
 [ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Core/States/StateMachine.tscn" id="3_hswj8"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://scenes/Player/DashingState.cs" id="5_0rran"]
 [ext_resource type="Script" path="res://scenes/Player/IdleState.cs" id="6_c8fjm"]
 [ext_resource type="Script" path="res://scenes/Player/BuildingTurretState.cs" id="6_d3gic"]
+[ext_resource type="PackedScene" uid="uid://cfcumt8tt3dvk" path="res://scenes/Core/Hurtbox.tscn" id="9_5ld46"]
+[ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://scenes/Core/Health.tscn" id="9_q8vd0"]
 
 [sub_resource type="Animation" id="Animation_nx18h"]
 resource_name = "Idle"
@@ -90,7 +92,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
-size = Vector2(9, 9)
+size = Vector2(7, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhoq4"]
+size = Vector2(9, 10)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -105,6 +110,7 @@ libraries = {
 autoplay = "RESET"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_to76k")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -174,3 +180,15 @@ offset_right = 10.0
 offset_bottom = -9.0
 rounded = true
 show_percentage = false
+
+[node name="Health" parent="." instance=ExtResource("9_q8vd0")]
+position = Vector2(-0.5, 0)
+MaxHealth = 100
+CurrentHealth = 100
+
+[node name="Hurtbox" parent="." instance=ExtResource("9_5ld46")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_yhoq4")
