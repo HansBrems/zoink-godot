@@ -34,6 +34,7 @@ public partial class Player : CharacterBody2D
 	public int Speed { get; set; } = 50;
 
 	private AnimationPlayer _animationPlayer;
+	private PlayerCam _camera;
 	private Array<Marker2D> _bulletSpawnLocations;
 	private Hurtbox _hurtbox;
 	private InteractionManager _interactionManager;
@@ -53,6 +54,7 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_camera = GetNode<PlayerCam>("PlayerCam");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
 		_bulletSpawnLocations = new Array<Marker2D>(GetNode("PlayerSprite/BulletSpawnLocations").GetChildren().Cast<Marker2D>());
 		_health = GetNode<Health>("Health");
@@ -140,7 +142,7 @@ public partial class Player : CharacterBody2D
 	{
 		var direction = GetGlobalMousePosition() - Position;
 		var spawnLocation = _bulletSpawnLocations.PickRandom();
-
+		_camera.Shake();
 		EmitSignal("OnShoot", new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
