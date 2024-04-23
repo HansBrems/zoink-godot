@@ -142,7 +142,7 @@ public partial class Player : CharacterBody2D
 	{
 		var direction = GetGlobalMousePosition() - Position;
 		var spawnLocation = _bulletSpawnLocations.PickRandom();
-		_camera.Shake();
+		
 		EmitSignal("OnShoot", new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
