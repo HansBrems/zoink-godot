@@ -17,7 +17,6 @@ public partial class Health : Node2D
 		set
 		{
 			_currentHealth = value;
-			GD.Print("Health:", _currentHealth);
 			if (_currentHealth <= 0) EmitSignal(SignalName.OnNoHealth);
 		}
 	}
