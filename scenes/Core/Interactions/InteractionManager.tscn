@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq70flx4mcn42"]
+[gd_scene load_steps=4 format=3 uid="uid://dq70flx4mcn42"]
 
 [ext_resource type="Script" path="res://scenes/Core/Interactions/InteractionManager.cs" id="1_qhpbs"]
+[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="2_jaoej"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kihas"]
+font = ExtResource("2_jaoej")
+font_size = 8
 
 [node name="InteractionManager" type="Node2D"]
 script = ExtResource("1_qhpbs")
@@ -15,5 +20,6 @@ offset_right = 52.5
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "[E] to interact"
+label_settings = SubResource("LabelSettings_kihas")
 horizontal_alignment = 1
 vertical_alignment = 1

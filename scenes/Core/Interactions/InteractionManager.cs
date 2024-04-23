@@ -6,8 +6,6 @@ namespace Zoink.scenes.Core.Interactions;
 
 public partial class InteractionManager : Node2D
 {
-	private const string Text = "E to ";
-
 	private Label _label;
 	private Player.Player _player;
 	private bool _canInteract = true;
@@ -27,11 +25,12 @@ public partial class InteractionManager : Node2D
 				.OrderBy(area => area.GlobalPosition.DistanceTo(_player.GlobalPosition))
 				.First();
 
+			if (string.IsNullOrEmpty(_activeArea.ActionName)) return;
 			var labelPosX = _activeArea.GlobalPosition.X - _label.Size.X / 2;
 			var labelPosY = _activeArea.GlobalPosition.Y - 36;
-			//_label.GlobalPosition = new Vector2(labelPosX, labelPosY);
-			//_label.Text = $"{Text} {_activeArea.ActionName}";
-			//_label.Show();
+			_label.GlobalPosition = new Vector2(labelPosX, labelPosY);
+			_label.Text = _activeArea.ActionName;
+			_label.Show();
 		}
 		else
 		{

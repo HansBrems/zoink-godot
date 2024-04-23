@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmirmbjj8qvwt"]
+[gd_scene load_steps=21 format=3 uid="uid://dmirmbjj8qvwt"]
 
 [ext_resource type="Script" path="res://scenes/Maps/Ship.cs" id="1_klscs"]
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
@@ -10,8 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://cq8jormcn1xy6" path="res://resources/sounds/ship-drone.wav" id="6_psafd"]
 [ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="8_h7nsa"]
 [ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="9_6ikew"]
+[ext_resource type="PackedScene" uid="uid://7jvvkdr1c202" path="res://scenes/Environment/Oxygen.tscn" id="9_jeuw8"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="10_glw5j"]
 [ext_resource type="PackedScene" uid="uid://k5vha8tx14ms" path="res://scenes/Core/Projectiles/ProjectileManager.tscn" id="10_jjy70"]
+[ext_resource type="PackedScene" uid="uid://cujwad47gjuxc" path="res://scenes/Environment/Power.tscn" id="10_ra41c"]
 [ext_resource type="PackedScene" uid="uid://dhdthxhs15ldr" path="res://scenes/UI/PlacementIndicator.tscn" id="11_fde4i"]
 [ext_resource type="PackedScene" uid="uid://28crs4j5djgf" path="res://scenes/Core/PlayerCam.tscn" id="12_hwl1f"]
 [ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="12_v4ffi"]
@@ -110,15 +112,25 @@ rotation = -1.71217
 position = Vector2(424, 504)
 rotation = -1.19206
 
-[node name="Systems" type="Node" parent="."]
+[node name="EnvironmentManager" parent="." node_paths=PackedStringArray("OxygenLabel", "PowerLabel") instance=ExtResource("8_h7nsa")]
+OxygenLabel = NodePath("../HUD/GridContainer/OxygenValue")
+PowerLabel = NodePath("../HUD/GridContainer/PowerValue")
 
-[node name="EnvironmentManager" parent="Systems" instance=ExtResource("8_h7nsa")]
+[node name="Oxygen" parent="EnvironmentManager" instance=ExtResource("9_jeuw8")]
+CurrentValue = 10000.0
+MaxValue = 10000.0
+DecayMilliseconds = 250.0
 
-[node name="OxygenConsole" parent="Systems" instance=ExtResource("9_6ikew")]
+[node name="Power" parent="EnvironmentManager" instance=ExtResource("10_ra41c")]
+CurrentValue = 1000.0
+DecayRate = 2.08165e-12
+DecayMilliseconds = 250.0
+
+[node name="OxygenConsole" parent="EnvironmentManager" instance=ExtResource("9_6ikew")]
 position = Vector2(24, 504)
 rotation = -1.5708
 
-[node name="PowerConsole" parent="Systems" instance=ExtResource("9_6ikew")]
+[node name="PowerConsole" parent="EnvironmentManager" instance=ExtResource("9_6ikew")]
 position = Vector2(152, 376)
 
 [node name="Turrets" type="Node" parent="."]

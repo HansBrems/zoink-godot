@@ -1,46 +1,68 @@
-using System;
 using Godot;
+using Zoink.scenes.Objects.Console;
 
 namespace Zoink.scenes.Systems;
 
 public partial class EnvironmentManager : Node
 {
-	private Timer _oxygenTicker;
-	private Timer _powerTicker;
+	private Oxygen _oxygen;
+	private Console _oxygenConsole;
+	private Power _power;
+	private Console _powerConsole;
 
-	private int _oxygen = 100;
-	private int _power = 100;
+	[Export]
+	public Label OxygenLabel { get; set; }
 
-	public bool IsOxygenOn { get; set; }
-	public bool IsPowerOn { get; set; }
+	[Export]
+	public Label PowerLabel { get; set; }
 
-	[Signal] public delegate void OnOxygenChangedEventHandler(int oxygen);
-	[Signal] public delegate void OnPowerChangedEventHandler(int power);
+	[Signal]
+	public delegate void OnPowerChangedEventHandler(int power);
 
 	public override void _Ready()
 	{
-		_oxygenTicker = GetNode<Timer>("OxygenTicker");
-		_oxygenTicker.Timeout += UpdateOxygen;
-		_powerTicker = GetNode<Timer>("PowerTicker");
-		_powerTicker.Timeout += UpdatePower;
+		_oxygen = GetNode<Oxygen>("Oxygen");
+		_oxygen.OnChange += (val) => UpdateLabel(OxygenLabel, val);
+		_oxygenConsole = GetNode<Console>("OxygenConsole");
+		_oxygenConsole.OnStateChanged += HandleOxygenChanged;
+		UpdateLabel(OxygenLabel, _oxygen.CurrentValue);
+
+		_power = GetNode<Power>("Power");
+		_power.OnChange += (val) => UpdateLabel(PowerLabel, val);
+		_powerConsole = GetNode<Console>("PowerConsole");
+		_powerConsole.OnStateChanged += HandlePowerChanged;
+		UpdateLabel(PowerLabel, _power.CurrentValue);
 	}
 
-	private void UpdateOxygen()
+	private void HandleOxygenChanged(bool isEnabled)
 	{
-		var changeValue = 0;
-		changeValue = IsOxygenOn ? 1 : -1;
-
-		_oxygen = Math.Clamp(_oxygen + changeValue, 0, 100);
-		EmitSignal(SignalName.OnOxygenChanged, _oxygen);
+		if (isEnabled)
+		{
+			_oxygen.DecayRate -= 2;
+			_power.DecayRate += 1;
+		}
+		else
+		{
+			_oxygen.DecayRate += 2;
+			_power.DecayRate -= 1;
+		}
 	}
 
-	private void UpdatePower()
+	private void HandlePowerChanged(bool isEnabled)
 	{
-		var changeValue = 0;
-		if (IsOxygenOn) changeValue -= 2;
-		if (IsPowerOn) changeValue += 1;
+		if (isEnabled)
+		{
+			_power.DecayRate -= 1;
+		}
+		else
+		{
+			_power.DecayRate += 1;
+		}
+	}
 
-		_power = Math.Clamp(_power + changeValue, 0, 100);
-		EmitSignal(SignalName.OnPowerChanged, _power);
+	private void UpdateLabel(Label label, float value)
+	{
+		if (label == null) return;
+		label.Text = $"{value}";
 	}
 }

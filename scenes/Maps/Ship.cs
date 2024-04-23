@@ -9,10 +9,6 @@ using Zoink.scripts;
 public partial class Ship : Node2D
 {
 	private EnvironmentManager _environmentManager;
-	private Console _oxygenConsole;
-	private Label _oxygenLabel;
-	private Label _powerLabel;
-	private Console _powerConsole;
 	private Area2D _doorToOutside;
 	private Player _player;
 	private Camera2D _camera;
@@ -28,9 +24,7 @@ public partial class Ship : Node2D
 
 	public override void _Ready()
 	{
-		_environmentManager = GetNode<EnvironmentManager>("Systems/EnvironmentManager");
-		_oxygenConsole = GetNode<Console>("Systems/OxygenConsole");
-		_powerConsole = GetNode<Console>("Systems/PowerConsole");
+		_environmentManager = GetNode<EnvironmentManager>("EnvironmentManager");
 		_doorToOutside = GetNode<Area2D>("DoorToOutside");
 		_player = GetNode<Player>("Player");
 		_camera = GetNode<Camera2D>("Player/Camera2D");
@@ -40,8 +34,6 @@ public partial class Ship : Node2D
 		_turrets = GetNode<Node>("Turrets");
 
 		// UI
-		_oxygenLabel = GetNode<Label>("HUD/GridContainer/OxygenValue");
-		_powerLabel = GetNode<Label>("HUD/GridContainer/PowerValue");
 		_placementIndicator = GetNode<Node2D>("HUD/PlacementIndicator");
 
 		// Events
@@ -51,14 +43,6 @@ public partial class Ship : Node2D
 		_player.OnBuildingConfirmed += () =>_showPlacementIndicator = false;
 		_player.OnBuildingFinished += PlaceTurret;;
 		_player.OnShoot += _shootController.OnShoot;
-		_oxygenConsole.OnStateChanged +=
-			(enabled) => _environmentManager.IsOxygenOn = enabled;
-		_environmentManager.OnOxygenChanged +=
-			(oxygen) => _oxygenLabel.Text = $"{oxygen}%";
-		_powerConsole.OnStateChanged +=
-			(enabled) => _environmentManager.IsPowerOn = enabled;
-		_environmentManager.OnPowerChanged +=
-			(power) => _powerLabel.Text = $"{power} %";
 	}
 
 	public override void _Process(double delta)
