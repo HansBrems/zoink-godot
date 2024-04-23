@@ -5,7 +5,8 @@ namespace Zoink.scenes.Enemies.Beetle;
 
 public partial class ChaseState : State
 {
-	[Export] public global::Zoink.scenes.Enemies.Beetle.Beetle Beetle;
+	[Export]
+	public Beetle Beetle;
 
 	public override void Enter()
 	{
