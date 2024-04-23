@@ -98,7 +98,7 @@ public partial class Beetle : CharacterBody2D
 
 		if (_health <= 0)
 		{
-			EmitSignal("OnKilled");
+			EmitSignal(SignalName.OnKilled);
 
 			var splatter = _bloodSplatterScene.Instantiate<Node2D>();
 			GetTree().CurrentScene.AddChild(splatter);

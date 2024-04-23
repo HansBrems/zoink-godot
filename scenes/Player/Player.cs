@@ -99,22 +99,22 @@ public partial class Player : CharacterBody2D
 
 	public void StartBuilding()
 	{
-		EmitSignal("OnBuildingStarted");
+		EmitSignal(SignalName.OnBuildingStarted);
 	}
 
 	public void CancelBuilding()
 	{
-		EmitSignal("OnBuildingCancelled");
+		EmitSignal(SignalName.OnBuildingCancelled);
 	}
 
 	public void ConfirmBuilding()
 	{
-		EmitSignal("OnBuildingConfirmed");
+		EmitSignal(SignalName.OnBuildingConfirmed);
 	}
 
 	public void FinishBuilding()
 	{
-		EmitSignal("OnBuildingFinished", _buildingPosition);
+		EmitSignal(SignalName.OnBuildingFinished, _buildingPosition);
 	}
 
 	public void CaptureMousePosition()
@@ -142,8 +142,8 @@ public partial class Player : CharacterBody2D
 	{
 		var direction = GetGlobalMousePosition() - Position;
 		var spawnLocation = _bulletSpawnLocations.PickRandom();
-		
-		EmitSignal("OnShoot", new OnShootEventArgs
+
+		EmitSignal(SignalName.OnShoot, new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
 			Position = spawnLocation.GlobalPosition,

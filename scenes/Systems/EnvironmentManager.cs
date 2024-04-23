@@ -31,7 +31,7 @@ public partial class EnvironmentManager : Node
 		changeValue = IsOxygenOn ? 1 : -1;
 
 		_oxygen = Math.Clamp(_oxygen + changeValue, 0, 100);
-		EmitSignal("OnOxygenChanged", _oxygen);
+		EmitSignal(SignalName.OnOxygenChanged, _oxygen);
 	}
 
 	private void UpdatePower()
@@ -41,6 +41,6 @@ public partial class EnvironmentManager : Node
 		if (IsPowerOn) changeValue += 1;
 
 		_power = Math.Clamp(_power + changeValue, 0, 100);
-		EmitSignal("OnPowerChanged", _power);
+		EmitSignal(SignalName.OnPowerChanged, _power);
 	}
 }

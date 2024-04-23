@@ -15,6 +15,6 @@ public partial class State : Node
 
 	protected void TransitionToState(string newStateName)
 	{
-		EmitSignal("OnTransition", newStateName);
+		EmitSignal(SignalName.OnTransition, newStateName);
 	}
 }

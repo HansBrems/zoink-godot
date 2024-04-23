@@ -84,7 +84,7 @@ public partial class Turret : StaticBody2D
 		if (_rayCast.IsColliding()) return;
 
 		var direction = _enemy.Position - Position;
-		EmitSignal("OnShoot", new OnShootEventArgs
+		EmitSignal(SignalName.OnShoot, new OnShootEventArgs
 		{
 			Direction = direction.Normalized(),
 			Position = Position,

@@ -25,7 +25,7 @@ public partial class Console : StaticBody2D
 	{
 		Enabled = !Enabled;
 		UpdateVisuals();
-		EmitSignal("OnStateChanged", Enabled);
+		EmitSignal(SignalName.OnStateChanged, Enabled);
 	}
 
 	private void UpdateVisuals()
