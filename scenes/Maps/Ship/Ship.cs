@@ -1,16 +1,16 @@
 using Godot;
 using Zoink.scenes.Core.Projectiles;
-using Zoink.scenes.Objects.Console;
+using Zoink.scenes.Environment;
 using Zoink.scenes.Objects.Turret;
-using Zoink.scenes.Player;
-using Zoink.scenes.Systems;
 using Zoink.scripts;
+
+namespace Zoink.scenes.Maps.Ship;
 
 public partial class Ship : Node2D
 {
 	private EnvironmentManager _environmentManager;
 	private Area2D _doorToOutside;
-	private Player _player;
+	private Player.Player _player;
 	private Camera2D _camera;
 	private TileMap _tileMap;
 	private ProjectileManager _shootController;
@@ -26,8 +26,8 @@ public partial class Ship : Node2D
 	{
 		_environmentManager = GetNode<EnvironmentManager>("EnvironmentManager");
 		_doorToOutside = GetNode<Area2D>("DoorToOutside");
-		_player = GetNode<Player>("Player");
-		_camera = GetNode<Camera2D>("Player/Camera2D");
+		_player = GetNode<Player.Player>("Player");
+		_camera = GetNode<Camera2D>("Player/PlayerCam");
 		_tileMap = GetNode<TileMap>("TileMap");
 		_shootController = GetNode<ProjectileManager>("ProjectileManager");
 		_turretScene = PackedSceneLoader.Load("Objects", "Turret");
@@ -53,7 +53,7 @@ public partial class Ship : Node2D
 
 	private void GoOutside(Node2D node)
 	{
-		if (node is Player)
+		if (node is Player.Player)
 		{
 			GetTree().ChangeSceneToFile("res://scenes/Maps/Outside.tscn");
 		}

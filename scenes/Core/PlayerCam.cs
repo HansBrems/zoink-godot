@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Zoink.scenes.Core;
 
 public partial class PlayerCam : Camera2D
 {

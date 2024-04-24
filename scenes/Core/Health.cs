@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Zoink.scenes.Core;
+
 public partial class Health : Node2D
 {
 	private int _currentHealth;

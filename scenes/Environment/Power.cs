@@ -1,17 +1,19 @@
 using Godot;
 
+namespace Zoink.scenes.Environment;
+
 public partial class Power : Node2D
 {
 	private Timer _decayTimer;
 
 	[Export]
-	public float CurrentValue { get; set; } = 100;
+	public float CurrentValue { get; set; } = 500;
 
 	[Export]
 	public float MaxValue { get; set; } = 1000;
 
 	[Export]
-	public float DecayRate { get; set; } = 1f;
+	public float DecayRate { get; set; } = 0f;
 
 	[Export]
 	public double DecayMilliseconds { get; set; } = 1000;

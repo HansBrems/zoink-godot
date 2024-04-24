@@ -1,7 +1,7 @@
 using Godot;
 using Zoink.scenes.Objects.Console;
 
-namespace Zoink.scenes.Systems;
+namespace Zoink.scenes.Environment;
 
 public partial class EnvironmentManager : Node
 {

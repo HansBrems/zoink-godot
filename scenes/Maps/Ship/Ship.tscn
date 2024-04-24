@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dmirmbjj8qvwt"]
 
-[ext_resource type="Script" path="res://scenes/Maps/Ship.cs" id="1_klscs"]
+[ext_resource type="Script" path="res://scenes/Maps/Ship/Ship.cs" id="1_klscs"]
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
 [ext_resource type="PackedScene" uid="uid://bt8ay5do6eb18" path="res://scenes/Core/Spawners/EnemySpawner.tscn" id="2_365x3"]
 [ext_resource type="PackedScene" uid="uid://ckvculsbye1tk" path="res://scenes/Objects/Candle/Candle.tscn" id="2_cee8s"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="3_ydtv6"]
 [ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/Objects/RotatingLight/RotatingLight.tscn" id="5_oy6yx"]
 [ext_resource type="AudioStream" uid="uid://cq8jormcn1xy6" path="res://resources/sounds/ship-drone.wav" id="6_psafd"]
-[ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Systems/EnvironmentManager.tscn" id="8_h7nsa"]
+[ext_resource type="PackedScene" uid="uid://cxahuhljrtkyg" path="res://scenes/Environment/EnvironmentManager.tscn" id="8_h7nsa"]
 [ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="9_6ikew"]
 [ext_resource type="PackedScene" uid="uid://7jvvkdr1c202" path="res://scenes/Environment/Oxygen.tscn" id="9_jeuw8"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="10_glw5j"]
@@ -123,7 +123,6 @@ DecayMilliseconds = 250.0
 
 [node name="Power" parent="EnvironmentManager" instance=ExtResource("10_ra41c")]
 CurrentValue = 1000.0
-DecayRate = 2.08165e-12
 DecayMilliseconds = 250.0
 
 [node name="OxygenConsole" parent="EnvironmentManager" instance=ExtResource("9_6ikew")]

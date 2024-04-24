@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Zoink.scenes.Environment;
+
 public partial class Oxygen : Node2D
 {
 	private Timer _decayTimer;
