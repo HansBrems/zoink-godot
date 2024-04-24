@@ -8,7 +8,6 @@ namespace Zoink.scenes.Maps.Ship;
 
 public partial class Ship : Node2D
 {
-	private EnvironmentManager _environmentManager;
 	private Area2D _doorToOutside;
 	private Player.Player _player;
 	private Camera2D _camera;
@@ -24,7 +23,6 @@ public partial class Ship : Node2D
 
 	public override void _Ready()
 	{
-		_environmentManager = GetNode<EnvironmentManager>("EnvironmentManager");
 		_doorToOutside = GetNode<Area2D>("DoorToOutside");
 		_player = GetNode<Player.Player>("Player");
 		_camera = GetNode<Camera2D>("Player/PlayerCam");

@@ -1,9 +1,8 @@
 using Godot;
+using Zoink.scenes.Environment;
 using Zoink.scenes.Objects.Console;
 
-namespace Zoink.scenes.Environment;
-
-public partial class EnvironmentManager : Node
+public partial class Environment : Node
 {
 	private Oxygen _oxygen;
 	private Console _oxygenConsole;
@@ -15,9 +14,6 @@ public partial class EnvironmentManager : Node
 
 	[Export]
 	public Label PowerLabel { get; set; }
-
-	[Signal]
-	public delegate void OnPowerChangedEventHandler(int power);
 
 	public override void _Ready()
 	{
