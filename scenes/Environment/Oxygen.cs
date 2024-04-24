@@ -1,41 +1,49 @@
 using Godot;
-
-namespace Zoink.scenes.Environment;
+using System;
 
 public partial class Oxygen : Node2D
 {
-	private Timer _decayTimer;
+	private Timer _timer;
+
+	private float _value;
 
 	[Export]
-	public float CurrentValue { get; set; } = 100;
+	public float DecayAmount { get; set; } = 1f;
+
+	[Export]
+	public float Value
+	{
+		get => _value;
+		set
+		{
+			_value = Mathf.Clamp(value, 0, MaxValue);
+			EmitSignal(SignalName.OnChange, _value);
+			if (_value == 0) EmitSignal(SignalName.OnDepleted);
+		}
+	}
 
 	[Export]
 	public float MaxValue { get; set; } = 1000;
 
-	[Export]
-	public float DecayRate { get; set; } = 1f;
-
-	[Export]
-	public double DecayMilliseconds { get; set; } = 1000;
-
 	[Signal]
-	public delegate void OnChangeEventHandler(float currentValue);
+	public delegate void OnChangeEventHandler(float value);
 
 	[Signal]
 	public delegate void OnDepletedEventHandler();
 
 	public override void _Ready()
 	{
-		_decayTimer = GetNode<Timer>("DecayTimer");
-		_decayTimer.WaitTime = DecayMilliseconds / 1000;
-		_decayTimer.Timeout += Decay;
-		_decayTimer.Start();
+		_timer = GetNode<Timer>("DecayTimer");
+		_timer.Timeout += () => Drain(DecayAmount);
 	}
 
-	private void Decay()
+	public void Drain(float amount)
 	{
-		CurrentValue = Mathf.Clamp(CurrentValue - DecayRate, 0, MaxValue);
-		EmitSignal(SignalName.OnChange, CurrentValue);
-		if (CurrentValue <= 0) EmitSignal(SignalName.OnDepleted);
+		Value -= amount;
+	}
+
+	public void Replenish(float amount)
+	{
+		Value += amount;
 	}
 }

@@ -4,38 +4,41 @@ namespace Zoink.scenes.Environment;
 
 public partial class Power : Node2D
 {
-	private Timer _decayTimer;
+	private float _value = 500;
 
 	[Export]
-	public float CurrentValue { get; set; } = 500;
+	public float Value
+	{
+		get => _value;
+		set
+		{
+			_value = Mathf.Clamp(value, 0, MaxValue);
+			EmitSignal(SignalName.OnChange, _value);
+			if (_value == 0) EmitSignal(SignalName.OnDepleted);
+		}
+	}
 
 	[Export]
 	public float MaxValue { get; set; } = 1000;
 
 	[Export]
-	public float DecayRate { get; set; } = 0f;
-
-	[Export]
-	public double DecayMilliseconds { get; set; } = 1000;
+	public bool IsEnabled { get; set; } = false;
 
 	[Signal]
-	public delegate void OnChangeEventHandler(float currentValue);
+	public delegate void OnChangeEventHandler(float value);
 
 	[Signal]
 	public delegate void OnDepletedEventHandler();
 
-	public override void _Ready()
+	public bool Drain(float amount)
 	{
-		_decayTimer = GetNode<Timer>("DecayTimer");
-		_decayTimer.WaitTime = DecayMilliseconds / 1000;
-		_decayTimer.Timeout += Decay;
-		_decayTimer.Start();
+		if (!IsEnabled || Value < amount) return false;
+		Value -= amount;
+		return true;
 	}
 
-	private void Decay()
+	public void ToggleEnabled()
 	{
-		CurrentValue = Mathf.Clamp(CurrentValue - DecayRate, 0, MaxValue);
-		EmitSignal(SignalName.OnChange, CurrentValue);
-		if (CurrentValue <= 0) EmitSignal(SignalName.OnDepleted);
+		IsEnabled = !IsEnabled;
 	}
 }

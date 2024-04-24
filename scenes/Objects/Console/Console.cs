@@ -1,5 +1,6 @@
 using Godot;
 using Zoink.scenes.Core.Interactions;
+using Zoink.scenes.Environment;
 
 namespace Zoink.scenes.Objects.Console;
 
@@ -9,8 +10,23 @@ public partial class Console : StaticBody2D
 	private InteractionArea _interactionArea;
 	private PointLight2D _light;
 
-	[Export] public bool Enabled { get; set; }
-	[Signal] public delegate void OnStateChangedEventHandler(bool enabled);
+	private bool _enabled;
+	[Export]
+	public bool Enabled
+	{
+		get => _enabled;
+		set
+		{
+			_enabled = value;
+			EmitSignal(SignalName.OnStateChanged, _enabled);
+		}
+	}
+
+	[Export]
+	public Power PowerSource { get; set; }
+
+	[Signal]
+	public delegate void OnStateChangedEventHandler(bool enabled);
 
 	public override void _Ready()
 	{
@@ -25,12 +41,12 @@ public partial class Console : StaticBody2D
 	{
 		Enabled = !Enabled;
 		UpdateVisuals();
-		EmitSignal(SignalName.OnStateChanged, Enabled);
 	}
 
 	private void UpdateVisuals()
 	{
-		_animationPlayer.Play(Enabled ? "On" : "Off");
-		_light.Enabled = Enabled;
+		var on = PowerSource.IsEnabled && Enabled;
+		_animationPlayer.Play(on ? "On" : "Off");
+		_light.Enabled = on;
 	}
 }

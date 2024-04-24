@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk3q66lglare4"]
+
+[ext_resource type="Script" path="res://scenes/Environment/OxygenGenerator.cs" id="1_lxcl2"]
+[ext_resource type="Texture2D" uid="uid://cthumrk36w2x7" path="res://icon.svg" id="2_bpl0m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1crp"]
+size = Vector2(24.5, 24.5)
+
+[node name="OxygenGenerator" type="StaticBody2D"]
+script = ExtResource("1_lxcl2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_x1crp")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_bpl0m")
+
+[node name="GenerateTimer" type="Timer" parent="."]
+autostart = true
