@@ -4,10 +4,10 @@ namespace Zoink.scenes.Environment;
 
 public partial class Power : Node2D
 {
-	private float _value = 500;
+	private int _value = 500;
 
 	[Export]
-	public float Value
+	public int Value
 	{
 		get => _value;
 		set
@@ -19,18 +19,18 @@ public partial class Power : Node2D
 	}
 
 	[Export]
-	public float MaxValue { get; set; } = 1000;
+	public int MaxValue { get; set; } = 1000;
 
 	[Export]
 	public bool IsEnabled { get; set; } = false;
 
 	[Signal]
-	public delegate void OnChangeEventHandler(float value);
+	public delegate void OnChangeEventHandler(int value);
 
 	[Signal]
 	public delegate void OnDepletedEventHandler();
 
-	public bool Drain(float amount)
+	public bool Drain(int amount)
 	{
 		if (!IsEnabled || Value < amount) return false;
 		Value -= amount;
@@ -40,5 +40,15 @@ public partial class Power : Node2D
 	public void ToggleEnabled()
 	{
 		IsEnabled = !IsEnabled;
+	}
+
+	public void TurnOn()
+	{
+		IsEnabled = true;
+	}
+
+	public void TurnOff()
+	{
+		IsEnabled = false;
 	}
 }

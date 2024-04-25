@@ -1,4 +1,5 @@
 using Godot;
+using Zoink.scenes.Core;
 using Zoink.scenes.Core.Projectiles;
 using Zoink.scenes.Environment;
 using Zoink.scenes.Objects.Turret;
@@ -9,6 +10,7 @@ namespace Zoink.scenes.Maps.Ship;
 public partial class Ship : Node2D
 {
 	private Area2D _doorToOutside;
+	private global::Environment _environment;
 	private Player.Player _player;
 	private Camera2D _camera;
 	private TileMap _tileMap;
@@ -17,6 +19,7 @@ public partial class Ship : Node2D
 	private Node _turrets;
 
 	// UI
+	private Label _healthLabel;
 	private Node2D _placementIndicator;
 
 	private bool _showPlacementIndicator;
@@ -24,6 +27,7 @@ public partial class Ship : Node2D
 	public override void _Ready()
 	{
 		_doorToOutside = GetNode<Area2D>("DoorToOutside");
+		_environment = GetNode<global::Environment>("Environment");
 		_player = GetNode<Player.Player>("Player");
 		_camera = GetNode<Camera2D>("Player/PlayerCam");
 		_tileMap = GetNode<TileMap>("TileMap");
@@ -32,15 +36,20 @@ public partial class Ship : Node2D
 		_turrets = GetNode<Node>("Turrets");
 
 		// UI
+		_healthLabel = GetNode<Label>("HUD/GridContainer/HealthValue");
 		_placementIndicator = GetNode<Node2D>("HUD/PlacementIndicator");
 
 		// Events
 		_doorToOutside.BodyEntered += GoOutside;
+		_environment.OnOxygenDepleted += () => _player.Hurt(1);
 		_player.OnBuildingStarted += () => _showPlacementIndicator = true;
 		_player.OnBuildingCancelled += () => _showPlacementIndicator = false;
 		_player.OnBuildingConfirmed += () =>_showPlacementIndicator = false;
 		_player.OnBuildingFinished += PlaceTurret;;
 		_player.OnShoot += _shootController.OnShoot;
+		_player.Health.OnChange += (health) => _healthLabel.Text = health.ToString();
+
+		_healthLabel.Text = _player.Health.CurrentHealth.ToString();
 	}
 
 	public override void _Process(double delta)

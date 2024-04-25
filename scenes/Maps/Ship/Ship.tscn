@@ -119,18 +119,20 @@ OxygenLabel = NodePath("../HUD/GridContainer/OxygenValue")
 PowerLabel = NodePath("../HUD/GridContainer/PowerValue")
 
 [node name="Oxygen" parent="Environment" instance=ExtResource("9_jeuw8")]
-Value = 500.0
+DecayAmount = 10
+Value = 50.0
 
 [node name="Power" parent="Environment" instance=ExtResource("10_ra41c")]
 
 [node name="OxygenGenerator" parent="Environment" node_paths=PackedStringArray("PowerSource") instance=ExtResource("12_qysmq")]
 position = Vector2(177, 481)
-EnergyCost = 2.0
 PowerSource = NodePath("../Power")
 
 [node name="PowerSwitch" parent="Environment" node_paths=PackedStringArray("Power") instance=ExtResource("13_gfaet")]
 position = Vector2(170, 524)
 Power = NodePath("../Power")
+
+[node name="OxygenHurtTimer" type="Timer" parent="Environment"]
 
 [node name="Turrets" type="Node" parent="."]
 
@@ -181,5 +183,15 @@ label_settings = SubResource("LabelSettings_2qc3k")
 uppercase = true
 
 [node name="PowerValue" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_na1a8")
+
+[node name="HealthTitle" type="Label" parent="HUD/GridContainer"]
+layout_mode = 2
+text = "Health:"
+label_settings = SubResource("LabelSettings_2qc3k")
+uppercase = true
+
+[node name="HealthValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_na1a8")

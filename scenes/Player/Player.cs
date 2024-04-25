@@ -4,6 +4,7 @@ using Godot.Collections;
 using Zoink.scenes.Core;
 using Zoink.scenes.Core.Interactions;
 using Zoink.scenes.Core.Projectiles;
+using Zoink.scripts;
 
 namespace Zoink.scenes.Player;
 
@@ -45,7 +46,9 @@ public partial class Player : CharacterBody2D
 	private Vector2 _buildingPosition;
 	private int _turretCount = 2;
 
-	private Health _health;
+	public Health Health;
+
+	private Label _healthLabel;
 
 	public bool CanBuild => _turretCount > 0;
 	public bool CanDash { get; set; } = true;
@@ -57,10 +60,10 @@ public partial class Player : CharacterBody2D
 		_camera = GetNode<PlayerCam>("PlayerCam");
 		_buildingProgressBar = GetNode<ProgressBar>("InteractionProgress");
 		_bulletSpawnLocations = new Array<Marker2D>(GetNode("PlayerSprite/BulletSpawnLocations").GetChildren().Cast<Marker2D>());
-		_health = GetNode<Health>("Health");
-		_health.OnNoHealth += () => GD.Print("Dead");
+		Health = GetNode<Health>("Health");
+
 		_hurtbox = GetNode<Hurtbox>("Hurtbox");
-		_hurtbox.OnHurt += (damage) => _health.CurrentHealth -= damage;
+		_hurtbox.OnHurt += (damage) => Health.CurrentHealth -= damage;
 		_interactionManager = GetNode<InteractionManager>("/root/InteractionManager");
 		_interactionManager.RegisterPlayer(this);
 		_playerSprite = GetNode<Sprite2D>("PlayerSprite");
@@ -72,6 +75,11 @@ public partial class Player : CharacterBody2D
 	public Vector2 GetInputVector()
 	{
 		return Input.GetVector("left", "right", "up", "down");
+	}
+
+	public void Hurt(int damage)
+	{
+		Health.CurrentHealth -= damage;
 	}
 
 	public void LookAtMousePosition()

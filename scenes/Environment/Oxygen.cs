@@ -1,35 +1,30 @@
 using Godot;
-using System;
 
 public partial class Oxygen : Node2D
 {
 	private Timer _timer;
 
-	private float _value;
+	private int _value;
 
 	[Export]
-	public float DecayAmount { get; set; } = 1f;
+	public int DecayAmount { get; set; } = 1;
 
 	[Export]
-	public float Value
+	public int Value
 	{
 		get => _value;
 		set
 		{
 			_value = Mathf.Clamp(value, 0, MaxValue);
 			EmitSignal(SignalName.OnChange, _value);
-			if (_value == 0) EmitSignal(SignalName.OnDepleted);
 		}
 	}
 
 	[Export]
-	public float MaxValue { get; set; } = 1000;
+	public int MaxValue { get; set; } = 1000;
 
 	[Signal]
-	public delegate void OnChangeEventHandler(float value);
-
-	[Signal]
-	public delegate void OnDepletedEventHandler();
+	public delegate void OnChangeEventHandler(int value);
 
 	public override void _Ready()
 	{
@@ -37,12 +32,12 @@ public partial class Oxygen : Node2D
 		_timer.Timeout += () => Drain(DecayAmount);
 	}
 
-	public void Drain(float amount)
+	public void Drain(int amount)
 	{
 		Value -= amount;
 	}
 
-	public void Replenish(float amount)
+	public void Replenish(int amount)
 	{
 		Value += amount;
 	}

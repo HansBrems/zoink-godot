@@ -6,16 +6,16 @@ public partial class OxygenGenerator : StaticBody2D
 	private Timer _generateTimer;
 
 	[Export]
-	public float EnergyCost { get; set; } = 20f;
+	public int EnergyCost { get; set; } = 20;
 
 	[Export]
-	public float GenerationAmount { get; set; } = 20f;
+	public int GenerationAmount { get; set; } = 20;
 
 	[Export]
 	public Power PowerSource { get; set; }
 
 	[Signal]
-	public delegate void OnOxygenGeneratedEventHandler(float amount);
+	public delegate void OnOxygenGeneratedEventHandler(int amount);
 
 	public override void _Ready()
 	{
