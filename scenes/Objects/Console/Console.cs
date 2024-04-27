@@ -18,6 +18,7 @@ public partial class Console : StaticBody2D
 		set
 		{
 			_enabled = value;
+			UpdateVisuals();
 			EmitSignal(SignalName.OnStateChanged, _enabled);
 		}
 	}

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scenes/Environment/PowerSwitch.cs" id="1_y5ynu"]
 [ext_resource type="PackedScene" uid="uid://cl1cf4l23ugcx" path="res://scenes/Core/Interactions/InteractionArea.tscn" id="2_14a5k"]
-[ext_resource type="Texture2D" uid="uid://cthumrk36w2x7" path="res://icon.svg" id="3_iqknv"]
+[ext_resource type="Texture2D" uid="uid://dbkh502ub4a6f" path="res://resources/images/power-switch.png" id="3_m5pdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxvds"]
-size = Vector2(24, 24)
+size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwri7"]
 size = Vector2(40, 40)
@@ -14,6 +14,7 @@ size = Vector2(40, 40)
 script = ExtResource("1_y5ynu")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mxvds")
 
 [node name="InteractionArea" parent="." instance=ExtResource("2_14a5k")]
@@ -23,5 +24,4 @@ ActionName = "Toggle"
 shape = SubResource("RectangleShape2D_cwri7")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_iqknv")
+texture = ExtResource("3_m5pdu")

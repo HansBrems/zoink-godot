@@ -114,13 +114,21 @@ rotation = -1.71217
 position = Vector2(424, 504)
 rotation = -1.19206
 
+[node name="Console3" parent="Objects" node_paths=PackedStringArray("PowerSource") instance=ExtResource("8_k1ile")]
+position = Vector2(152, 632)
+rotation = 3.14159
+Enabled = true
+PowerSource = NodePath("../../Environment/Power")
+
 [node name="Console2" parent="Objects" node_paths=PackedStringArray("PowerSource") instance=ExtResource("8_k1ile")]
 position = Vector2(24, 504)
 rotation = -1.5708
+Enabled = true
 PowerSource = NodePath("../../Environment/Power")
 
 [node name="Console" parent="Objects" node_paths=PackedStringArray("PowerSource") instance=ExtResource("8_k1ile")]
 position = Vector2(152, 376)
+Enabled = true
 PowerSource = NodePath("../../Environment/Power")
 
 [node name="Environment" type="Node" parent="." node_paths=PackedStringArray("OxygenLabel", "PowerLabel")]
@@ -139,7 +147,7 @@ position = Vector2(144, 463)
 PowerSource = NodePath("../Power")
 
 [node name="PowerSwitch" parent="Environment" node_paths=PackedStringArray("Power") instance=ExtResource("13_gfaet")]
-position = Vector2(179, 528)
+position = Vector2(143, 543)
 Power = NodePath("../Power")
 
 [node name="OxygenHurtTimer" type="Timer" parent="Environment"]
@@ -149,6 +157,7 @@ Power = NodePath("../Power")
 [node name="ProjectileManager" parent="." instance=ExtResource("10_jjy70")]
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("10_glw5j")]
+process_mode = 3
 position = Vector2(86, 503)
 
 [node name="PlayerCam" parent="Player" instance=ExtResource("12_hwl1f")]
