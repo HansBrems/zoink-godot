@@ -120,7 +120,7 @@ PowerLabel = NodePath("../HUD/GridContainer/PowerValue")
 
 [node name="Oxygen" parent="Environment" instance=ExtResource("9_jeuw8")]
 DecayAmount = 10
-Value = 50.0
+Value = 1000
 
 [node name="Power" parent="Environment" instance=ExtResource("10_ra41c")]
 
@@ -148,7 +148,7 @@ stream = ExtResource("6_psafd")
 autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.9
+energy = 0.8
 blend_mode = 1
 
 [node name="HUD" type="CanvasLayer" parent="."]

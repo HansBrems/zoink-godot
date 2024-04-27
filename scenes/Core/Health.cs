@@ -24,6 +24,6 @@ public partial class Health : Node2D
 	[Signal]
 	public delegate void OnChangeEventHandler(int health);
 
-    [Signal]
+	[Signal]
 	public delegate void OnNoHealthEventHandler();
 }

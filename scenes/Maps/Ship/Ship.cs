@@ -1,7 +1,5 @@
 using Godot;
-using Zoink.scenes.Core;
 using Zoink.scenes.Core.Projectiles;
-using Zoink.scenes.Environment;
 using Zoink.scenes.Objects.Turret;
 using Zoink.scripts;
 
@@ -62,7 +60,7 @@ public partial class Ship : Node2D
 	{
 		if (node is Player.Player)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/Maps/Outside.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/Maps/Space.tscn");
 		}
 	}
 
