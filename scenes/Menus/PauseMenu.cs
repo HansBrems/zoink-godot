@@ -23,9 +23,9 @@ public partial class PauseMenu : ColorRect
 	public override void _Ready()
 	{
 		_exitGameButton = GetNode<Button>("CenterContainer/VBoxContainer/ExitGameButton");
-        _quitButton = GetNode<Button>("CenterContainer/VBoxContainer/QuitButton");
+		_quitButton = GetNode<Button>("CenterContainer/VBoxContainer/QuitButton");
 
-        _exitGameButton.Pressed += ExitGame;
+		_exitGameButton.Pressed += ExitGame;
 		_quitButton.Pressed += () => GetTree().Quit();
 	}
 

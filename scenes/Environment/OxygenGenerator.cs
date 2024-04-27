@@ -4,6 +4,7 @@ using Zoink.scenes.Environment;
 public partial class OxygenGenerator : StaticBody2D
 {
 	private Timer _generateTimer;
+	private PointLight2D _pointLight2D;
 
 	[Export]
 	public int EnergyCost { get; set; } = 20;
@@ -21,6 +22,12 @@ public partial class OxygenGenerator : StaticBody2D
 	{
 		_generateTimer = GetNode<Timer>("GenerateTimer");
 		_generateTimer.Timeout += GenerateOxygen;
+		_pointLight2D = GetNode<PointLight2D>("PointLight2D");
+	}
+
+	public override void _Process(double delta)
+	{
+		_pointLight2D.Enabled = PowerSource.IsEnabled && PowerSource.Value != 0;
 	}
 
 	public void GenerateOxygen()
