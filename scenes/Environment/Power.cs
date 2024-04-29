@@ -4,6 +4,7 @@ namespace Zoink.scenes.Environment;
 
 public partial class Power : Node2D
 {
+	private bool _isEnabled = false;
 	private int _value = 500;
 
 	[Export]
@@ -22,10 +23,21 @@ public partial class Power : Node2D
 	public int MaxValue { get; set; } = 1000;
 
 	[Export]
-	public bool IsEnabled { get; set; } = false;
+	public bool IsEnabled
+	{
+		get => _isEnabled;
+		set
+		{
+			_isEnabled = value;
+			EmitSignal(SignalName.OnStatusChanged);
+		}
+	}
 
 	[Signal]
 	public delegate void OnChangeEventHandler(int value);
+
+	[Signal]
+	public delegate void OnStatusChangedEventHandler();
 
 	[Signal]
 	public delegate void OnDepletedEventHandler();

@@ -18,7 +18,6 @@ public partial class Console : StaticBody2D
 		set
 		{
 			_enabled = value;
-			UpdateVisuals();
 			EmitSignal(SignalName.OnStateChanged, _enabled);
 		}
 	}
@@ -35,7 +34,9 @@ public partial class Console : StaticBody2D
 		_interactionArea = GetNode<InteractionArea>("InteractionArea");
 		_interactionArea.Interact = Callable.From(ToggleEnabled);
 		_light = GetNode<PointLight2D>("PointLight2D");
+
 		UpdateVisuals();
+		PowerSource.OnStatusChanged += UpdateVisuals;
 	}
 
 	private void ToggleEnabled()
@@ -46,7 +47,7 @@ public partial class Console : StaticBody2D
 
 	private void UpdateVisuals()
 	{
-		var on = PowerSource.IsEnabled && Enabled;
+		var on = PowerSource != null && PowerSource.IsEnabled && Enabled;
 		_animationPlayer.Play(on ? "On" : "Off");
 		_light.Enabled = on;
 	}
