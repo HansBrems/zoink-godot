@@ -171,7 +171,6 @@ stream = ExtResource("6_psafd")
 autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 color = Color(1, 1, 0.854902, 1)
 energy = 0.8
 blend_mode = 1
@@ -222,4 +221,5 @@ layout_mode = 2
 label_settings = SubResource("LabelSettings_na1a8")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.470588, 0.470588, 0.470588, 1)
+visible = false
+color = Color(0.0823529, 0.0823529, 0.0823529, 1)
