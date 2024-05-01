@@ -15,6 +15,10 @@ run/main_scene="res://scenes/Menus/StartMenu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 InteractionManager="*res://scenes/Core/Interactions/InteractionManager.tscn"
@@ -27,6 +31,7 @@ window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [dotnet]
 
@@ -35,6 +40,10 @@ project/assembly_name="Zoink"
 [editor]
 
 movie_writer/movie_file="/Users/hbrems/Desktop/zoink.avi"
+
+[gui]
+
+theme/custom="res://themes/Theme.tres"
 
 [input]
 

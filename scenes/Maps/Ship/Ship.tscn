@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dmirmbjj8qvwt"]
+[gd_scene load_steps=20 format=3 uid="uid://dmirmbjj8qvwt"]
 
 [ext_resource type="Script" path="res://scenes/Maps/Ship/Ship.cs" id="1_klscs"]
 [ext_resource type="TileSet" uid="uid://cn06wx5pcwxqx" path="res://scenes/Maps/TileSet.tres" id="1_senoy"]
@@ -18,22 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://28crs4j5djgf" path="res://scenes/Core/PlayerCam.tscn" id="12_hwl1f"]
 [ext_resource type="PackedScene" uid="uid://bk3q66lglare4" path="res://scenes/Environment/OxygenGenerator.tscn" id="12_qysmq"]
 [ext_resource type="PackedScene" uid="uid://bn8dfyelrb4np" path="res://scenes/Environment/PowerSwitch.tscn" id="13_gfaet"]
-[ext_resource type="FontFile" uid="uid://cy1idqwgxjdwh" path="res://resources/fonts/Jersey10-Regular.ttf" id="19_ymkci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cov8l"]
 size = Vector2(15.5, 15.5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_2qc3k"]
-line_spacing = 2.0
-font = ExtResource("19_ymkci")
-font_size = 4
-font_color = Color(0, 0.980392, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_na1a8"]
-line_spacing = 2.0
-font = ExtResource("19_ymkci")
-font_size = 4
-font_color = Color(0, 0.980392, 0, 1)
 
 [node name="Ship" type="Node2D"]
 script = ExtResource("1_klscs")
@@ -182,45 +169,33 @@ blend_mode = 1
 [node name="PlacementIndicator" parent="HUD" instance=ExtResource("11_fde4i")]
 
 [node name="GridContainer" type="GridContainer" parent="HUD"]
-anchors_preset = -1
-anchor_right = 0.13
-anchor_bottom = 0.077
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 13.4
-offset_bottom = 7.14
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 42.0
+offset_bottom = 35.0
 size_flags_horizontal = 0
 columns = 2
 
 [node name="OxygenTitle" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 text = "Oxygen:"
-label_settings = SubResource("LabelSettings_2qc3k")
-uppercase = true
 
 [node name="OxygenValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_na1a8")
 
 [node name="PowerTitle" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 text = "Power:"
-label_settings = SubResource("LabelSettings_2qc3k")
-uppercase = true
 
 [node name="PowerValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_na1a8")
 
 [node name="HealthTitle" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
 text = "Health:"
-label_settings = SubResource("LabelSettings_2qc3k")
-uppercase = true
 
 [node name="HealthValue" type="Label" parent="HUD/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_na1a8")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

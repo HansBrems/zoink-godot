@@ -1,17 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bquk7tks34w2v"]
+[gd_scene load_steps=3 format=3 uid="uid://bquk7tks34w2v"]
 
 [ext_resource type="Script" path="res://scenes/Intro.cs" id="1_n2act"]
-[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="2_fbw3k"]
 [ext_resource type="AudioStream" uid="uid://8n6qij7ugv7p" path="res://resources/sounds/intro-music.wav" id="3_qdik5"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_0awyo"]
-content_margin_left = 6.0
-content_margin_top = 6.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_n2act")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qdik5")
+autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.069
@@ -20,7 +17,6 @@ autostart = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="RichTextLabel" parent="CanvasLayer"]
-modulate = Color(0, 0.788235, 0, 1)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -32,12 +28,6 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_fonts/normal_font = ExtResource("2_fbw3k")
-theme_override_font_sizes/normal_font_size = 6
-theme_override_styles/normal = SubResource("StyleBoxLine_0awyo")
+theme_override_colors/default_color = Color(1, 0, 0, 1)
 text = "A few days ago I crashed on this remote planet... I thought I was a goner but luckily I survived. I made myself at home in what's left of the ship. It's in bad shape but it still has a bit of power left. I'll see if I can boot some of the systems and perhaps it will enable me to contact the captain."
 autowrap_mode = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_qdik5")
-autoplay = true
