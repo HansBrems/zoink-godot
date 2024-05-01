@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxm0j161834m3"]
+[gd_scene load_steps=19 format=3 uid="uid://dxm0j161834m3"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_1qkp2"]
 [ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://scenes/Core/States/StateMachine.tscn" id="3_hswj8"]
-[ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/character.png" id="3_yq0mq"]
+[ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://resources/images/sprites/character.png" id="3_yq0mq"]
 [ext_resource type="Script" path="res://scenes/Player/BuildingState.cs" id="4_mii4y"]
 [ext_resource type="Script" path="res://scenes/Player/FightingState.cs" id="4_pwo8c"]
 [ext_resource type="Script" path="res://scenes/Player/DashingState.cs" id="5_0rran"]
@@ -18,13 +18,21 @@ size = Vector2(7, 8)
 atlas = ExtResource("3_yq0mq")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yfifr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe1we"]
 atlas = ExtResource("3_yq0mq")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7a76c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_11g62"]
 atlas = ExtResource("3_yq0mq")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vohtx"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2gvd"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tspdt"]
 animations = [{
@@ -38,14 +46,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yfifr")
+"texture": SubResource("AtlasTexture_oe1we")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7a76c")
+"texture": SubResource("AtlasTexture_11g62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vohtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2gvd")
 }],
 "loop": true,
 "name": &"running",
-"speed": 7.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhoq4"]
@@ -58,19 +72,19 @@ motion_mode = 1
 script = ExtResource("1_1qkp2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_to76k")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_tspdt")
 animation = &"running"
 autoplay = "idle"
-frame_progress = 0.0783893
+frame = 2
+frame_progress = 0.679737
 
 [node name="BulletSpawnLocations" type="Node2D" parent="PlayerSprite"]
-rotation = -1.5708
+position = Vector2(0, 3)
 
 [node name="Spawn1" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
 position = Vector2(6, -1)

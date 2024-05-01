@@ -4,7 +4,6 @@ using Godot.Collections;
 using Zoink.scenes.Core;
 using Zoink.scenes.Core.Interactions;
 using Zoink.scenes.Core.Projectiles;
-using Zoink.scripts;
 
 namespace Zoink.scenes.Player;
 
@@ -80,14 +79,11 @@ public partial class Player : CharacterBody2D
 		Health.CurrentHealth -= damage;
 	}
 
-	public void LookAtMousePosition()
-	{
-		_playerSprite.LookAt(GetGlobalMousePosition());
-		_playerSprite.Rotation += Mathf.DegToRad(90);
-	}
-
 	public void Move(Vector2 direction)
 	{
+		if (_playerSprite.FlipH && direction.X > 0) _playerSprite.FlipH = false;
+		if (!_playerSprite.FlipH && direction.X < 0) _playerSprite.FlipH = true;
+
 		Velocity = direction * Speed;
 		MoveAndSlide();
 	}

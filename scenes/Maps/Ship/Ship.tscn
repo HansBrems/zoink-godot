@@ -98,6 +98,11 @@ position = Vector2(666, 152)
 rotation = 2.80474
 LightColor = Color(0.807843, 0.560784, 0.431373, 1)
 
+[node name="Candle7" parent="Lights" instance=ExtResource("2_cee8s")]
+position = Vector2(553, 104)
+rotation = -0.481711
+LightColor = Color(0.807843, 0.560784, 0.431373, 1)
+
 [node name="Objects" type="Node" parent="."]
 
 [node name="Chair1" parent="Objects" instance=ExtResource("2_ksumh")]

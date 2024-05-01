@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csglwfwm25cqe"
-path="res://.godot/imported/chair.png-dd96f60d970edc7487898ae6d6a8b435.ctex"
+uid="uid://dbkh502ub4a6f"
+path="res://.godot/imported/power-switch.png-30904d8aec957571438c43e738d0c10f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/chair.png"
-dest_files=["res://.godot/imported/chair.png-dd96f60d970edc7487898ae6d6a8b435.ctex"]
+source_file="res://resources/images/sprites/power-switch.png"
+dest_files=["res://.godot/imported/power-switch.png-30904d8aec957571438c43e738d0c10f.ctex"]
 
 [params]
 

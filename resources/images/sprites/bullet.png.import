@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbkh502ub4a6f"
-path="res://.godot/imported/power-switch.png-9bceaeeb6666b0d09551c9ed2af1aa55.ctex"
+uid="uid://ima8mtvtvm8u"
+path="res://.godot/imported/bullet.png-fdaff3815b177f1b0bfe8d47a827622f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/power-switch.png"
-dest_files=["res://.godot/imported/power-switch.png-9bceaeeb6666b0d09551c9ed2af1aa55.ctex"]
+source_file="res://resources/images/sprites/bullet.png"
+dest_files=["res://.godot/imported/bullet.png-fdaff3815b177f1b0bfe8d47a827622f.ctex"]
 
 [params]
 

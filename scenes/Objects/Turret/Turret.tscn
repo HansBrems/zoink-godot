@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5l10jf380t3u"]
 
 [ext_resource type="Script" path="res://scenes/Objects/Turret/Turret.cs" id="1_yjs1c"]
-[ext_resource type="Texture2D" uid="uid://cjmc0dowdvd8o" path="res://resources/images/turret-base.png" id="2_dsiyf"]
-[ext_resource type="Texture2D" uid="uid://ctilq3tggwg24" path="res://resources/images/turret.png" id="3_25ey2"]
+[ext_resource type="Texture2D" uid="uid://cjmc0dowdvd8o" path="res://resources/images/sprites/turret-base.png" id="2_dsiyf"]
+[ext_resource type="Texture2D" uid="uid://ctilq3tggwg24" path="res://resources/images/sprites/turret.png" id="3_25ey2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjs43"]
 size = Vector2(12, 12)

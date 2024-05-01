@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deypl647iihpq"
-path="res://.godot/imported/decorations.png-fc3f21fc0dcba631ca49bb1827abb8dc.ctex"
+uid="uid://5y2t408jgfbo"
+path="res://.godot/imported/oxygen-generator.png-9bed8ba3081b1b96cd4a1b8dbb8395e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/decorations.png"
-dest_files=["res://.godot/imported/decorations.png-fc3f21fc0dcba631ca49bb1827abb8dc.ctex"]
+source_file="res://resources/images/sprites/oxygen-generator.png"
+dest_files=["res://.godot/imported/oxygen-generator.png-9bed8ba3081b1b96cd4a1b8dbb8395e6.ctex"]
 
 [params]
 

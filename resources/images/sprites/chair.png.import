@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctilq3tggwg24"
-path="res://.godot/imported/turret.png-2c786039a995a7120f75f037e4aa3fec.ctex"
+uid="uid://csglwfwm25cqe"
+path="res://.godot/imported/chair.png-79fa4f5aa7bca0a29f837a5c20b3cbed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/turret.png"
-dest_files=["res://.godot/imported/turret.png-2c786039a995a7120f75f037e4aa3fec.ctex"]
+source_file="res://resources/images/sprites/chair.png"
+dest_files=["res://.godot/imported/chair.png-79fa4f5aa7bca0a29f837a5c20b3cbed.ctex"]
 
 [params]
 

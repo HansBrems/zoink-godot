@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvi5fqbiecpvh"
-path="res://.godot/imported/rotating-light.png-cda472e59e6d5b5f7032e4f47e63b907.ctex"
+uid="uid://ctilq3tggwg24"
+path="res://.godot/imported/turret.png-6cd5a48dc799d71c889fca7ed8ca1da8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/rotating-light.png"
-dest_files=["res://.godot/imported/rotating-light.png-cda472e59e6d5b5f7032e4f47e63b907.ctex"]
+source_file="res://resources/images/sprites/turret.png"
+dest_files=["res://.godot/imported/turret.png-6cd5a48dc799d71c889fca7ed8ca1da8.ctex"]
 
 [params]
 

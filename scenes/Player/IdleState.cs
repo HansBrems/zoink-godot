@@ -23,7 +23,5 @@ public partial class IdleState : State
 		var inputVector = Player.GetInputVector();
 		if (inputVector != Vector2.Zero)
 			TransitionToState("FightingState");
-
-		Player.LookAtMousePosition();
 	}
 }

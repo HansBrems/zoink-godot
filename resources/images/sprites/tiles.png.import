@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3q5gt08cg2yb"
-path="res://.godot/imported/light.png-04015cf6c4f0b388da1eb8cb56902f3f.ctex"
+uid="uid://cborlij1lqi2r"
+path="res://.godot/imported/tiles.png-85612b22902910db2bd4b7ecde3da70d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/light.png"
-dest_files=["res://.godot/imported/light.png-04015cf6c4f0b388da1eb8cb56902f3f.ctex"]
+source_file="res://resources/images/sprites/tiles.png"
+dest_files=["res://.godot/imported/tiles.png-85612b22902910db2bd4b7ecde3da70d.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
