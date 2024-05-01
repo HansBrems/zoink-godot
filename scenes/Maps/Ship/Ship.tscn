@@ -17,19 +17,21 @@
 [ext_resource type="PackedScene" uid="uid://dhdthxhs15ldr" path="res://scenes/UI/PlacementIndicator.tscn" id="11_fde4i"]
 [ext_resource type="PackedScene" uid="uid://28crs4j5djgf" path="res://scenes/Core/PlayerCam.tscn" id="12_hwl1f"]
 [ext_resource type="PackedScene" uid="uid://bk3q66lglare4" path="res://scenes/Environment/OxygenGenerator.tscn" id="12_qysmq"]
-[ext_resource type="FontFile" uid="uid://hfycthxk03td" path="res://resources/fonts/VT323-Regular.ttf" id="12_v4ffi"]
 [ext_resource type="PackedScene" uid="uid://bn8dfyelrb4np" path="res://scenes/Environment/PowerSwitch.tscn" id="13_gfaet"]
+[ext_resource type="FontFile" uid="uid://cy1idqwgxjdwh" path="res://resources/fonts/Jersey10-Regular.ttf" id="19_ymkci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cov8l"]
 size = Vector2(15.5, 15.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qc3k"]
-font = ExtResource("12_v4ffi")
+line_spacing = 2.0
+font = ExtResource("19_ymkci")
 font_size = 4
 font_color = Color(0, 0.980392, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_na1a8"]
-font = ExtResource("12_v4ffi")
+line_spacing = 2.0
+font = ExtResource("19_ymkci")
 font_size = 4
 font_color = Color(0, 0.980392, 0, 1)
 
