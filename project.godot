@@ -43,7 +43,7 @@ movie_writer/movie_file="/Users/hbrems/Desktop/zoink.avi"
 
 [gui]
 
-theme/custom="res://themes/Theme.tres"
+theme/custom="res://resources/themes/Theme.tres"
 
 [input]
 
