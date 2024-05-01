@@ -25,6 +25,7 @@ layout_mode = 2
 
 [node name="Paused" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Paused"
 
 [node name="ExitGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
