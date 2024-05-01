@@ -11,88 +11,42 @@
 [ext_resource type="PackedScene" uid="uid://cfcumt8tt3dvk" path="res://scenes/Core/Hurtbox.tscn" id="9_5ld46"]
 [ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://scenes/Core/Health.tscn" id="9_q8vd0"]
 
-[sub_resource type="Animation" id="Animation_nx18h"]
-resource_name = "Idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_mga73"]
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
-[sub_resource type="Animation" id="Animation_ig6jw"]
-resource_name = "Walking"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sufwe"]
-_data = {
-"Idle": SubResource("Animation_nx18h"),
-"RESET": SubResource("Animation_mga73"),
-"Walking": SubResource("Animation_ig6jw")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
 size = Vector2(7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gds3r"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfifr"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a76c"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tspdt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gds3r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfifr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a76c")
+}],
+"loop": true,
+"name": &"running",
+"speed": 7.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhoq4"]
 size = Vector2(9, 10)
@@ -103,23 +57,17 @@ collision_mask = 13
 motion_mode = 1
 script = ExtResource("1_1qkp2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_sufwe")
-}
-autoplay = "RESET"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_to76k")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
-texture = ExtResource("3_yq0mq")
-hframes = 3
-frame = 1
-region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 21)
+sprite_frames = SubResource("SpriteFrames_tspdt")
+animation = &"running"
+autoplay = "idle"
+frame_progress = 0.0783893
 
 [node name="BulletSpawnLocations" type="Node2D" parent="PlayerSprite"]
 rotation = -1.5708

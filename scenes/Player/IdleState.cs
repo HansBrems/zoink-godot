@@ -9,7 +9,7 @@ public partial class IdleState : State
 
 	public override void Enter()
 	{
-		Player.PlayAnimation("Idle");
+		Player.PlayAnimation("idle");
 	}
 
 	public override void Update(double delta)

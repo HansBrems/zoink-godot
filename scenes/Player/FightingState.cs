@@ -9,7 +9,7 @@ public partial class FightingState : State
 
 	public override void Enter()
 	{
-		Player.PlayAnimation("Walking");
+		Player.PlayAnimation("running");
 	}
 
 	public override void Update(double delta)
