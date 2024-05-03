@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://scenes/Core/Health.tscn" id="9_q8vd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
-size = Vector2(7, 8)
+size = Vector2(7, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gds3r"]
 atlas = ExtResource("3_yq0mq")
@@ -63,7 +63,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhoq4"]
-size = Vector2(9, 10)
+size = Vector2(6, 11)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -72,7 +72,7 @@ motion_mode = 1
 script = ExtResource("1_1qkp2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_to76k")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
@@ -152,5 +152,5 @@ CurrentHealth = 100
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-0.5, 0)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_yhoq4")
