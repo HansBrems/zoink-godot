@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bv1tbt8rf32mp" path="res://scenes/Enemies/Beetle/Beetle.tscn" id="3_ydtv6"]
 [ext_resource type="PackedScene" uid="uid://chjajje6rykpa" path="res://scenes/Objects/RotatingLight/RotatingLight.tscn" id="5_oy6yx"]
 [ext_resource type="AudioStream" uid="uid://cq8jormcn1xy6" path="res://resources/sounds/ship-drone.wav" id="6_psafd"]
-[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://scenes/Objects/Console/Console.tscn" id="8_k1ile"]
+[ext_resource type="PackedScene" uid="uid://dl3mtk1tgtlh8" path="res://Entities/Console/Console.tscn" id="8_k1ile"]
 [ext_resource type="Script" path="res://scenes/Maps/Ship/Environment.cs" id="8_txywk"]
 [ext_resource type="PackedScene" uid="uid://dgbic5sovtaej" path="res://scenes/Environment/Oxygen.tscn" id="9_jeuw8"]
 [ext_resource type="PackedScene" uid="uid://dxm0j161834m3" path="res://scenes/Player/Player.tscn" id="10_glw5j"]
