@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cujwad47gjuxc"]
-
-[ext_resource type="Script" path="res://scenes/Environment/Power.cs" id="1_fou64"]
-
-[node name="Power" type="Node2D"]
-script = ExtResource("1_fou64")

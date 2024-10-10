@@ -30,7 +30,7 @@ public partial class Ship : Node2D
 		_camera = GetNode<Camera2D>("Player/PlayerCam");
 		_tileMap = GetNode<TileMap>("TileMap");
 		_shootController = GetNode<ProjectileManager>("ProjectileManager");
-		_turretScene = PackedSceneLoader.Load("Objects", "Turret");
+		_turretScene = PackedSceneLoader.Load("Entities", "Systems", "Turret");
 		_turrets = GetNode<Node>("Turrets");
 
 		// UI

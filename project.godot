@@ -21,7 +21,7 @@ buses/default_bus_layout=""
 
 [autoload]
 
-InteractionManager="*res://scenes/Core/Interactions/InteractionManager.tscn"
+InteractionManager="*res://Common/Interactions/InteractionManager/InteractionManager.tscn"
 
 [display]
 

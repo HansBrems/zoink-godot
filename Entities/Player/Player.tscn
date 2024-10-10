@@ -1,0 +1,156 @@
+[gd_scene load_steps=19 format=3 uid="uid://dxm0j161834m3"]
+
+[ext_resource type="Script" path="res://Entities/Player/Player.cs" id="1_1qkp2"]
+[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://Common/Interactions/States/StateMachine/StateMachine.tscn" id="3_hswj8"]
+[ext_resource type="Texture2D" uid="uid://bhbf1i5ww3r7d" path="res://Entities/Player/Art/character.png" id="3_yq0mq"]
+[ext_resource type="Script" path="res://Entities/Player/States/BuildingState.cs" id="4_mii4y"]
+[ext_resource type="Script" path="res://Entities/Player/States/FightingState.cs" id="4_pwo8c"]
+[ext_resource type="Script" path="res://Entities/Player/States/DashingState.cs" id="5_0rran"]
+[ext_resource type="Script" path="res://Entities/Player/States/IdleState.cs" id="6_c8fjm"]
+[ext_resource type="Script" path="res://Entities/Player/States/BuildingTurretState.cs" id="6_d3gic"]
+[ext_resource type="PackedScene" uid="uid://cfcumt8tt3dvk" path="res://scenes/Core/Hurtbox.tscn" id="9_5ld46"]
+[ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://scenes/Core/Health.tscn" id="9_q8vd0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
+size = Vector2(7, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gds3r"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe1we"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11g62"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vohtx"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2gvd"]
+atlas = ExtResource("3_yq0mq")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tspdt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gds3r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe1we")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11g62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vohtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2gvd")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhoq4"]
+size = Vector2(6, 11)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("1_1qkp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_to76k")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_tspdt")
+animation = &"running"
+autoplay = "idle"
+frame = 2
+frame_progress = 0.679737
+
+[node name="BulletSpawnLocations" type="Node2D" parent="PlayerSprite"]
+position = Vector2(0, 3)
+
+[node name="Spawn1" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
+position = Vector2(6, -1)
+
+[node name="Spawn2" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
+position = Vector2(7, 0)
+
+[node name="Spawn3" type="Marker2D" parent="PlayerSprite/BulletSpawnLocations"]
+position = Vector2(6, 1)
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("3_hswj8")]
+InitialState = NodePath("IdleState")
+
+[node name="BuildingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
+script = ExtResource("4_mii4y")
+Player = NodePath("../..")
+
+[node name="BuildingTurretState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
+script = ExtResource("6_d3gic")
+Player = NodePath("../..")
+
+[node name="BuildTimer" type="Timer" parent="StateMachine/BuildingTurretState"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DashingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
+script = ExtResource("5_0rran")
+Player = NodePath("../..")
+
+[node name="CooldownTimer" type="Timer" parent="StateMachine/DashingState"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="StateMachine/DashingState"]
+wait_time = 0.2
+one_shot = true
+
+[node name="FightingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
+script = ExtResource("4_pwo8c")
+Player = NodePath("../..")
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Player")]
+script = ExtResource("6_c8fjm")
+Player = NodePath("../..")
+
+[node name="InteractionProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -13.0
+offset_right = 10.0
+offset_bottom = -9.0
+rounded = true
+show_percentage = false
+
+[node name="Health" parent="." instance=ExtResource("9_q8vd0")]
+position = Vector2(-0.5, 0)
+MaxHealth = 100
+CurrentHealth = 100
+
+[node name="Hurtbox" parent="." instance=ExtResource("9_5ld46")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_yhoq4")
