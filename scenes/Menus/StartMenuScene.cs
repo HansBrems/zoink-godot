@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Zoink.scenes.Menus;
 
 public partial class StartMenuScene : ColorRect
 {

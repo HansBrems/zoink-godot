@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Zoink.Common.Interactions.InteractionArea;
 
-namespace Zoink.scenes.Objects.Candle;
+namespace Zoink.Entities.Environment.Candle;
 
 public partial class CandleScene : Node2D
 {

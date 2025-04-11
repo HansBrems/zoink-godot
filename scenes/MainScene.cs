@@ -4,11 +4,11 @@ namespace Zoink.scenes;
 
 public partial class MainScene : Node2D
 {
-	private PauseMenuScene _pauseMenu;
+	private Menus.PauseMenuScene _pauseMenu;
 
 	public override void _Ready()
 	{
-		_pauseMenu = GetNode<PauseMenuScene>("CanvasLayer/PauseMenu");
+		_pauseMenu = GetNode<Menus.PauseMenuScene>("CanvasLayer/PauseMenu");
 		_pauseMenu.OnExitGame += () => GetTree().ChangeSceneToFile("res://scenes/Menus/StartMenu.tscn");
 
 		// var new_scene = load("res://scenes/Maps/Ship/Ship.tscn").instance()

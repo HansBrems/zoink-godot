@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Zoink.scripts;
 
-namespace Zoink.scenes.Projectiles.Bullet;
+namespace Zoink.Entities.Projectiles.Bullet;
 
 public partial class BulletScene : Area2D
 {

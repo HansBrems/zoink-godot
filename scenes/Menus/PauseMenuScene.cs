@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Zoink.scenes.Menus;
+
 public partial class PauseMenuScene : ColorRect
 {
 	private Button _exitGameButton;

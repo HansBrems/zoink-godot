@@ -1,7 +1,7 @@
 using Godot;
-using Zoink.scenes.Core.States;
+using Zoink.Common.Interactions.States.StateMachine;
 
-namespace Zoink.scenes.Player;
+namespace Zoink.Entities.Player.States;
 
 public partial class FightingState : State
 {

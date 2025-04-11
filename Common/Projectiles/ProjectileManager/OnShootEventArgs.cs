@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Zoink.scenes.Core.Projectiles;
+namespace Zoink.Common.Projectiles.ProjectileManager;
 
 public partial class OnShootEventArgs : GodotObject
 {

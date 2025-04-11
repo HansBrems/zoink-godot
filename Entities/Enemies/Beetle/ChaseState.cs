@@ -1,5 +1,6 @@
 using Godot;
-using Zoink.scenes.Core.States;
+
+using Zoink.Common.Interactions.States.StateMachine;
 
 namespace Zoink.Entities.Enemies.Beetle;
 

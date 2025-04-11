@@ -1,5 +1,7 @@
 using Godot;
-using Zoink.scenes.Environment;
+using Zoink.Entities.Systems.Power;
+
+namespace Zoink.Entities.Systems.OxygenGenerator;
 
 public partial class OxygenGeneratorScene : StaticBody2D
 {

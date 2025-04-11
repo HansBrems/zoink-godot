@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Zoink.Entities.Player;
 
 namespace Zoink.Entities.Enemies.Beetle;
 
@@ -89,7 +90,7 @@ public partial class BeetleScene : CharacterBody2D
 
 	private void TargetPlayer()
 	{
-		Target = GetTree().GetNodesInGroup("Player")[0] as scenes.Player.PlayerScene;
+		Target = GetTree().GetNodesInGroup("Player")[0] as PlayerScene;
 	}
 
 	private void TakeHit(Area2D area)

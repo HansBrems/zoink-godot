@@ -1,6 +1,8 @@
 using Godot;
-using Zoink.scenes.Environment;
 using Zoink.Common.Interactions.InteractionArea;
+using Zoink.Entities.Systems.Power;
+
+namespace Zoink.Entities.Systems.PowerSwitch;
 
 public partial class PowerSwitchScene : StaticBody2D
 {

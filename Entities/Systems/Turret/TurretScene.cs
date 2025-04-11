@@ -1,9 +1,9 @@
 using System;
 using Godot;
+using Zoink.Common.Projectiles.ProjectileManager;
 using Zoink.Entities.Enemies.Beetle;
-using Zoink.scenes.Core.Projectiles;
 
-namespace Zoink.scenes.Objects.Turret;
+namespace Zoink.Entities.Systems.Turret;
 
 public partial class TurretScene : StaticBody2D
 {

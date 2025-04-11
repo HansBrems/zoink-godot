@@ -1,8 +1,8 @@
 using Godot;
-using Zoink.scenes.Environment;
 using Zoink.Common.Interactions.InteractionArea;
+using Zoink.Entities.Systems.Power;
 
-namespace Zoink.scenes.Objects.Console;
+namespace Zoink.Entities.Systems.Console;
 
 public partial class ConsoleScene : StaticBody2D
 {

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Zoink.scenes.Objects.RotatingLight;
+namespace Zoink.Entities.Environment.RotatingLight;
 
 public partial class RotatingLightScene : Node2D
 {

@@ -1,4 +1,4 @@
-namespace Zoink.scenes.Core.Projectiles;
+namespace Zoink.Common.Projectiles.ProjectileManager;
 
 public enum ProjectileType
 {

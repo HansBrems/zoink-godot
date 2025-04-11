@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Zoink.scenes.Core.States;
+namespace Zoink.Common.Interactions.States.StateMachine;
 
 public partial class State : Node
 {

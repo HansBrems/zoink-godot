@@ -1,10 +1,12 @@
 using Godot;
-using Zoink.scenes.Environment;
+using Zoink.Entities.Systems.Power;
+
+namespace Zoink.scenes.Maps.Ship;
 
 public partial class Environment : Node
 {
-	private OxygenGeneratorScene _oxygenGenerator;
-	private OxygenScene _oxygen;
+	private Entities.Systems.OxygenGenerator.OxygenGeneratorScene _oxygenGenerator;
+	private Entities.Systems.Oxygen.OxygenScene _oxygen;
 	private PowerScene _power;
 	private Timer _oxygenHurtTimer;
 
@@ -19,13 +21,13 @@ public partial class Environment : Node
 
 	public override void _Ready()
 	{
-		_oxygenGenerator = GetNode<OxygenGeneratorScene>("OxygenGenerator");
+		_oxygenGenerator = GetNode<Entities.Systems.OxygenGenerator.OxygenGeneratorScene>("OxygenGenerator");
 		_oxygenGenerator.OnOxygenGenerated += (amount) => _oxygen.Replenish(amount);
 
 		_oxygenHurtTimer = GetNode<Timer>("OxygenHurtTimer");
 		_oxygenHurtTimer.Timeout += () => EmitSignal(SignalName.OnOxygenDepleted);
 
-		_oxygen = GetNode<OxygenScene>("Oxygen");
+		_oxygen = GetNode<Entities.Systems.Oxygen.OxygenScene>("Oxygen");
 		_oxygen.OnChange += (val) =>
 		{
 			UpdateLabel(OxygenLabel, val);

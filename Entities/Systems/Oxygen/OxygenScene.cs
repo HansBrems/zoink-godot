@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Zoink.Entities.Systems.Oxygen;
+
 public partial class OxygenScene : Node2D
 {
 	private Timer _timer;

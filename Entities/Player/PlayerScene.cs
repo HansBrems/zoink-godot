@@ -1,11 +1,11 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Zoink.scenes.Core;
-using Zoink.scenes.Core.Projectiles;
 using Zoink.Common.Interactions.InteractionManager;
+using Zoink.Common.Projectiles.ProjectileManager;
+using Zoink.scenes.Core;
 
-namespace Zoink.scenes.Player;
+namespace Zoink.Entities.Player;
 
 public partial class PlayerScene : CharacterBody2D
 {

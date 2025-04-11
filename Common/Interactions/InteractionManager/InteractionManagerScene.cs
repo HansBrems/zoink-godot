@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Zoink.Entities.Player;
 using InteractionAreaScene = Zoink.Common.Interactions.InteractionArea.InteractionAreaScene;
 
 namespace Zoink.Common.Interactions.InteractionManager;
@@ -12,7 +13,7 @@ public partial class InteractionManagerScene : Node2D
 	private bool _canInteract = true;
 	private Label _label;
 	private PanelContainer _panelContainer;
-	private scenes.Player.PlayerScene _player;
+	private PlayerScene _player;
 
 	public override void _Ready()
 	{
@@ -42,7 +43,7 @@ public partial class InteractionManagerScene : Node2D
 		_canInteract = true;
 	}
 
-	public void RegisterPlayer(scenes.Player.PlayerScene player)
+	public void RegisterPlayer(PlayerScene player)
 	{
 		_player = player;
 	}

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Zoink.scenes.Environment;
+namespace Zoink.Entities.Systems.Power;
 
 public partial class PowerScene : Node2D
 {
