@@ -5,7 +5,7 @@ namespace Zoink.scenes.Player;
 
 public partial class IdleState : State
 {
-	[Export] public Player Player;
+	[Export] public PlayerScene Player;
 
 	public override void Enter()
 	{

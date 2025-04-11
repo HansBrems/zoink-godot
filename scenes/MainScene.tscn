@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs30bakpqplxt"]
+
+[ext_resource type="Script" path="res://scenes/MainScene.cs" id="1_3ik1s"]
+[ext_resource type="PackedScene" uid="uid://dqqul7o1dlfec" path="res://scenes/Menus/PauseMenuScene.tscn" id="2_5hpxv"]
+[ext_resource type="PackedScene" uid="uid://dmirmbjj8qvwt" path="res://scenes/Maps/Ship/ShipScene.tscn" id="2_fcwlj"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3ik1s")
+
+[node name="Ship" parent="." instance=ExtResource("2_fcwlj")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_5hpxv")]
+visible = false

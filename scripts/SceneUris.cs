@@ -7,12 +7,12 @@ public partial class SceneUris : Node
 {
 	[Obsolete]
 	public static string Get(string name)
-		=> $"res://scenes/{name}.tscn";
+		=> $"res://scenes/{name}Scene.tscn";
 
 	[Obsolete]
 	public static string Get(string category, string name)
-		=> $"res://scenes/{category}/{name}/{name}.tscn";
+		=> $"res://scenes/{category}/{name}/{name}Scene.tscn";
 
 	public static string Get(string root, string category, string name)
-		=> $"res://{root}/{category}/{name}/{name}.tscn";
+		=> $"res://{root}/{category}/{name}/{name}Scene.tscn";
 }

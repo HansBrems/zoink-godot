@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://chjajje6rykpa"]
+
+[ext_resource type="Texture2D" uid="uid://c3q5gt08cg2yb" path="res://resources/images/lights/light.png" id="1_g70xh"]
+[ext_resource type="Script" path="res://Entities/Environment/RotatingLight/RotatingLightScene.cs" id="1_gpsew"]
+[ext_resource type="Texture2D" uid="uid://cvi5fqbiecpvh" path="res://Entities/Environment/RotatingLight/Art/rotating-light.png" id="3_ar4u1"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xrjhp"]
+polygon = PackedVector2Array(0, -3.24219, 0.859375, -3.14062, 1.65625, -2.79688, 2.28906, -2.3125, 2.80469, -1.63281, 3.14062, -0.867188, 3.25781, 0.015625, 3.14062, 0.84375, 2.80469, 1.64062, 2.30469, 2.28125, 1.48438, 2.28125, 1.99219, -0.0078125, 1.16406, -0.671875, -0.0390625, -0.953125, -1.17969, -0.640625, -2, 0.0078125, -1.5, 2.32812, -2.26562, 2.32812, -2.82812, 1.66406, -3.17188, 0.875, -3.27344, 0.015625, -3.14844, -0.890625, -2.8125, -1.64844, -2.32812, -2.30469, -1.65625, -2.8125, -0.835938, -3.13281)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ghdh"]
+radius = 3.25015
+
+[node name="RotatingLight" type="StaticBody2D"]
+script = ExtResource("1_gpsew")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_xrjhp")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-0.0078125, 0.484375)
+color = Color(1, 0, 0, 1)
+shadow_enabled = true
+texture = ExtResource("1_g70xh")
+texture_scale = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ghdh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_ar4u1")

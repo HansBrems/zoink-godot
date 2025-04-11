@@ -5,7 +5,7 @@ namespace Zoink.scenes.Player;
 
 public partial class DashingState : State
 {
-	[Export] public Player Player;
+	[Export] public PlayerScene Player;
 
 	private Vector2 _inputVector;
 	private Timer _cooldownTimer;

@@ -1,20 +1,20 @@
 using Godot;
 using Zoink.scenes.Core.States;
 
-namespace Zoink.scenes.Enemies.Beetle;
+namespace Zoink.Entities.Enemies.Beetle;
 
 public partial class ChaseState : State
 {
 	[Export]
-	public Beetle Beetle;
+	public Entities.Enemies.Beetle.BeetleScene BeetleScene;
 
 	public override void Enter()
 	{
-		Beetle.PlayAnimation(Animations.Walking);
+		BeetleScene.PlayAnimation(Animations.Walking);
 	}
 
 	public override void Update(double delta)
 	{
-		Beetle.Chase(delta);
+		BeetleScene.Chase(delta);
 	}
 }

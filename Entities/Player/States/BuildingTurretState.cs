@@ -5,7 +5,7 @@ namespace Zoink.scenes.Player;
 
 public partial class BuildingTurretState : State
 {
-	[Export] public Player Player;
+	[Export] public PlayerScene Player;
 
 	private Timer _buildTimer;
 

@@ -1,4 +1,4 @@
-namespace Zoink.scenes.Enemies.Beetle;
+namespace Zoink.Entities.Enemies.Beetle;
 
 public static class States
 {

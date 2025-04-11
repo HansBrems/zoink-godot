@@ -1,0 +1,174 @@
+[gd_scene load_steps=17 format=3 uid="uid://bv1tbt8rf32mp"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/Beetle/BeetleScene.cs" id="1_xgf3s"]
+[ext_resource type="Texture2D" uid="uid://b7eiqcovvtsfa" path="res://Entities/Enemies/Beetle/Art/void.png" id="2_fmq0i"]
+[ext_resource type="AudioStream" uid="uid://raquhuhqg6bf" path="res://resources/sounds/Retro FootStep Mud 01.wav" id="3_cq1e6"]
+[ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://Common/Interactions/States/StateMachine/StateMachineScene.tscn" id="4_x7cmy"]
+[ext_resource type="Script" path="res://Entities/Enemies/Beetle/ChaseState.cs" id="5_axqdf"]
+[ext_resource type="Script" path="res://Entities/Enemies/Beetle/IdleState.cs" id="6_npb6m"]
+[ext_resource type="PackedScene" uid="uid://dcr4vgcek8wfu" path="res://scenes/Core/HitboxScene.tscn" id="7_u6il5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4frt"]
+size = Vector2(4, 8)
+
+[sub_resource type="Gradient" id="Gradient_hj5cl"]
+colors = PackedColorArray(0.517647, 0, 0, 1, 1, 0, 0.183333, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_to43h"]
+gradient = SubResource("Gradient_hj5cl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg3rv"]
+size = Vector2(8, 11)
+
+[sub_resource type="Animation" id="Animation_si1uk"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wbhfe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_28ysg"]
+resource_name = "Walking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"PlayFootstepAudio"
+}, {
+"args": [],
+"method": &"PlayFootstepAudio"
+}, {
+"args": [],
+"method": &"PlayFootstepAudio"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_co6dd"]
+_data = {
+"Idle": SubResource("Animation_si1uk"),
+"RESET": SubResource("Animation_wbhfe"),
+"Walking": SubResource("Animation_28ysg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwrn2"]
+size = Vector2(6, 10)
+
+[node name="Beetle" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_xgf3s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o4frt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fmq0i")
+hframes = 4
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+radius = 51.67
+
+[node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cq1e6")
+pitch_scale = 1.41
+max_distance = 250.0
+attenuation = 3.4822
+max_polyphony = 4
+panning_strength = 2.5
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -12.0
+offset_right = 9.0
+offset_bottom = -8.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_progress = SubResource("GradientTexture2D_to43h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_kg3rv")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("4_x7cmy")]
+InitialState = NodePath("IdleState")
+
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+script = ExtResource("5_axqdf")
+Beetle = NodePath("../..")
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+script = ExtResource("6_npb6m")
+Beetle = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_co6dd")
+}
+
+[node name="Hitbox" parent="." instance=ExtResource("7_u6il5")]
+collision_mask = 2
+Damage = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pwrn2")

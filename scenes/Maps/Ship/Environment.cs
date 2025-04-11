@@ -3,9 +3,9 @@ using Zoink.scenes.Environment;
 
 public partial class Environment : Node
 {
-	private OxygenGenerator _oxygenGenerator;
-	private Oxygen _oxygen;
-	private Power _power;
+	private OxygenGeneratorScene _oxygenGenerator;
+	private OxygenScene _oxygen;
+	private PowerScene _power;
 	private Timer _oxygenHurtTimer;
 
 	[Export]
@@ -19,13 +19,13 @@ public partial class Environment : Node
 
 	public override void _Ready()
 	{
-		_oxygenGenerator = GetNode<OxygenGenerator>("OxygenGenerator");
+		_oxygenGenerator = GetNode<OxygenGeneratorScene>("OxygenGenerator");
 		_oxygenGenerator.OnOxygenGenerated += (amount) => _oxygen.Replenish(amount);
 
 		_oxygenHurtTimer = GetNode<Timer>("OxygenHurtTimer");
 		_oxygenHurtTimer.Timeout += () => EmitSignal(SignalName.OnOxygenDepleted);
 
-		_oxygen = GetNode<Oxygen>("Oxygen");
+		_oxygen = GetNode<OxygenScene>("Oxygen");
 		_oxygen.OnChange += (val) =>
 		{
 			UpdateLabel(OxygenLabel, val);
@@ -39,7 +39,7 @@ public partial class Environment : Node
 			}
 		};
 
-		_power = GetNode<Power>("Power");
+		_power = GetNode<PowerScene>("Power");
 		_power.OnChange += (val) => UpdateLabel(PowerLabel, val);
 		_power.OnDepleted += () => _power.TurnOff();
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zoink"
-run/main_scene="res://scenes/Intro.tscn"
+run/main_scene="res://scenes/IntroScene.tscn"
 config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,7 @@ buses/default_bus_layout=""
 
 [autoload]
 
-InteractionManager="*res://Common/Interactions/InteractionManager/InteractionManager.tscn"
+InteractionManager="*res://Common/Interactions/InteractionManager/InteractionManagerScene.tscn"
 
 [display]
 

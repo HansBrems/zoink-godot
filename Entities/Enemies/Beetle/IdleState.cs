@@ -1,16 +1,16 @@
 using Godot;
 using Zoink.scenes.Core.States;
 
-namespace Zoink.scenes.Enemies.Beetle;
+namespace Zoink.Entities.Enemies.Beetle;
 
 public partial class IdleState : State
 {
 	[Export]
-	public Beetle Beetle;
+	public Entities.Enemies.Beetle.BeetleScene BeetleScene;
 
 	public override void Enter()
 	{
-		Beetle.PlayAnimation(Animations.Idle);
+		BeetleScene.PlayAnimation(Animations.Idle);
 		GetTree().CreateTimer(5).Timeout += () => TransitionToState(States.ChaseState);
 	}
 
