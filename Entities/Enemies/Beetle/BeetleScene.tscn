@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://doynlutbbbhfw" path="res://Common/Interactions/States/StateMachine/StateMachineScene.tscn" id="4_x7cmy"]
 [ext_resource type="Script" path="res://Entities/Enemies/Beetle/ChaseState.cs" id="5_axqdf"]
 [ext_resource type="Script" path="res://Entities/Enemies/Beetle/IdleState.cs" id="6_npb6m"]
-[ext_resource type="PackedScene" uid="uid://dcr4vgcek8wfu" path="res://scenes/Core/HitboxScene.tscn" id="7_u6il5"]
+[ext_resource type="PackedScene" uid="uid://dcr4vgcek8wfu" path="res://Core/Hitbox/HitboxScene.tscn" id="7_u6il5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4frt"]
 size = Vector2(4, 8)
@@ -152,13 +152,13 @@ shape = SubResource("RectangleShape2D_kg3rv")
 [node name="StateMachine" parent="." node_paths=PackedStringArray("InitialState") instance=ExtResource("4_x7cmy")]
 InitialState = NodePath("IdleState")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("BeetleScene")]
 script = ExtResource("5_axqdf")
-Beetle = NodePath("../..")
+BeetleScene = NodePath("../..")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("Beetle")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("BeetleScene")]
 script = ExtResource("6_npb6m")
-Beetle = NodePath("../..")
+BeetleScene = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

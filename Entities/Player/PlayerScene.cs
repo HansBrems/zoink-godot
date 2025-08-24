@@ -3,7 +3,9 @@ using Godot;
 using Godot.Collections;
 using Zoink.Common.Interactions.InteractionManager;
 using Zoink.Common.Projectiles.ProjectileManager;
-using Zoink.scenes.Core;
+using HealthScene = Zoink.Core.Health.HealthScene;
+using HurtboxScene = Zoink.Core.Hurtbox.HurtboxScene;
+using PlayerCamScene = Zoink.Core.PlayerCam.PlayerCamScene;
 
 namespace Zoink.Entities.Player;
 

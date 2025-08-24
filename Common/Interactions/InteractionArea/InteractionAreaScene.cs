@@ -1,10 +1,11 @@
 using Godot;
+using Zoink.Common.Interactions.InteractionManager;
 
 namespace Zoink.Common.Interactions.InteractionArea;
 
 public partial class InteractionAreaScene : Area2D
 {
-	private Common.Interactions.InteractionManager.InteractionManagerScene _interactionManager;
+	private InteractionManagerScene _interactionManager;
 
 	[Export]
 	public string ActionName = "interact";

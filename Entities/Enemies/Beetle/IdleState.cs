@@ -6,7 +6,7 @@ namespace Zoink.Entities.Enemies.Beetle;
 public partial class IdleState : State
 {
 	[Export]
-	public Entities.Enemies.Beetle.BeetleScene BeetleScene;
+	public BeetleScene BeetleScene;
 
 	public override void Enter()
 	{

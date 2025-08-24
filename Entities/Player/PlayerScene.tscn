@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://Entities/Player/States/DashingState.cs" id="6_huw30"]
 [ext_resource type="Script" path="res://Entities/Player/States/FightingState.cs" id="7_0c2jc"]
 [ext_resource type="Script" path="res://Entities/Player/States/IdleState.cs" id="8_qya2k"]
-[ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://scenes/Core/HealthScene.tscn" id="9_llxkf"]
-[ext_resource type="PackedScene" uid="uid://cfcumt8tt3dvk" path="res://scenes/Core/HurtboxScene.tscn" id="10_tlp0k"]
+[ext_resource type="PackedScene" uid="uid://cm5q04jiyd62y" path="res://Core/Health/HealthScene.tscn" id="9_llxkf"]
+[ext_resource type="PackedScene" uid="uid://cfcumt8tt3dvk" path="res://Core/Hurtbox/HurtboxScene.tscn" id="10_tlp0k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to76k"]
 size = Vector2(7, 4)
